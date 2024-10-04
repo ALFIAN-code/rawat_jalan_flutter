@@ -6,11 +6,45 @@ class AdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Dashboard'),
-      ),
-      body: const Center(
-        child: Text('Welcome, Admin!'),
+      body: Row(
+        children: [
+          Container(
+            width: 200,
+            color: Colors.blue,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Home"),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Pasien"),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Dokter"),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Pendaftaran"),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Logout"),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              child: Text("hi admin....."),
+            ),
+          )
+        ],
       ),
     );
   }

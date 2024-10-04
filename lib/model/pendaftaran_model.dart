@@ -1,10 +1,10 @@
 class Pendaftaran {
-  final int idPendaftaran;
-  final int idAdmin;
-  final int idPasien;
-  final int idDokter;
-  final String tanggal;
-  final String keluhan;
+  int idPendaftaran;
+  int idAdmin;
+  int idPasien;
+  int idDokter;
+  DateTime tanggal;
+  String keluhan;
 
   Pendaftaran({
     required this.idPendaftaran,
@@ -15,25 +15,14 @@ class Pendaftaran {
     required this.keluhan,
   });
 
-  factory Pendaftaran.fromMap(Map<String, dynamic> map) {
+  factory Pendaftaran.fromJson(Map<String, dynamic> json) {
     return Pendaftaran(
-      idPendaftaran: map['id_pendaftaran'],
-      idAdmin: map['id_admin'],
-      idPasien: map['id_pasien'],
-      idDokter: map['id_dokter'],
-      tanggal: map['tanggal'],
-      keluhan: map['keluhan'],
+      idPendaftaran: json['ID_Pendaftaran'],
+      idAdmin: json['ID_admin'],
+      idPasien: json['ID_Pasien'],
+      idDokter: json['ID_Dokter'],
+      tanggal: DateTime.parse(json['Tanggal']),
+      keluhan: json['Keluhan'],
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id_pendaftaran': idPendaftaran,
-      'id_admin': idAdmin,
-      'id_pasien': idPasien,
-      'id_dokter': idDokter,
-      'tanggal': tanggal,
-      'keluhan': keluhan,
-    };
   }
 }
