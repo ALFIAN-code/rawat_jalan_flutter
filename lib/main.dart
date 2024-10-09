@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         } else {
           if (snapshot.hasData) {
             if (snapshot.data == 'Admin') {
-              return const AdminHomePage();
+              return AdminHomePage();
             } else {
               return DokterHomePage();
             }

@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.isNotEmpty) {
         print('Admin signed in successfully');
         storeLoginData();
-        Get.off(const AdminHomePage());
+        Get.off(AdminHomePage());
       } else {
         Get.snackbar(
             backgroundColor: Colors.red.withOpacity(0.5),
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.isNotEmpty) {
         print('Admin signed in successfully');
         storeLoginData();
-        Get.off(const AdminHomePage());
+        Get.off(AdminHomePage());
       } else {
         Get.snackbar("login invalid", 'nomor telfon atau password salah');
       }
