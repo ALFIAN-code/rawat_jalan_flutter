@@ -1,51 +1,63 @@
+import 'package:get/get.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class PendaftaranService {
-  final _supabase = Supabase.instance.client;
+class PendaftaranController extends GetxController {
+  var listPendaftaran = <Pendaftaran>[].obs;
+  final SupabaseClient client = Supabase.instance.client;
 
-  Future<List<Pendaftaran>> getAllPendaftaran() async {
-    final response = await _supabase
-        .from('Pendaftaran')
-        .select('ID_Pendaftaran, ID_admin, ID_Pasien, ID_Dokter, Tanggal, Keluhan');
-    return response.map((e) => Pendaftaran.fromJson(e)).toList();
-  }
-
-  Future<Pendaftaran> getPendaftaranById(int id) async {
-    final response = await _supabase
-        .from('Pendaftaran')
-        .select('ID_Pendaftaran, ID_admin, ID_Pasien, ID_Dokter, Tanggal, Keluhan')
-        .eq('ID_Pendaftaran', id);
-    return Pendaftaran.fromJson(response.single);
-  }
-
+  // Create Pendaftaran
   Future<void> createPendaftaran(Pendaftaran pendaftaran) async {
-    await _supabase.from('Pendaftaran').insert([
-      {
-        'ID_admin': pendaftaran.idAdmin,
-        'ID_Pasien': pendaftaran.idPasien,
-        'ID_Dokter': pendaftaran.idDokter,
-        'Tanggal': pendaftaran.tanggal,
-        'Keluhan': pendaftaran.keluhan,
-      }
-    ]);
-  }
-
-  Future<void> updatePendaftaran(Pendaftaran pendaftaran) async {
-    await _supabase
+    final response = await client
         .from('Pendaftaran')
-        .update({
-          'ID_admin': pendaftaran.idAdmin,
-          'ID_Pasien': pendaftaran.idPasien,
-          'ID_Dokter': pendaftaran.idDokter,
-          'Tanggal': pendaftaran.tanggal,
-          'Keluhan': pendaftaran.keluhan,
-        })
-        .eq('ID_Pendaftaran', pendaftaran.idPendaftaran);
+        .insert(pendaftaran.toJson());
+
+    if (response.error == null) {
+      fetchPendaftaran();  // Update data setelah insert
+    } else {
+      Get.snackbar('Error', response.error!.message);
+    }
   }
 
+  // Read Pendaftaran
+  Future<void> fetchPendaftaran() async {
+    final response = await client
+        .from('Pendaftaran')
+        .select();
+
+    if (response.isEmpty) {
+      var data = response;
+      listPendaftaran.value = data.map((e) => Pendaftaran.fromJson(e)).toList();
+    } else {
+      Get.snackbar('Error', 'failed to fetch Pendaftaran');
+    }
+  }
+
+  // Update Pendaftaran
+  Future<void> updatePendaftaran(int id, Pendaftaran updatedPendaftaran) async {
+    final response = await client
+        .from('Pendaftaran')
+        .update(updatedPendaftaran.toJson())
+        .eq('ID_Pendaftaran', id);
+
+    if (response.error == null) {
+      fetchPendaftaran();  // Update data setelah update
+    } else {
+      Get.snackbar('Error', response.error!.message);
+    }
+  }
+
+  // Delete Pendaftaran
   Future<void> deletePendaftaran(int id) async {
-    await _supabase.from('Pendaftaran').delete().eq('ID_Pendaftaran', id);
+    final response = await client
+        .from('Pendaftaran')
+        .delete()
+        .eq('ID_Pendaftaran', id);
+
+    if (response.error == null) {
+      fetchPendaftaran();  // Update data setelah delete
+    } else {
+      Get.snackbar('Error', response.error!.message);
+    }
   }
 }
-

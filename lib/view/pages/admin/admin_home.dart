@@ -7,6 +7,8 @@ import 'package:rawat_jalan/view/pages/admin/kelola_jadwal.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_pasien.dart';
 import 'package:rawat_jalan/view/style.dart';
 
+
+
 class AdminHomePage extends StatelessWidget {
   AdminHomePage({super.key});
 
@@ -125,7 +127,7 @@ class AdminHomePage extends StatelessWidget {
             Expanded(child: Obx(
               () {
                 if (selectedPage.value == 0) {
-                  return const OverviewPage();
+                  return OverviewPage();
                 } else if (selectedPage.value == 1) {
                   return const KelolaDokterPage();
                 } else if (selectedPage.value == 2) {

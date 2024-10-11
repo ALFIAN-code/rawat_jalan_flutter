@@ -1,5 +1,7 @@
+
+
 class PasienModel {
-  final String idPasien;
+  final int idPasien;
   final String namaLengkap;
   final String namaPanggilan;
   final String namaIbuPasien;
@@ -16,12 +18,11 @@ class PasienModel {
   final String noRekening;
   final String noSim;
   final String kelompokEtnis;
-  final String kelahiranKembar;
-  final String indikatorMeninggal;
+  final bool kelahiranKembar;
+  final bool indikatorMeninggal;
   final String kewarganegaraan;
   final String statusMiliter;
   final String tanggalPasienMeninggal;
-  final String password;
 
   PasienModel({
     required this.idPasien,
@@ -46,7 +47,6 @@ class PasienModel {
     required this.kewarganegaraan,
     required this.statusMiliter,
     required this.tanggalPasienMeninggal,
-    required this.password,
   });
 
   factory PasienModel.fromJson(Map<String, dynamic> json) {
@@ -72,8 +72,7 @@ class PasienModel {
       indikatorMeninggal: json['indikator_meninggal'],
       kewarganegaraan: json['kewarganegaraan'],
       statusMiliter: json['status_militer'],
-      tanggalPasienMeninggal: json['tanggal_pasien_meninggal'],
-      password: json['password'],
+      tanggalPasienMeninggal: json['tanggal_pasien_meninggal'] ?? '-',
     );
   }
 
@@ -101,7 +100,6 @@ class PasienModel {
       'kewarganegaraan': kewarganegaraan,
       'status_militer': statusMiliter,
       'tanggal_pasien_meninggal': tanggalPasienMeninggal,
-      'password': password,
     };
   }
 }
