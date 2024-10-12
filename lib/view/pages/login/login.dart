@@ -14,10 +14,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  var obscure = true.obs;
 
   // String password = '';
   String selectedRole = 'Admin';
@@ -33,19 +33,21 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     if (selectedRole == 'Admin') {
       var adminController = Get.put(AdminController());
-      adminController.getAdminData(phoneNumberController.text);
-
-      if (adminController.adminAuth(phoneNumberController.text, passwordController.text)) {
-        storeLoginData();
-        Get.off(AdminHomePage());
-      } else {
-        Get.snackbar(
-            backgroundColor: Colors.red.withOpacity(0.5),
-            "login invalid",
-            'nomor telfon atau password salah');
-      }
-    } else if (selectedRole == 'Dokter') {
-    }
+      await adminController.getAdminDataById(phoneNumberController.text).then(
+        (value) {
+          if (adminController.adminAuth(
+              phoneNumberController.text, passwordController.text)) {
+            storeLoginData();
+            Get.off(() => AdminHomePage());
+          } else {
+            Get.snackbar(
+                backgroundColor: Colors.red.withOpacity(0.5),
+                "login invalid",
+                'nomor telfon atau password salah');
+          }
+        },
+      );
+    } else if (selectedRole == 'Dokter') {}
   }
 
   @override
@@ -105,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               CustomTextField(
                                 controller: phoneNumberController,
+                                obscureText: false,
                                 hint: '0815********',
                                 onChanged: (p0) {
                                   print(phoneNumberController.text);
@@ -122,15 +125,23 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              CustomTextField(
-                                controller: passwordController,
-                                hint: 'xxxxxxxxx',
-                                obscureText: true,
+                              Obx(
+                                () => CustomTextField(
+                                  controller: passwordController,
+                                  hint: 'xxxxxxxxx',
+                                  obscureText: obscure.value,
+                                  suffix: IconButton(
+                                      onPressed: () {
+                                        obscure.value = !obscure.value;
+                                      },
+                                      icon: Icon(obscure.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off)),
+                                ),
                               ),
                               const SizedBox(
                                 height: 30,
                               ),
-
                               Text(
                                 'User Role',
                                 style: semibold16.copyWith(
@@ -174,16 +185,6 @@ class _LoginPageState extends State<LoginPage> {
                                       color: Colors.black.withOpacity(0.6)),
                                 ),
                               ),
-
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Text('Don\'t have an account? ', style: bold10.copyWith(color: const Color(0xff727272)),),
-                              //     TextButton(onPressed: () {
-                              //       // loginOrRegister.changeValue();
-                              //     }, child: Text('Sign up', style: bold10.copyWith(color: mainColor),))
-                              //   ],
-                              // )
                             ],
                           ),
                         ],
@@ -231,12 +232,15 @@ class CustomTextField extends StatelessWidget {
       required this.hint,
       this.obscureText = false,
       this.onChanged,
-      required this.controller});
+      required this.controller,
+      this.suffix});
 
   final String hint;
   final bool obscureText;
   final Function(String)? onChanged;
   final TextEditingController controller;
+  final Widget? suffix;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -248,6 +252,7 @@ class CustomTextField extends StatelessWidget {
         color: const Color(0xff525252).withOpacity(0.9),
       ),
       decoration: InputDecoration(
+        suffixIcon: suffix,
         isDense: true,
         hintText: hint,
         contentPadding:

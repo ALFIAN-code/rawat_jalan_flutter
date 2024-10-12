@@ -8,12 +8,15 @@ import 'package:rawat_jalan/view/pages/admin/kelola_jadwal.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_pasien.dart';
 import 'package:rawat_jalan/view/style.dart';
 
-
-
-class AdminHomePage extends StatelessWidget {
+class AdminHomePage extends StatefulWidget {
   AdminHomePage({super.key});
 
-  var selectedPage = 0.obs;
+  @override
+  State<AdminHomePage> createState() => _AdminHomePageState();
+}
+
+class _AdminHomePageState extends State<AdminHomePage> {
+  var selectedPage = 0;
 
   var controller = Get.put(AdminController());
 
@@ -50,31 +53,39 @@ class AdminHomePage extends StatelessWidget {
                     NavbarButton(
                         text: "Dashboard",
                         onTap: () {
-                          selectedPage.value = 0;
+                          setState(() {
+                            selectedPage = 0;
+                          });
                         },
                         icon: const Icon(Icons.healing),
-                        selected: (selectedPage.value == 0) ? true : false),
+                        selected: (selectedPage == 0) ? true : false),
                     NavbarButton(
                         text: "Dokter",
                         onTap: () {
-                          selectedPage.value = 1;
+                          setState(() {
+                            selectedPage = 1;
+                          });
                         },
                         icon: const Icon(Icons.healing),
-                        selected: (selectedPage.value == 1) ? true : false),
+                        selected: (selectedPage == 1) ? true : false),
                     NavbarButton(
                         text: "Pasien",
                         onTap: () {
-                          selectedPage.value = 2;
+                          setState(() {
+                            selectedPage = 2;
+                          });
                         },
                         icon: const Icon(Icons.healing),
-                        selected: (selectedPage.value == 2) ? true : false),
+                        selected: (selectedPage == 2) ? true : false),
                     NavbarButton(
                         text: "Jadwal",
                         onTap: () {
-                          selectedPage.value = 3;
+                          setState(() {
+                            selectedPage = 3;
+                          });
                         },
                         icon: const Icon(Icons.healing),
-                        selected: (selectedPage.value == 3) ? true : false),
+                        selected: (selectedPage == 3) ? true : false),
                     const SizedBox(
                       height: 50,
                     ),
@@ -127,23 +138,31 @@ class AdminHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: Obx(
-              () {
-                if (selectedPage.value == 0) {
-                  return OverviewPage();
-                } else if (selectedPage.value == 1) {
-                  return const KelolaDokterPage();
-                } else if (selectedPage.value == 2) {
-                  return const KelolaPasienPage();
-                } else if (selectedPage.value == 3) {
-                  return const KelolaJadwalPage();
-                } else {
-                  return const Center(
-                    child: Text('Halaman tidak ditemukan'),
-                  );
-                }
-              },
-            ))
+            Expanded(
+                child: (selectedPage == 0)
+                    ? OverviewPage()
+                    : (selectedPage == 1)
+                        ? KelolaDokterPage()
+                        : (selectedPage == 2)
+                            ? const KelolaPasienPage()
+                            : const KelolaJadwalPage())
+            // Expanded(child: Obx(
+            //   () {
+            //     if (selectedPage.value == 0) {
+            //       return OverviewPage();
+            //     } else if (selectedPage.value == 1) {
+            //       return KelolaDokterPage();
+            //     } else if (selectedPage.value == 2) {
+            //       return const KelolaPasienPage();
+            //     } else if (selectedPage.value == 3) {
+            //       return const KelolaJadwalPage();
+            //     } else {
+            //       return const Center(
+            //         child: Text('Halaman tidak ditemukan'),
+            //       );
+            //     }
+            //   },
+            // ))
           ],
         ),
       ),

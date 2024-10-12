@@ -21,7 +21,7 @@ class AdminService {
   static Future<List<Admin>> getAdminList(PocketBase client) async {
     try {
       final records = await client.collection('admin').getFullList();
-    return records.map((e) => Admin.fromJson(e.data)).toList();
+      return records.map((e) => Admin.fromJson(e.data)).toList();
     } catch (e) {
       rethrow;
     }

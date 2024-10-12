@@ -1,24 +1,24 @@
 class Dokter {
-  final int idDokter;
-  final String npi;
-  final String namaDokter;
-  final String jenisKelamin;
-  final String spesialisasi;
-  final String noTelp;
-  final String alamat;
-  final String tanggalLahir;
-  final String email;
-  final String statusLisensi;
-  final String tanggalLisensi;
-  final String namaInstitusi;
-  final String password;
+  String id;
+  String npi;
+  String namaDokter;
+  String spesialisasi;
+  String jenisKelamin;
+  String noTelp;
+  String alamat;
+  DateTime tanggalLahir;
+  String email;
+  String statusLisensi;
+  String tanggalLisensi;
+  String namaInstitusi;
+  String password;
 
   Dokter({
-    required this.idDokter,
+    required this.id,
     required this.npi,
     required this.namaDokter,
-    required this.jenisKelamin,
     required this.spesialisasi,
+    required this.jenisKelamin,
     required this.noTelp,
     required this.alamat,
     required this.tanggalLahir,
@@ -29,16 +29,16 @@ class Dokter {
     required this.password,
   });
 
-  factory Dokter.fromJson(Map<String, dynamic> json) {
+  factory Dokter.fromJson(Map<String, dynamic> json, {String? id}) {
     return Dokter(
-      idDokter: json['id_dokter'],
+      id: id!,
       npi: json['npi'],
       namaDokter: json['nama_dokter'],
-      jenisKelamin: json['jenis_kelamin'],
       spesialisasi: json['spesialisasi'],
+      jenisKelamin: json['jenis_kelamin'],
       noTelp: json['no_telp'],
       alamat: json['alamat'],
-      tanggalLahir: json['tanggal_lahir'],
+      tanggalLahir: DateTime.parse(json['tanggal_lahir']),
       email: json['email'],
       statusLisensi: json['status_lisensi'],
       tanggalLisensi: json['tanggal_lisensi'],
@@ -49,14 +49,14 @@ class Dokter {
 
   Map<String, dynamic> toJson() {
     return {
-      'id_dokter': idDokter,
+      'id': id,
       'npi': npi,
       'nama_dokter': namaDokter,
-      'jenis_kelamin': jenisKelamin,
       'spesialisasi': spesialisasi,
+      'jenis_kelamin': jenisKelamin,
       'no_telp': noTelp,
       'alamat': alamat,
-      'tanggal_lahir': tanggalLahir,
+      'tanggal_lahir': tanggalLahir.toIso8601String(),
       'email': email,
       'status_lisensi': statusLisensi,
       'tanggal_lisensi': tanggalLisensi,
