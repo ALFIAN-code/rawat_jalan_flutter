@@ -2,10 +2,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/view/pages/admin/admin_home.dart';
-import 'package:rawat_jalan/view/pages/dokter/dokter_home.dart';
+import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
 import 'package:rawat_jalan/view/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,37 +14,28 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final SupabaseClient supabaseClient = Supabase.instance.client;
 
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  String phoneNumber = '';
-  String password = '';
+
+  // String password = '';
   String selectedRole = 'Admin';
 
   final roles = ['Admin', 'Dokter'];
 
   void storeLoginData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString('phoneNumber', phoneNumber);
-    prefs.setString('password', password);
     prefs.setString('role', selectedRole);
+    prefs.setString('noTelp', phoneNumberController.text);
   }
 
   Future<void> _login() async {
     if (selectedRole == 'Admin') {
-      final response = await supabaseClient
-          .from('admin')
-          .select()
-          .eq('no_telp', phoneNumberController.text)
-          .eq('password', passwordController.text);
+      var adminController = Get.put(AdminController());
+      adminController.getAdminData(phoneNumberController.text);
 
-      print('${passwordController.text}   ${phoneNumberController.text}');
-
-      if (response.isNotEmpty) {
-        print('Admin signed in successfully');
+      if (adminController.adminAuth(phoneNumberController.text, passwordController.text)) {
         storeLoginData();
         Get.off(AdminHomePage());
       } else {
@@ -55,19 +45,6 @@ class _LoginPageState extends State<LoginPage> {
             'nomor telfon atau password salah');
       }
     } else if (selectedRole == 'Dokter') {
-      final response = await supabaseClient
-          .from('dokter')
-          .select()
-          .eq('notelp', phoneNumber)
-          .eq('password', password);
-
-      if (response.isNotEmpty) {
-        print('Admin signed in successfully');
-        storeLoginData();
-        Get.off(AdminHomePage());
-      } else {
-        Get.snackbar("login invalid", 'nomor telfon atau password salah');
-      }
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/view/component/navbar_item.dart';
 import 'package:rawat_jalan/view/pages/admin/dashboard.dart';
+import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_dokter.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_jadwal.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_pasien.dart';
@@ -13,6 +14,8 @@ class AdminHomePage extends StatelessWidget {
   AdminHomePage({super.key});
 
   var selectedPage = 0.obs;
+
+  var controller = Get.put(AdminController());
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +106,7 @@ class AdminHomePage extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            'Admin 1',
+                            controller.adminData.value.nama,
                             style: bold14,
                           )
                         ],
