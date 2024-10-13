@@ -70,4 +70,94 @@ class AdminController extends GetxController {
     }
     update();
   }
+
+  void deleteDokter(String idDokter) async {
+    try {
+      await DokterService.deleteDokter(idDokter);
+      getDokterData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void deletePasien(String idPasien) async {
+    try {
+      await PasienService.deletePasien(idPasien);
+      getPasienData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void deletePendaftaran(String idPendaftaran) async {
+    try {
+      await PendaftaranService.deletePendaftaran(idPendaftaran);
+      getPendaftaranData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void updateDokter(String idDokter, Dokter dokter) async {
+    try {
+      await DokterService.updateDokter(idDokter, dokter);
+      getDokterData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void updatePasien(Pasien pasien) async {
+    try {
+      await PasienService.updatePasien(pasien);
+      getPasienData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void updatePendaftaran(Pendaftaran pendaftaran) async {
+    try {
+      await PendaftaranService.updatePendaftaran(pendaftaran);
+      getPendaftaranData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void createDokter(Map<String, dynamic> dokterData) async {
+    try {
+      await DokterService.createDokter(dokterData);
+      getDokterData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void createPasien(Pasien pasien) async {
+    try {
+      await PasienService.createPasien(pasien);
+      getPasienData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void createPendaftaran(Pendaftaran pendaftaran) async {
+    try {
+      await PendaftaranService.createPendaftaran(pendaftaran);
+      getPendaftaranData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
 }

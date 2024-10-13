@@ -13,7 +13,7 @@ class DokterService {
     // }
   }
 
-  Future<void> createDokter(Map<String, dynamic> dokterData) async {
+  static Future<void> createDokter(Map<String, dynamic> dokterData) async {
     try {
       await pb.collection('dokter').create(body: dokterData);
     } catch (e) {
@@ -21,7 +21,7 @@ class DokterService {
     }
   }
 
-  Future<Dokter?> getDokter(String dokterId) async {
+  static Future<Dokter?> getDokter(String dokterId) async {
     try {
       final record = await pb.collection('dokter').getOne(dokterId);
       return Dokter.fromJson(record.data);
@@ -31,7 +31,7 @@ class DokterService {
     }
   }
 
-  Future<void> updateDokter(String dokterId, Dokter dokter) async {
+  static Future<void> updateDokter(String dokterId, Dokter dokter) async {
     try {
       final record =
           await pb.collection('dokter').update(dokterId, body: dokter.toJson());
@@ -41,7 +41,7 @@ class DokterService {
     }
   }
 
-  Future<void> deleteDokter(String dokterId) async {
+  static Future<void> deleteDokter(String dokterId) async {
     try {
       await pb.collection('dokter').delete(dokterId);
       print('Data dokter berhasil dihapus');
