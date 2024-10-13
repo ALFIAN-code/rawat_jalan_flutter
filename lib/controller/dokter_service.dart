@@ -16,6 +16,7 @@ class DokterService {
   static Future<void> createDokter(Map<String, dynamic> dokterData) async {
     try {
       await pb.collection('dokter').create(body: dokterData);
+      print('berhasil tambah data');
     } catch (e) {
       rethrow;
     }

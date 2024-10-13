@@ -1,12 +1,14 @@
+import 'package:intl/intl.dart';
+
 class Dokter {
-  String id;
+  String? id;
   String npi;
   String namaDokter;
   String spesialisasi;
   String jenisKelamin;
   String noTelp;
   String alamat;
-  DateTime tanggalLahir;
+  String tanggalLahir;
   String email;
   String statusLisensi;
   String tanggalLisensi;
@@ -14,7 +16,7 @@ class Dokter {
   String password;
 
   Dokter({
-    required this.id,
+    this.id,
     required this.npi,
     required this.namaDokter,
     required this.spesialisasi,
@@ -38,7 +40,7 @@ class Dokter {
       jenisKelamin: json['jenis_kelamin'],
       noTelp: json['no_telp'],
       alamat: json['alamat'],
-      tanggalLahir: DateTime.parse(json['tanggal_lahir']),
+      tanggalLahir: json['tanggal_lahir'],
       email: json['email'],
       statusLisensi: json['status_lisensi'],
       tanggalLisensi: json['tanggal_lisensi'],
@@ -49,14 +51,13 @@ class Dokter {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'npi': npi,
       'nama_dokter': namaDokter,
       'spesialisasi': spesialisasi,
       'jenis_kelamin': jenisKelamin,
       'no_telp': noTelp,
       'alamat': alamat,
-      'tanggal_lahir': tanggalLahir.toIso8601String(),
+      'tanggal_lahir': tanggalLahir,
       'email': email,
       'status_lisensi': statusLisensi,
       'tanggal_lisensi': tanggalLisensi,

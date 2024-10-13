@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rawat_jalan/view/style.dart';
 
 import 'get/admin_controller.dart';
@@ -15,7 +16,7 @@ class _OverviewPageState extends State<OverviewPage> {
   final controller = Get.find<AdminController>();
 
   int calculateAge(String birthdateString) {
-    DateTime birthdate = DateTime.parse(birthdateString);
+    DateTime birthdate = DateFormat("yyyy-MM-dd").parse(birthdateString);
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthdate.year;
 
@@ -127,16 +128,36 @@ class _OverviewPageState extends State<OverviewPage> {
                               height: 20,
                             ),
                             DataTable(
-                              columns: const [
-                                DataColumn(label: Text('Nama Lengkap')),
-                                DataColumn(label: Text('Nama Panggilan')),
-                                DataColumn(label: Text('Jenis Kelamin')),
-                                DataColumn(label: Text('Alamat')),
-                                DataColumn(label: Text('Tanggal Lahir')),
-                                DataColumn(label: Text('Tempat Lahir')),
-                                DataColumn(label: Text('Agama')),
-                                DataColumn(label: Text('Umur')),
-                                DataColumn(label: Text('No telp')),
+                              columns: [
+                                DataColumn(
+                                    label: Text(
+                                  'Nama Lengkap',
+                                  style: bold10.copyWith(fontSize: 12),
+                                )),
+                                DataColumn(
+                                    label: Text('Nama Panggilan',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Jenis Kelamin',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Alamat',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Tanggal Lahir',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Tempat Lahir',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Agama',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Umur',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('No telp',
+                                        style: bold10.copyWith(fontSize: 12))),
 
                                 // Add more columns as needed
                               ],
@@ -190,16 +211,34 @@ class _OverviewPageState extends State<OverviewPage> {
                               height: 20,
                             ),
                             DataTable(
-                              columns: const [
-                                DataColumn(label: Text('NPI')),
-                                DataColumn(label: Text('Nama')),
-                                DataColumn(label: Text('Kelamin')),
-                                DataColumn(label: Text('Alamat')),
-                                DataColumn(label: Text('Tgl lahir')),
-                                DataColumn(label: Text('Spesialisasi')),
-                                DataColumn(label: Text('Umur')),
-                                DataColumn(label: Text('No telp')),
-                                DataColumn(label: Text('Lisensi'))
+                              columns: [
+                                DataColumn(
+                                    label: Text('NPI',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Nama',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Kelamin',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Alamat',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Tgl lahir',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Spesialisasi',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Umur',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('No telp',
+                                        style: bold10.copyWith(fontSize: 12))),
+                                DataColumn(
+                                    label: Text('Lisensi',
+                                        style: bold10.copyWith(fontSize: 12)))
                                 // Add more columns as needed
                               ],
                               rows: controller.dokterData.value.map((dokter) {
@@ -209,11 +248,10 @@ class _OverviewPageState extends State<OverviewPage> {
                                     DataCell(Text(dokter.namaDokter)),
                                     DataCell(Text(dokter.jenisKelamin)),
                                     DataCell(Text(dokter.alamat)),
-                                    DataCell(Text(
-                                        '${dokter.tanggalLahir.day}-${dokter.tanggalLahir.month}-${dokter.tanggalLahir.year}')),
+                                    DataCell(Text(dokter.tanggalLahir)),
                                     DataCell(Text(dokter.spesialisasi)),
                                     DataCell(Text(
-                                        '${calculateAge('${dokter.tanggalLahir}')}')),
+                                        '${calculateAge(dokter.tanggalLahir)}')),
                                     DataCell(Text(dokter.noTelp)),
                                     DataCell(Text(dokter.statusLisensi)),
 
