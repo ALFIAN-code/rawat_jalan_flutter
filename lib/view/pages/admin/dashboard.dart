@@ -168,8 +168,7 @@ class _OverviewPageState extends State<OverviewPage> {
                                     DataCell(Text(pasien.namaPanggilan)),
                                     DataCell(Text(pasien.jenisKelamin)),
                                     DataCell(Text(pasien.alamat)),
-                                    DataCell(Text(
-                                        '${pasien.tanggalLahir.day}-${pasien.tanggalLahir.month}-${pasien.tanggalLahir.year}')),
+                                    DataCell(Text(pasien.tanggalLahir)),
                                     DataCell(Text(pasien.tempatLahir)),
                                     DataCell(Text(pasien.agama)),
                                     DataCell(Text(

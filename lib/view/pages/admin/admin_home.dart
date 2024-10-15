@@ -154,7 +154,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       : (selectedPage == 1)
                           ? KelolaDokterPage()
                           : (selectedPage == 2)
-                              ? const KelolaPasienPage()
+                              ? KelolaPasienPage()
                               : const KelolaJadwalPage(),
                 ),
               ],

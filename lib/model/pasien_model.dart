@@ -1,11 +1,11 @@
 class Pasien {
-  String id;
+  String? id;
   String idEksternal;
   String namaLengkap;
   String namaPanggilan;
   String namaIbu;
   String jenisKelamin;
-  DateTime tanggalLahir;
+  String tanggalLahir;
   String tempatLahir;
   String agama;
   String ras;
@@ -18,13 +18,13 @@ class Pasien {
   String noSim;
   String kelompokEtnis;
   String kelahiranKembar;
-  String indikatorMeninggal;
+  String? indikatorMeninggal;
   String kewarganegaraan;
   String statusMiliter;
   String? tanggalMeninggal;
 
   Pasien({
-    required this.id,
+    this.id,
     required this.idEksternal,
     required this.namaLengkap,
     required this.namaPanggilan,
@@ -57,7 +57,7 @@ class Pasien {
       namaPanggilan: json['nama_panggilan'],
       namaIbu: json['nama_ibu'],
       jenisKelamin: json['jenis_kelamin'],
-      tanggalLahir: DateTime.parse(json['tanggal_lahir']),
+      tanggalLahir: json['tanggal_lahir'],
       tempatLahir: json['tempat_lahir'],
       agama: json['agama'],
       ras: json['ras'],
@@ -79,13 +79,12 @@ class Pasien {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'id_eksternal': idEksternal,
       'nama_lengkap': namaLengkap,
       'nama_panggilan': namaPanggilan,
       'nama_ibu': namaIbu,
       'jenis_kelamin': jenisKelamin,
-      'tanggal_lahir': tanggalLahir.toIso8601String(),
+      'tanggal_lahir': tanggalLahir,
       'tempat_lahir': tempatLahir,
       'agama': agama,
       'ras': ras,

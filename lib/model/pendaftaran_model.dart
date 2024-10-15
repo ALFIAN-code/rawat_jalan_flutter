@@ -3,7 +3,7 @@ class Pendaftaran {
   String admin;
   String pasien;
   String dokter;
-  DateTime tanggal;
+  String tanggal;
   String keluhan;
   String status;
 
@@ -23,7 +23,7 @@ class Pendaftaran {
       admin: json['admin'],
       pasien: json['pasien'],
       dokter: json['dokter'],
-      tanggal: DateTime.parse(json['tanggal']),
+      tanggal: json['tanggal'],
       keluhan: json['keluhan'],
       status: json['status'],
     );
@@ -35,7 +35,7 @@ class Pendaftaran {
       'admin': admin,
       'pasien': pasien,
       'dokter': dokter,
-      'tanggal': tanggal.toIso8601String(),
+      'tanggal': tanggal,
       'keluhan': keluhan,
       'status': status,
     };

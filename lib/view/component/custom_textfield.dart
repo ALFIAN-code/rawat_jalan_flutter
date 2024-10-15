@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,
       style: semibold16.copyWith(
-        fontSize : 14,
+        fontSize: 14,
         color: const Color(0xff525252).withOpacity(0.9),
       ),
       decoration: InputDecoration(

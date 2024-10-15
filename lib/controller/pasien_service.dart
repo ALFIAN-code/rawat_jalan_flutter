@@ -37,7 +37,7 @@ class PasienService {
 
   static Future<void> updatePasien(Pasien pasien) async {
     try {
-      await pb.collection('pasien').update(pasien.id, body: pasien.toJson());
+      await pb.collection('pasien').update(pasien.id!, body: pasien.toJson());
       print('Pasien berhasil diupdate');
     } catch (e) {
       print('Error: $e');

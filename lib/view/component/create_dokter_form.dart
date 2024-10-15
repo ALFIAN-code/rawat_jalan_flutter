@@ -94,7 +94,7 @@ class _CreateDokterFormState extends State<CreateDokterForm> {
           mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
           children: [
             Text("Tambah Dokter", style: bold24),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Flexible(
               child: ListView(
                 shrinkWrap: true,
@@ -307,44 +307,44 @@ class _CreateDokterFormState extends State<CreateDokterForm> {
                       obscureText: false),
                   const SizedBox(
                     height: 20,
-                  )
+                  ),
+                  Container(
+                      decoration: BoxDecoration(boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 10,
+                          offset: const Offset(5, 5),
+                        ),
+                      ]),
+                      child: CustomButton(
+                        onTap: () {
+                          Dokter dokter = Dokter(
+                            npi: widget.NPI.text,
+                            namaDokter: widget.namaDokter.text,
+                            spesialisasi: widget.spesialisasi.text,
+                            jenisKelamin: widget.jenisKelamin.value,
+                            noTelp: widget.noTelp.text,
+                            alamat: widget.alamat.text,
+                            tanggalLahir: widget.tanggalLahir.text,
+                            email: widget.email.text,
+                            statusLisensi: widget.statusLisensi.value,
+                            tanggalLisensi: widget.tanggalLisensi.text,
+                            namaInstitusi: widget.namaInstitusi.text,
+                            password: widget.password.text,
+                          );
+                          controller.createDokter(dokter.toJson());
+                          Get.back();
+                        },
+                        color: mainColor,
+                        child: Text(
+                          'Tambah',
+                          style: bold16,
+                        ),
+                      ))
                 ],
               ),
             ),
-            Container(
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 10,
-                    offset: const Offset(5, 5),
-                  ),
-                ]),
-                child: CustomButton(
-                  onTap: () {
-                    Dokter dokter = Dokter(
-                      npi: widget.NPI.text,
-                      namaDokter: widget.namaDokter.text,
-                      spesialisasi: widget.spesialisasi.text,
-                      jenisKelamin: widget.jenisKelamin.value,
-                      noTelp: widget.noTelp.text,
-                      alamat: widget.alamat.text,
-                      tanggalLahir: widget.tanggalLahir.text,
-                      email: widget.email.text,
-                      statusLisensi: widget.statusLisensi.value,
-                      tanggalLisensi: widget.tanggalLisensi.text,
-                      namaInstitusi: widget.namaInstitusi.text,
-                      password: widget.password.text,
-                    );
-                    controller.createDokter(dokter.toJson());
-                    Get.back();
-                  },
-                  color: mainColor,
-                  child: Text(
-                    'Tambah',
-                    style: bold16,
-                  ),
-                ))
           ],
         ),
       ),
