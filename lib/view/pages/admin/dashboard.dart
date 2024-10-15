@@ -40,7 +40,8 @@ class _OverviewPageState extends State<OverviewPage> {
               builder: (_) {
                 if (controller.pasienData.isEmpty ||
                     controller.dokterData.isEmpty ||
-                    controller.pendaftaranData.isEmpty) {
+                    controller.pendaftaranData.isEmpty ||
+                    controller.listAdmin.isEmpty) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
@@ -138,7 +139,7 @@ class _OverviewPageState extends State<OverviewPage> {
                                     label: Text('Nama Panggilan',
                                         style: bold10.copyWith(fontSize: 12))),
                                 DataColumn(
-                                    label: Text('Jenis Kelamin',
+                                    label: Text('Kelamin',
                                         style: bold10.copyWith(fontSize: 12))),
                                 DataColumn(
                                     label: Text('Alamat',

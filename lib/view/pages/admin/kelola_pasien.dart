@@ -5,10 +5,12 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
 import 'package:rawat_jalan/view/component/create_dokter_form.dart';
 import 'package:rawat_jalan/view/component/create_pasien_form.dart';
+import 'package:rawat_jalan/view/component/create_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/component/edit_dokter_form.dart';
 import 'package:rawat_jalan/view/component/edit_pasien_form.dart';
+import 'package:rawat_jalan/view/component/edit_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
 import 'package:rawat_jalan/view/style.dart';
 
@@ -77,7 +79,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
     }
   }
 
-  void openFormDialog(BuildContext context, {AdminController? controller}) {
+  void openFormDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -203,8 +205,6 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                       DataColumn(
                           label: Text('Action',
                               style: bold10.copyWith(fontSize: 12))),
-
-                      // Add more columns as needed
                     ],
                     rows: controller.pasienData.value.map((pasien) {
                       return DataRow(
@@ -286,7 +286,12 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          openFormDialog(context);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return CreatePendaftarannForm();
+                            },
+                          );
                         },
                         child: const Row(
                           children: [
@@ -329,12 +334,9 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                         'Admin',
                         style: bold10.copyWith(fontSize: 12),
                       )),
-
                       DataColumn(
                           label: Text('Action',
                               style: bold10.copyWith(fontSize: 12))),
-
-                      // Add more columns as needed
                     ],
                     rows: controller.pendaftaranData.value.map((data) {
                       return DataRow(
@@ -344,20 +346,31 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                                 (element) => element.id == data.pasien,
                               )
                               .namaLengkap)),
-                          DataCell(Text(controller.dokterData.value
+                          DataCell(Text(controller.listAdmin.value
                               .firstWhere(
-                                (element) => element.id == data.dokter,
+                                (element) => element.idAdmin == data.admin,
                               )
-                              .namaDokter)),
+                              .nama)),
                           DataCell(Text(data.tanggal)),
                           DataCell(Text(data.keluhan)),
 
                           DataCell(Text(data.status)),
-                          DataCell(Text('null')),
+                          DataCell(Text(controller.listAdmin.value
+                              .firstWhere(
+                                (element) => element.idAdmin == data.admin,
+                              )
+                              .nama)),
                           DataCell(Row(
                             children: [
                               ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return EditPendaftarannForm(
+                                              idPendaftaran: data.id);
+                                        });
+                                  },
                                   child: const Icon(Icons.edit)),
                               const SizedBox(
                                 width: 5,

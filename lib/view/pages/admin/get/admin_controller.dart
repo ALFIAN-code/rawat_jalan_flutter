@@ -14,6 +14,7 @@ class AdminController extends GetxController {
   var dokterData = <Dokter>[].obs;
   var pasienData = <Pasien>[].obs;
   var pendaftaranData = <Pendaftaran>[].obs;
+  var listAdmin = <Admin>[].obs;
 
   @override
   void onInit() {
@@ -22,12 +23,25 @@ class AdminController extends GetxController {
     getDokterData();
     getPasienData();
     getPendaftaranData();
+    getAllAdmin();
   }
 
   Future<void> getAdminDataById(String noTelp) async {
     var result = await AdminService.getAdmin(pb, noTelp);
     adminData.value = result;
     update();
+  }
+
+  Future<void> getAllAdmin() async {
+    try {
+      var result = await AdminService.getAdminList().then(
+        (value) => listAdmin.value = value,
+      );
+      print('panjang data admin = ${listAdmin.length}');
+      update();
+    } catch (e) {
+      print(e);
+    }
   }
 
   bool adminAuth(String noTelp, String password) {
@@ -111,9 +125,9 @@ class AdminController extends GetxController {
     }
   }
 
-  void updatePasien(Pasien pasien) async {
+  void updatePasien(Pasien pasien, String id) async {
     try {
-      await PasienService.updatePasien(pasien);
+      await PasienService.updatePasien(id, pasien);
       getPasienData();
       update();
     } catch (e) {
@@ -121,9 +135,9 @@ class AdminController extends GetxController {
     }
   }
 
-  void updatePendaftaran(Pendaftaran pendaftaran) async {
+  void updatePendaftaran(Pendaftaran pendaftaran, String id) async {
     try {
-      await PendaftaranService.updatePendaftaran(pendaftaran);
+      await PendaftaranService.updatePendaftaran(id, pendaftaran);
       getPendaftaranData();
       update();
     } catch (e) {

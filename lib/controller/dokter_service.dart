@@ -6,11 +6,6 @@ class DokterService {
   static Future<List<Dokter>> getAllDokter(PocketBase client) async {
     final records = await client.collection('dokter').getFullList();
     return records.map((e) => Dokter.fromJson(e.data, id: e.id)).toList();
-    // try {
-
-    // } catch (e) {
-    //   rethrow;
-    // }
   }
 
   static Future<void> createDokter(Map<String, dynamic> dokterData) async {

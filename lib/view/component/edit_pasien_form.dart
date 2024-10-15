@@ -40,7 +40,7 @@ class EditPasienForm extends StatefulWidget {
   final List<String> gender = ['Laki-laki', 'Perempuan'];
   final List<String> kelahiranKembarList = ['Tidak', 'iya'];
   final List<String> statusPernikahanList = ['Menikah', 'Belum Menikah'];
-  final List<String> statusMiliterList = ['Ada', 'Tidak ada'];
+  final List<String> statusMiliterList = ['Ada', 'Tidak Ada'];
 
   final idPasien;
 
@@ -69,6 +69,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
   void loadPasienData() {
     var pasien = controller.pasienData
         .firstWhere((element) => element.id == widget.idPasien);
+
     widget.idEksternalController.text = pasien.idEksternal;
     widget.namaLengkapController.text = pasien.namaLengkap;
     widget.namaPanggilanController.text = pasien.namaPanggilan;
@@ -140,7 +141,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
               children: [
-                Text("Tambah Pasiwn", style: bold24),
+                Text("Edit Pasied", style: bold24),
                 const SizedBox(height: 30),
                 Flexible(
                   child: ListView(
@@ -526,7 +527,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
                             },
                           ).toList(),
                           onChanged: (value) {
-                            widget.statusPernikahan.value = value.toString();
+                            widget.statusMiliter.value = value.toString();
                           },
                         ),
                       ),
@@ -611,7 +612,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
                                 tanggalMeninggal: widget
                                     .tanggalPasienMeninggalController.text,
                               );
-                              controller.updatePasien(pasien);
+                              controller.updatePasien(pasien, widget.idPasien);
                               Get.back();
                             },
                             color: mainColor,

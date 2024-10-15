@@ -487,7 +487,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
                         },
                       ).toList(),
                       onChanged: (value) {
-                        widget.statusPernikahan.value = value.toString();
+                        widget.statusMiliter.value = value.toString();
                       },
                     ),
                   ),

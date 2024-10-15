@@ -36,11 +36,10 @@ class PendaftaranService {
     }
   }
 
-  static Future<void> updatePendaftaran(Pendaftaran pendaftaran) async {
+  static Future<void> updatePendaftaran(
+      String id, Pendaftaran pendaftaran) async {
     try {
-      await pb
-          .collection('pendaftaran')
-          .update(pendaftaran.id, body: pendaftaran.toJson());
+      await pb.collection('pendaftaran').update(id, body: pendaftaran.toJson());
       print('Pendaftaran berhasil diupdate');
     } catch (e) {
       print('Error: $e');

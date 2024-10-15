@@ -1,5 +1,5 @@
 class Pendaftaran {
-  String id;
+  String? id;
   String admin;
   String pasien;
   String dokter;
@@ -8,7 +8,7 @@ class Pendaftaran {
   String status;
 
   Pendaftaran({
-    required this.id,
+    this.id,
     required this.admin,
     required this.pasien,
     required this.dokter,
@@ -31,7 +31,6 @@ class Pendaftaran {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'admin': admin,
       'pasien': pasien,
       'dokter': dokter,

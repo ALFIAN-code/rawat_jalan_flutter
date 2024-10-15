@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:rawat_jalan/model/admin_model.dart';
+import 'package:rawat_jalan/pocketbase.dart';
 
 class AdminService {
   static Future<Admin> getAdmin(PocketBase client, String noTelp) async {
@@ -18,12 +19,15 @@ class AdminService {
     }
   }
 
-  static Future<List<Admin>> getAdminList(PocketBase client) async {
+  static Future<List<Admin>> getAdminList() async {
     try {
-      final records = await client.collection('admin').getFullList();
-      return records.map((e) => Admin.fromJson(e.data)).toList();
+      final records = await pb.collection('admin').getFullList();
+      return records
+          .map((record) => Admin.fromJson(record.data, id: record.id))
+          .toList();
     } catch (e) {
-      rethrow;
+      print('Error: $e');
+      return [];
     }
   }
 }
