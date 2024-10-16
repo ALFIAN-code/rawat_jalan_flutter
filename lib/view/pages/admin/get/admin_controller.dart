@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
 import 'package:rawat_jalan/controller/admin_service.dart';
 import 'package:rawat_jalan/controller/dokter_service.dart';
+import 'package:rawat_jalan/controller/jadwal_services.dart';
 import 'package:rawat_jalan/controller/pasien_service.dart';
 import 'package:rawat_jalan/controller/pendaftaran_service.dart';
+import 'package:rawat_jalan/controller/ruangan_service.dart';
 import 'package:rawat_jalan/model/admin_model.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
+import 'package:rawat_jalan/model/jadwal_model.dart';
 import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
+import 'package:rawat_jalan/model/ruangan_model.dart';
 import 'package:rawat_jalan/pocketbase.dart';
 
 class AdminController extends GetxController {
@@ -15,15 +19,30 @@ class AdminController extends GetxController {
   var pasienData = <Pasien>[].obs;
   var pendaftaranData = <Pendaftaran>[].obs;
   var listAdmin = <Admin>[].obs;
+  var listJadwal = <Jadwal>[].obs;
+  var listRuangan = <Ruangan>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     print('geting data .......');
+
+    getAllRuangan();
+    getJadwalData();
     getDokterData();
     getPasienData();
     getPendaftaranData();
     getAllAdmin();
+  }
+
+  Future<void> getAllRuangan() async {
+    try {
+      var result = await RuanganService.getAllRuangan(pb);
+      listRuangan.value = result;
+      update();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> getAdminDataById(String noTelp) async {
@@ -50,6 +69,46 @@ class AdminController extends GetxController {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<void> createJadwal(Jadwal jadwal) async {
+    try {
+      await JadwalService.createJadwal(jadwal);
+      getJadwalData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateJadwal(Jadwal jadwal, String id) async {
+    try {
+      await JadwalService.updateJadwal(id, jadwal);
+      getJadwalData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> deleteJadwal(String id) async {
+    try {
+      await JadwalService.deleteJadwal(id);
+      getJadwalData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getJadwalData() async {
+    try {
+      var result = await JadwalService.getAllJadwal(pb);
+      listJadwal.value = result;
+      update();
+    } catch (e) {
+      print(e);
     }
   }
 

@@ -1,49 +1,36 @@
-import 'package:rawat_jalan/model/pendaftaran_model.dart';
-import 'package:rawat_jalan/model/ruangan_model.dart';
-
 class Jadwal {
-  final int idJadwal;
-  final int idRuangan;
-  final int idPendaftaran;
+  final String? idJadwal;
+  final String idRuangan;
+  final String idPendaftaran;
   final String tanggal;
   final String waktuMulai;
   final String waktuSelesai;
-  Pendaftaran? pendaftaran;
-  Ruangan? ruangan;
 
   Jadwal({
-    required this.idJadwal,
+    this.idJadwal,
     required this.idRuangan,
     required this.idPendaftaran,
     required this.tanggal,
     required this.waktuMulai,
     required this.waktuSelesai,
-    this.pendaftaran,
-    this.ruangan
   });
 
-  factory Jadwal.fromJson(Map<String, dynamic> json) {
+  factory Jadwal.fromJson(Map<String, dynamic> json, {String? id}) {
     return Jadwal(
-      idJadwal: json['id_jadwal'],
-      idRuangan: json['id_ruangan'],
-      idPendaftaran: json['id_pendaftaran'],
+      idJadwal: id!,
+      idRuangan: json['ruangan'],
+      idPendaftaran: json['pendaftaran'],
       tanggal: json['tanggal'],
       waktuMulai: json['waktu_mulai'],
       waktuSelesai: json['waktu_selesai'],
-      pendaftaran: json['pendaftaran'] != null
-          ? Pendaftaran.fromJson(json['pendaftaran'])
-          : null,
-      ruangan: json['ruangan'] != null
-          ? Ruangan.fromJson(json['ruangan'])
-          : null
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id_jadwal': idJadwal,
-      'id_ruangan': idRuangan,
-      'id_pendaftaran': idPendaftaran,
+      // 'id_jadwal': idJadwal,
+      'ruangan': idRuangan,
+      'pendaftaran': idPendaftaran,
       'tanggal': tanggal,
       'waktu_mulai': waktuMulai,
       'waktu_selesai': waktuSelesai,

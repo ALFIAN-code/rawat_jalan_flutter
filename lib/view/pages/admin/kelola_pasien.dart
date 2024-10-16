@@ -278,11 +278,14 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
               Padding(
                 padding: const EdgeInsets.only(right: 60),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'Pendaftaran Rawat Jalan',
                       style: bold20,
+                    ),
+                    const SizedBox(
+                      width: 30,
                     ),
                     ElevatedButton(
                         onPressed: () {
@@ -376,7 +379,9 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                                 width: 5,
                               ),
                               ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    controller.deletePendaftaran(data.id!);
+                                  },
                                   child: const Icon(Icons.delete))
                             ],
                           ))

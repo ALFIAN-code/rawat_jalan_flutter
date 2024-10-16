@@ -1,34 +1,28 @@
 import 'package:rawat_jalan/model/poli_model.dart';
 
 class Ruangan {
-  final int idRuangan;
-  final int idPoli;
+  final String idRuangan;
+  final String poli;
   final String namaRuangan;
-  final Poliklinik? poliklinik;
 
   Ruangan({
     required this.idRuangan,
-    required this.idPoli,
+    required this.poli,
     required this.namaRuangan,
-    this.poliklinik,
   });
 
-  factory Ruangan.fromJson(Map<String, dynamic> json) {
+  factory Ruangan.fromJson(Map<String, dynamic> json, {String? id}) {
     return Ruangan(
-      idRuangan: json['idRuangan'],
-      idPoli: json['idPoli'],
-      namaRuangan: json['namaRuangan'],
-      poliklinik: json['poliklinik'] != null
-          ? Poliklinik.fromJson(json['poliklinik'])
-          : null,
+      idRuangan: id!,
+      poli: json['poli'],
+      namaRuangan: json['nama_ruangan'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'idRuangan': idRuangan,
-      'idPoli': idPoli,
-      'namaRuangan': namaRuangan,
+      'idPoli': poli,
+      'nama_ruangan': namaRuangan,
     };
   }
 }
