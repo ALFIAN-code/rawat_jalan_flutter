@@ -75,7 +75,7 @@ class _OverviewPageState extends State<OverviewPage> {
                             count: controller.dokterData.isNotEmpty
                                 ? controller.dokterData.length.toString()
                                 : '-',
-                            title: 'Total pokter saat ini',
+                            title: 'Total Dokter saat ini',
                           ),
                           const SizedBox(
                             width: 20,
@@ -139,7 +139,7 @@ class _OverviewPageState extends State<OverviewPage> {
                                     label: Text('Nama Panggilan',
                                         style: bold10.copyWith(fontSize: 12))),
                                 DataColumn(
-                                    label: Text('Kelamin',
+                                    label: Text('Jenis Kelamin',
                                         style: bold10.copyWith(fontSize: 12))),
                                 DataColumn(
                                     label: Text('Alamat',

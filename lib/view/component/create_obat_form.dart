@@ -52,7 +52,7 @@ class _CreateObatFormState extends State<CreateObatForm> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Tambah Pendaftaran", style: bold24),
+            Text("Tambah Obat", style: bold24),
             const SizedBox(height: 30),
             Flexible(
               child: ListView(

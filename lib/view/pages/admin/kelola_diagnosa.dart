@@ -156,21 +156,24 @@ class KelolaDiagnosa extends StatelessWidget {
                                   child: const Text('Tambah Resep'),
                                 )
                               : Row(children: [
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          WidgetStateProperty.all<Color>(
-                                              Colors.lightBlue[200]!),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all<Color>(
+                                                Colors.lightBlue[200]!),
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CreateObatForm(
+                                            resepId: resep.idResep!,
+                                          ),
+                                        );
+                                      },
+                                      child: const Text('tambah obat'),
                                     ),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => CreateObatForm(
-                                          resepId: resep.idResep!,
-                                        ),
-                                      );
-                                    },
-                                    child: const Text('tambah obat'),
                                   ),
                                   SizedBox(
                                     width:
@@ -183,7 +186,7 @@ class KelolaDiagnosa extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(o.namaObat),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 5,
                                             ),
                                             Text(o.dosis),

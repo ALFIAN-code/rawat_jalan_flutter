@@ -85,7 +85,7 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
         child: Column(
           mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
           children: [
-            Text("Tambah Pendaftaran", style: bold24),
+            Text("Tambah Jadwal", style: bold24),
             const SizedBox(height: 30),
             Flexible(
               child: ListView(

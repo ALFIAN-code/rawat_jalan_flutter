@@ -150,19 +150,21 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                       'Data Pasien',
                       style: bold20,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          openFormDialog(context);
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.add_rounded),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text('Tambah')
-                          ],
-                        )),
+                    (controller.role == 'Admin')
+                        ? ElevatedButton(
+                            onPressed: () {
+                              openFormDialog(context);
+                            },
+                            child: const Row(
+                              children: [
+                                Icon(Icons.add_rounded),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('Tambah')
+                              ],
+                            ))
+                        : const SizedBox(),
                   ],
                 ),
               ),
@@ -234,11 +236,13 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                               const SizedBox(
                                 width: 5,
                               ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    controller.deletePasien(pasien.id!);
-                                  },
-                                  child: const Icon(Icons.delete))
+                              (controller.role == 'Admin')
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        controller.deletePasien(pasien.id!);
+                                      },
+                                      child: const Icon(Icons.delete))
+                                  : const SizedBox()
                             ],
                           ))
 
@@ -288,24 +292,26 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                           const SizedBox(
                             width: 30,
                           ),
-                          ElevatedButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return CreatePendaftarannForm();
+                          (controller.role == "Admin")
+                              ? ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return CreatePendaftarannForm();
+                                      },
+                                    );
                                   },
-                                );
-                              },
-                              child: const Row(
-                                children: [
-                                  Icon(Icons.add_rounded),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text('Tambah')
-                                ],
-                              )),
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.add_rounded),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text('Tambah')
+                                    ],
+                                  ))
+                              : const SizedBox(),
                         ],
                       ),
                     ),

@@ -38,7 +38,7 @@ class KelolaJadwalPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Data Dokter',
+                      'Data Jadwal',
                       style: bold20,
                     ),
                     const SizedBox(
