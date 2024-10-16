@@ -223,16 +223,18 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                           DataCell(Text(pasien.noTelp)),
                           DataCell(Row(
                             children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return EditPasienForm(
-                                              idPasien: pasien.id);
-                                        });
-                                  },
-                                  child: const Icon(Icons.edit)),
+                              (controller.role == 'Admin')
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return EditPasienForm(
+                                                  idPasien: pasien.id);
+                                            });
+                                      },
+                                      child: const Icon(Icons.edit))
+                                  : const SizedBox(),
                               const SizedBox(
                                 width: 5,
                               ),
@@ -263,154 +265,151 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
         const SizedBox(
           height: 40,
         ),
-        (controller.role == 'Admin')
-            ? Container(
-                height: 500,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: const Offset(0, 5))
-                    ]),
-                padding: const EdgeInsets.fromLTRB(40, 40, 40, 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          height: 500,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: const Offset(0, 5))
+              ]),
+          padding: const EdgeInsets.fromLTRB(40, 40, 40, 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 60),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Pendaftaran Rawat Jalan',
-                            style: bold20,
-                          ),
-                          const SizedBox(
-                            width: 30,
-                          ),
-                          (controller.role == "Admin")
-                              ? ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return CreatePendaftarannForm();
-                                      },
-                                    );
-                                  },
-                                  child: const Row(
-                                    children: [
-                                      Icon(Icons.add_rounded),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text('Tambah')
-                                    ],
-                                  ))
-                              : const SizedBox(),
-                        ],
-                      ),
+                    Text(
+                      'Pendaftaran Rawat Jalan',
+                      style: bold20,
                     ),
                     const SizedBox(
-                      height: 20,
+                      width: 30,
                     ),
-                    Obx(() {
-                      if (controller.dokterData.isNotEmpty) {
-                        return DataTable(
-                          columns: [
-                            DataColumn(
-                                label: Text(
-                              'Nama Pasien',
-                              style: bold10.copyWith(fontSize: 12),
-                            )),
-                            DataColumn(
-                                label: Text('Dokter',
-                                    style: bold10.copyWith(fontSize: 12))),
-                            DataColumn(
-                                label: Text('Tanggal Pendaftaran',
-                                    style: bold10.copyWith(fontSize: 12))),
-                            DataColumn(
-                                label: Text('Keluhan',
-                                    style: bold10.copyWith(fontSize: 12))),
-                            DataColumn(
-                                label: Text('Status',
-                                    style: bold10.copyWith(fontSize: 12))),
-                            DataColumn(
-                                label: Text(
-                              'Admin',
-                              style: bold10.copyWith(fontSize: 12),
-                            )),
-                            DataColumn(
-                                label: Text('Action',
-                                    style: bold10.copyWith(fontSize: 12))),
-                          ],
-                          rows: controller.pendaftaranData.value.map((data) {
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(controller.pasienData.value
-                                    .firstWhere(
-                                      (element) => element.id == data.pasien,
-                                    )
-                                    .namaLengkap)),
-                                DataCell(Text(controller.listAdmin.value
-                                    .firstWhere(
-                                      (element) =>
-                                          element.idAdmin == data.admin,
-                                    )
-                                    .nama)),
-                                DataCell(Text(data.tanggal)),
-                                DataCell(Text(data.keluhan)),
-
-                                DataCell(Text(data.status)),
-                                DataCell(Text(controller.listAdmin.value
-                                    .firstWhere(
-                                      (element) =>
-                                          element.idAdmin == data.admin,
-                                    )
-                                    .nama)),
-                                DataCell(Row(
-                                  children: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return EditPendaftarannForm(
-                                                    idPendaftaran: data.id);
-                                              });
-                                        },
-                                        child: const Icon(Icons.edit)),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          controller
-                                              .deletePendaftaran(data.id!);
-                                        },
-                                        child: const Icon(Icons.delete))
-                                  ],
-                                ))
-
-                                // Add more cells as needed
+                    (controller.role == "Admin")
+                        ? ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CreatePendaftarannForm();
+                                },
+                              );
+                            },
+                            child: const Row(
+                              children: [
+                                Icon(Icons.add_rounded),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('Tambah')
                               ],
-                            );
-                          }).toList(),
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
+                            ))
+                        : const SizedBox(),
                   ],
                 ),
-              )
-            : const SizedBox()
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Obx(() {
+                if (controller.dokterData.isNotEmpty) {
+                  return DataTable(
+                    columns: [
+                      DataColumn(
+                          label: Text(
+                        'Nama Pasien',
+                        style: bold10.copyWith(fontSize: 12),
+                      )),
+                      DataColumn(
+                          label: Text('Dokter',
+                              style: bold10.copyWith(fontSize: 12))),
+                      DataColumn(
+                          label: Text('Tanggal Pendaftaran',
+                              style: bold10.copyWith(fontSize: 12))),
+                      DataColumn(
+                          label: Text('Keluhan',
+                              style: bold10.copyWith(fontSize: 12))),
+                      DataColumn(
+                          label: Text('Status',
+                              style: bold10.copyWith(fontSize: 12))),
+                      DataColumn(
+                          label: Text(
+                        'Admin',
+                        style: bold10.copyWith(fontSize: 12),
+                      )),
+                      DataColumn(
+                          label: Text('Action',
+                              style: bold10.copyWith(fontSize: 12))),
+                    ],
+                    rows: controller.pendaftaranData.value.map((data) {
+                      return DataRow(
+                        cells: [
+                          DataCell(Text(controller.pasienData.value
+                              .firstWhere(
+                                (element) => element.id == data.pasien,
+                              )
+                              .namaLengkap)),
+                          DataCell(Text(controller.listAdmin.value
+                              .firstWhere(
+                                (element) => element.idAdmin == data.admin,
+                              )
+                              .nama)),
+                          DataCell(Text(data.tanggal)),
+                          DataCell(Text(data.keluhan)),
+
+                          DataCell(Text(data.status)),
+                          DataCell(Text(controller.listAdmin.value
+                              .firstWhere(
+                                (element) => element.idAdmin == data.admin,
+                              )
+                              .nama)),
+                          DataCell(Row(
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return EditPendaftarannForm(
+                                              idPendaftaran: data.id);
+                                        });
+                                  },
+                                  child: const Icon(Icons.edit)),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              (controller.role == 'Admin')
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        controller.deletePendaftaran(data.id!);
+                                      },
+                                      child: const Icon(Icons.delete))
+                                  : const SizedBox()
+                            ],
+                          ))
+
+                          // Add more cells as needed
+                        ],
+                      );
+                    }).toList(),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+            ],
+          ),
+        )
       ],
     );
   }

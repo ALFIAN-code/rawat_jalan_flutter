@@ -107,7 +107,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
               children: [
-                Text("Tambah Pendaftaran", style: bold24),
+                Text("Edit Diagnosa", style: bold24),
                 const SizedBox(height: 30),
                 Flexible(
                   child: ListView(
