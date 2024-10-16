@@ -224,7 +224,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                             },
                             color: mainColor,
                             child: Text(
-                              'Tambah',
+                              'Update',
                               style: bold16,
                             ),
                           )),
