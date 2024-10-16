@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:rawat_jalan/view/component/navbar_item.dart';
 import 'package:rawat_jalan/view/pages/admin/dashboard.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
+import 'package:rawat_jalan/view/pages/admin/kelola_diagnosa.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_dokter.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_jadwal.dart';
 import 'package:rawat_jalan/view/pages/admin/kelola_pasien.dart';
+import 'package:rawat_jalan/view/pages/login/login.dart';
 import 'package:rawat_jalan/view/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminHomePage extends StatefulWidget {
   AdminHomePage({super.key});
@@ -20,13 +23,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   var controller = Get.put(AdminController());
 
+  void logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('role');
+    prefs.remove('noTelp');
+    Get.offAll(const LoginPage());
+  }
+
+  String getFirstTwoWords(String sentence) {
+    List<String> words = sentence.split(' ');
+    if (words.length >= 2) {
+      return '${words[0]} ${words[1]}';
+    } else {
+      return words.join(' ');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(31, 143, 232, 230),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          // Menyesuaikan padding berdasarkan lebar layar
           double sidePadding = constraints.maxWidth > 1200 ? 30 : 10;
           double containerWidth = constraints.maxWidth > 1200 ? 250 : 200;
 
@@ -67,16 +85,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           icon: const Icon(Icons.healing),
                           selected: (selectedPage == 0) ? true : false,
                         ),
-                        NavbarButton(
-                          text: "Dokter",
-                          onTap: () {
-                            setState(() {
-                              selectedPage = 1;
-                            });
-                          },
-                          icon: const Icon(Icons.healing),
-                          selected: (selectedPage == 1) ? true : false,
-                        ),
+                        (controller.role == 'Admin')
+                            ? NavbarButton(
+                                text: "Dokter",
+                                onTap: () {
+                                  setState(() {
+                                    selectedPage = 1;
+                                  });
+                                },
+                                icon: const Icon(Icons.healing),
+                                selected: (selectedPage == 1) ? true : false,
+                              )
+                            : const SizedBox(),
                         NavbarButton(
                           text: "Pasien",
                           onTap: () {
@@ -87,6 +107,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           icon: const Icon(Icons.healing),
                           selected: (selectedPage == 2) ? true : false,
                         ),
+                        (controller.role == 'Dokter')
+                            ? NavbarButton(
+                                text: "Diagnosa",
+                                onTap: () {
+                                  setState(() {
+                                    selectedPage = 4;
+                                  });
+                                },
+                                icon: const Icon(Icons.healing),
+                                selected: (selectedPage == 4) ? true : false,
+                              )
+                            : const SizedBox(),
                         NavbarButton(
                           text: "Jadwal",
                           onTap: () {
@@ -127,22 +159,30 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               ),
                               const SizedBox(height: 20),
                               Text(
-                                controller.adminData.value.nama,
+                                (controller.role == 'Admin')
+                                    ? controller.adminData.value.nama
+                                    : getFirstTwoWords(
+                                        controller.dokterUser.value.namaDokter),
                                 style: bold14,
                               ),
                             ],
                           ),
                         ),
                         const Expanded(child: SizedBox()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.logout),
-                            Text(
-                              'Logout',
-                              style: regular14,
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            logout();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.logout),
+                              Text(
+                                'Logout',
+                                style: regular14,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -155,7 +195,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           ? KelolaDokterPage()
                           : (selectedPage == 2)
                               ? KelolaPasienPage()
-                              : KelolaJadwalPage(),
+                              : (selectedPage == 3)
+                                  ? KelolaJadwalPage()
+                                  : KelolaDiagnosa(),
                 ),
               ],
             ),

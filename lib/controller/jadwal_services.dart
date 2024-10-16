@@ -32,7 +32,7 @@ class JadwalService {
     try {
       final record =
           await pb.collection('jadwal').update(id, body: jadwal.toJson());
-      print('Data dokter berhasil diperbarui: ${record.id}');
+      print('Data jadwal berhasil diperbarui: ${record.id}');
     } catch (e) {
       print('Gagal memperbarui data dokter: $e');
     }

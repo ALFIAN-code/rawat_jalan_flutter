@@ -1,27 +1,27 @@
 class Resep {
-  final String idResep;
+  final String? idResep;
   final String idDiagnosa;
-  final DateTime waktuDiberikan;
+  final String tanggalDiberikan;
 
   Resep({
-    required this.idResep,
+    this.idResep,
     required this.idDiagnosa,
-    required this.waktuDiberikan,
+    required this.tanggalDiberikan,
   });
 
-  factory Resep.fromJson(Map<String, dynamic> json) {
+  factory Resep.fromJson(Map<String, dynamic> json, {String? id}) {
     return Resep(
-      idResep: json['idResep'],
-      idDiagnosa: json['idDiagnosa'],
-      waktuDiberikan: DateTime.parse(json['waktuDiberikan']),
+      idResep: id!,
+      idDiagnosa: json['diagnosa'],
+      tanggalDiberikan: json['tanggal_diberikan'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'idResep': idResep,
-      'idDiagnosa': idDiagnosa,
-      'waktuDiberikan': waktuDiberikan.toIso8601String(),
+      'resep': idResep,
+      'diagnosa': idDiagnosa,
+      'tanggal_diberikan': tanggalDiberikan,
     };
   }
 }

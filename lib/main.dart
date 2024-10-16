@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rawat_jalan/view/component/create_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/pages/admin/admin_home.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
 import 'package:rawat_jalan/view/pages/dokter/dokter_home.dart';
@@ -43,13 +44,15 @@ class MyApp extends StatelessWidget {
             );
           } else {
             if (snapshot.hasData) {
+              var adminController = Get.put(AdminController());
               if (snapshot.data![0] == 'Admin') {
-                var adminController = Get.put(AdminController());
                 adminController.getAdminDataById(snapshot.data![1]!);
-                return AdminHomePage();
+                controller.role = 'Admin';
               } else {
-                return DokterHomePage();
+                adminController.getDokterById(snapshot.data![1]!);
+                controller.role = 'Dokter';
               }
+              return AdminHomePage();
             } else {
               return const LoginPage();
             }

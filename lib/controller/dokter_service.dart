@@ -17,13 +17,24 @@ class DokterService {
     }
   }
 
-  static Future<Dokter?> getDokter(String dokterId) async {
+  static Future<Dokter> getDokter(String dokterId) async {
     try {
       final record = await pb.collection('dokter').getOne(dokterId);
       return Dokter.fromJson(record.data);
     } catch (e) {
       print('Gagal mendapatkan data dokter: $e');
-      return null;
+      rethrow;
+    }
+  }
+
+  static Future<Dokter> getDokterByNoTelp(String noTelp) async {
+    try {
+      final record =
+          await pb.collection('dokter').getFirstListItem('no_telp="$noTelp"');
+      return Dokter.fromJson(record.data, id: record.id);
+    } catch (e) {
+      print('Gagal mendapatkan data dokter: $e');
+      rethrow;
     }
   }
 

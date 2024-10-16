@@ -33,13 +33,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _login() async {
+    var adminController = Get.put(AdminController());
     if (selectedRole == 'Admin') {
-      var adminController = Get.put(AdminController());
       await adminController.getAdminDataById(phoneNumberController.text).then(
         (value) {
           if (adminController.adminAuth(
               phoneNumberController.text, passwordController.text)) {
             storeLoginData();
+            adminController.role = 'Admin';
             Get.off(() => AdminHomePage());
           } else {
             Get.snackbar(
@@ -49,7 +50,23 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
       );
-    } else if (selectedRole == 'Dokter') {}
+    } else if (selectedRole == 'Dokter') {
+      await adminController.getDokterById(phoneNumberController.text).then(
+        (value) {
+          if (adminController.dokterAuth(
+              phoneNumberController.text, passwordController.text)) {
+            storeLoginData();
+            adminController.role = 'Dokter';
+            Get.off(() => AdminHomePage());
+          } else {
+            Get.snackbar(
+                backgroundColor: Colors.red.withOpacity(0.5),
+                "login invalid",
+                'nomor telfon atau password salah');
+          }
+        },
+      );
+    }
   }
 
   @override
@@ -172,6 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedRole = value.toString();
+                                    print('role: $selectedRole');
                                   });
                                 },
                               ),

@@ -63,6 +63,13 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
   var selectedRuangan = controller.listRuangan.value.first;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadJadwalData();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     tanggalController.dispose();
@@ -97,7 +104,6 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
     return FutureBuilder(
       future: Future.delayed(
         Duration(milliseconds: 200),
-        () => loadJadwalData(),
       ),
       builder: (context, snapshot) {
         return Dialog(
@@ -247,8 +253,6 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
                         ).toList(),
                         onChanged: (value) {
                           setState(() {
-                            // widget.selectedPasien = value;
-                            // Pasien selected = value as Pasien;
                             selectedPasien = value!;
                           });
                         },

@@ -1,35 +1,34 @@
 class Diagnosa {
-  final String idDiagnosa;
+  final String? idDiagnosa;
   final String idPendaftaran;
-  final DateTime tanggal;
+  final String tanggal;
   final String detail;
   final String kodeDiagnosa;
 
   Diagnosa({
-    required this.idDiagnosa,
+    this.idDiagnosa,
     required this.idPendaftaran,
     required this.tanggal,
     required this.detail,
     required this.kodeDiagnosa,
   });
 
-  factory Diagnosa.fromJson(Map<String, dynamic> json) {
+  factory Diagnosa.fromJson(Map<String, dynamic> json, {String? id}) {
     return Diagnosa(
-      idDiagnosa: json['idDiagnosa'],
-      idPendaftaran: json['idPendaftaran'],
-      tanggal: DateTime.parse(json['tanggal']),
+      idDiagnosa: id,
+      idPendaftaran: json['pendaftaran'],
+      tanggal: json['tanggal'],
       detail: json['detail'],
-      kodeDiagnosa: json['kodeDiagnosa'],
+      kodeDiagnosa: json['kode_diagnosis'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'idDiagnosa': idDiagnosa,
-      'idPendaftaran': idPendaftaran,
-      'tanggal': tanggal.toIso8601String(),
+      'pendaftaran': idPendaftaran,
+      'tanggal': tanggal,
       'detail': detail,
-      'kodeDiagnosa': kodeDiagnosa,
+      'kode_diagnosis': kodeDiagnosa,
     };
   }
 }

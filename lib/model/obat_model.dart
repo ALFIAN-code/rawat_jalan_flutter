@@ -1,5 +1,5 @@
 class Obat {
-  final String idObat;
+  final String? idObat;
   final String idResep;
   final String namaObat;
   final String jenisObat;
@@ -7,7 +7,7 @@ class Obat {
   final String rutePemberian;
 
   Obat({
-    required this.idObat,
+    this.idObat,
     required this.idResep,
     required this.namaObat,
     required this.jenisObat,
@@ -15,25 +15,24 @@ class Obat {
     required this.rutePemberian,
   });
 
-  factory Obat.fromJson(Map<String, dynamic> json) {
+  factory Obat.fromJson(Map<String, dynamic> json, {String? id}) {
     return Obat(
-      idObat: json['idObat'],
-      idResep: json['idResep'],
-      namaObat: json['namaObat'],
-      jenisObat: json['jenisObat'],
+      idObat: id,
+      idResep: json['resep'],
+      namaObat: json['nama_obat'],
+      jenisObat: json['jenis_obat'],
       dosis: json['dosis'],
-      rutePemberian: json['rutePemberian'],
+      rutePemberian: json['rute_pemberian'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'idObat': idObat,
-      'idResep': idResep,
-      'namaObat': namaObat,
-      'jenisObat': jenisObat,
+      'resep': idResep,
+      'nama_obat': namaObat,
+      'jenis_obat': jenisObat,
       'dosis': dosis,
-      'rutePemberian': rutePemberian,
+      'rute_pemberian': rutePemberian,
     };
   }
 }

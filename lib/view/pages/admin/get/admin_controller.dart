@@ -1,15 +1,21 @@
 import 'package:get/get.dart';
 import 'package:rawat_jalan/controller/admin_service.dart';
+import 'package:rawat_jalan/controller/diagnosa_service.dart';
 import 'package:rawat_jalan/controller/dokter_service.dart';
 import 'package:rawat_jalan/controller/jadwal_services.dart';
+import 'package:rawat_jalan/controller/obat_service.dart';
 import 'package:rawat_jalan/controller/pasien_service.dart';
 import 'package:rawat_jalan/controller/pendaftaran_service.dart';
+import 'package:rawat_jalan/controller/resep_service.dart';
 import 'package:rawat_jalan/controller/ruangan_service.dart';
 import 'package:rawat_jalan/model/admin_model.dart';
+import 'package:rawat_jalan/model/diagnosa_model.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
+import 'package:rawat_jalan/model/obat_model.dart';
 import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
+import 'package:rawat_jalan/model/resep_model.dart';
 import 'package:rawat_jalan/model/ruangan_model.dart';
 import 'package:rawat_jalan/pocketbase.dart';
 
@@ -21,6 +27,26 @@ class AdminController extends GetxController {
   var listAdmin = <Admin>[].obs;
   var listJadwal = <Jadwal>[].obs;
   var listRuangan = <Ruangan>[].obs;
+  var diagnosaList = <Diagnosa>[].obs;
+  var resepList = <Resep>[].obs;
+  var obatList = <Obat>[].obs;
+
+  var dokterUser = Dokter(
+    npi: '',
+    namaDokter: '',
+    jenisKelamin: '',
+    spesialisasi: '',
+    alamat: '',
+    tanggalLahir: '',
+    email: '',
+    statusLisensi: '',
+    tanggalLisensi: '',
+    namaInstitusi: '',
+    password: '',
+    noTelp: '',
+  ).obs;
+
+  var role = 'Admin';
 
   @override
   void onInit() {
@@ -28,11 +54,134 @@ class AdminController extends GetxController {
     print('geting data .......');
 
     getAllRuangan();
+    getResepData();
+    getObatData();
+    getDiagnosaData();
     getJadwalData();
     getDokterData();
     getPasienData();
     getPendaftaranData();
     getAllAdmin();
+  }
+
+  Future<void> createResep(Resep resep) async {
+    try {
+      await ResepService.createResep(resep.toJson());
+      getResepData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getResepData() async {
+    try {
+      var result = await ResepService.getAllResep(pb);
+      resepList.value = result;
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> deleteResep(String id) async {
+    try {
+      await ResepService.deleteResep(id);
+      getResepData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateResep(Resep resep, String id) async {
+    try {
+      await ResepService.updateResep(id, resep);
+      getResepData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> createObat(Obat obat) async {
+    try {
+      await ObatService.createObat(obat.toJson());
+      getResepData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getObatData() async {
+    try {
+      var result = await ObatService.getAllObat(pb);
+      obatList.value = result;
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> deleteObat(String id) async {
+    try {
+      await ObatService.deleteObat(id);
+      getObatData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateObat(Obat obat, String id) async {
+    try {
+      await ObatService.updateObat(id, obat);
+      getObatData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> createDiagnosa(Diagnosa diagnosa) async {
+    try {
+      await DiagnosaService.createDiagnosa(diagnosa.toJson());
+      getDiagnosaData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateDiagnosa(Diagnosa diagnosa, String id) async {
+    try {
+      await DiagnosaService.updateDiagnosa(id, diagnosa);
+      getDiagnosaData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> deleteDiagnosa(String id) async {
+    try {
+      await DiagnosaService.deleteDiagnosa(id);
+      getDiagnosaData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getDiagnosaData() async {
+    try {
+      var result = await DiagnosaService.getAllDiagnosa(pb);
+      diagnosaList.value = result;
+      update();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> getAllRuangan() async {
@@ -46,9 +195,14 @@ class AdminController extends GetxController {
   }
 
   Future<void> getAdminDataById(String noTelp) async {
-    var result = await AdminService.getAdmin(pb, noTelp);
-    adminData.value = result;
-    update();
+    try {
+      var result = await AdminService.getAdmin(pb, noTelp);
+      adminData.value = result;
+      update();
+    } catch (e) {
+      Get.snackbar('cannot find account',
+          'check your phonenumber or password, or check your role is righ or not');
+    }
   }
 
   Future<void> getAllAdmin() async {
@@ -66,6 +220,15 @@ class AdminController extends GetxController {
   bool adminAuth(String noTelp, String password) {
     if (adminData.value.no_telp == noTelp &&
         adminData.value.password == password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool dokterAuth(String noTelp, String password) {
+    if (dokterUser.value.noTelp == noTelp &&
+        dokterUser.value.password == password) {
       return true;
     } else {
       return false;
@@ -121,6 +284,17 @@ class AdminController extends GetxController {
       print(e);
     }
     update();
+  }
+
+  Future<void> getDokterById(String noTelp) async {
+    try {
+      var result = await DokterService.getDokterByNoTelp(noTelp);
+      dokterUser.value = result;
+      print(dokterUser.value.namaDokter);
+      update();
+    } catch (e) {
+      print(e);
+    }
   }
 
   void getPasienData() async {
