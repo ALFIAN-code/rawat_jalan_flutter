@@ -82,10 +82,10 @@ class KelolaDiagnosa extends StatelessWidget {
                           label: Text('Tanggal',
                               style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
-                          label: Text('detail',
+                          label: Text('Kode diagnosa',
                               style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
-                          label: Text('Kode diagnosa',
+                          label: Text('detail',
                               style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
                           label: Text('Resep',

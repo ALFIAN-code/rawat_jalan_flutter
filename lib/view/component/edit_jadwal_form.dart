@@ -120,7 +120,7 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
               children: [
-                Text("Update jadwal", style: bold24),
+                Text("Edit jadwal", style: bold24),
                 const SizedBox(height: 30),
                 Flexible(
                   child: ListView(

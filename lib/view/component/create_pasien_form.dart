@@ -520,7 +520,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
                       ),
                       IconButton(
                           onPressed: () {
-                            widget.tanggalLahirController.clear();
+                            widget.tanggalPasienMeninggalController.clear();
                           },
                           icon: const Icon(Icons.clear_rounded))
                     ],

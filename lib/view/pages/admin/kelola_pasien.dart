@@ -357,11 +357,11 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                                 (element) => element.id == data.pasien,
                               )
                               .namaLengkap)),
-                          DataCell(Text(controller.listAdmin.value
+                          DataCell(Text(controller.dokterData.value
                               .firstWhere(
-                                (element) => element.idAdmin == data.admin,
+                                (element) => element.id == data.dokter,
                               )
-                              .nama)),
+                              .namaDokter)),
                           DataCell(Text(data.tanggal)),
                           DataCell(Text(data.keluhan)),
 

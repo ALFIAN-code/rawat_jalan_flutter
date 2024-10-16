@@ -15,7 +15,6 @@ class EditPendaftarannForm extends StatefulWidget {
   final idPendaftaran;
   final tanggalController = TextEditingController();
   final keluhanController = TextEditingController();
-  var status = 'Berjalan';
 
   @override
   State<EditPendaftarannForm> createState() => _EditPendaftarannFormState();
@@ -46,18 +45,38 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
   var selectedPasien = controller.pasienData.value.first;
   var selectedDokter = controller.dokterData.value.first;
 
+  var admin = '';
+
+  var status = 'Berjalan';
+  var statusList = ['Berjalan', 'Selesai'];
+
   loadPendaftaranData() {
     var pendaftaran = controller.pendaftaranData
         .firstWhere((element) => element.id == widget.idPendaftaran);
 
     widget.tanggalController.text = pendaftaran.tanggal;
     widget.keluhanController.text = pendaftaran.keluhan;
-    widget.status = pendaftaran.status;
+    status = pendaftaran.status;
+
+    if (controller.role == 'Dokter') {
+      admin = controller.pendaftaranData.value
+          .firstWhere(
+            (element) => element.id == widget.idPendaftaran,
+          )
+          .admin;
+    }
     selectedPasien = controller.pasienData
         .firstWhere((element) => element.id == pendaftaran.pasien);
 
     selectedDokter = controller.dokterData
         .firstWhere((element) => element.id == pendaftaran.dokter);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadPendaftaranData();
   }
 
   @override
@@ -74,7 +93,6 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
     return FutureBuilder(
       future: Future.delayed(
         const Duration(milliseconds: 300),
-        () => loadPendaftaranData(),
       ),
       builder: (context, snapshot) {
         return Dialog(
@@ -97,21 +115,103 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
+                      (controller.role == 'Admin')
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Keluhan",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CustomTextField(
+                                    hint: 'Demam tinggi',
+                                    controller: widget.keluhanController),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Pilih Pasien",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                DropdownButton2(
+                                  buttonStyleData: ButtonStyleData(
+                                      decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 2,
+                                        color: const Color(0xffC9C9C9)
+                                            .withOpacity(0.7)),
+                                  )),
+                                  isExpanded: true,
+                                  value: selectedPasien,
+                                  items: pasienList.map(
+                                    (e) {
+                                      return DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e.namaLengkap),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // widget.selectedPasien = value;
+                                      // Pasien selected = value as Pasien;
+                                      selectedPasien = value!;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Pilih Dokter",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                DropdownButton2(
+                                  buttonStyleData: ButtonStyleData(
+                                      decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 2,
+                                        color: const Color(0xffC9C9C9)
+                                            .withOpacity(0.7)),
+                                  )),
+                                  isExpanded: true,
+                                  value: selectedDokter,
+                                  items: dokterList.map(
+                                    (e) {
+                                      return DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e.namaDokter),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // Dokter selected = value as Dokter;
+                                      selectedDokter = value!;
+                                      print(selectedDokter);
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            )
+                          : const SizedBox(),
+
                       Text(
-                        "Keluhan",
-                        style: regular14,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                          hint: '012********',
-                          controller: widget.keluhanController),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Pilih Pasien",
+                        "Status",
                         style: regular14,
                       ),
                       const SizedBox(
@@ -126,53 +226,19 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                               color: const Color(0xffC9C9C9).withOpacity(0.7)),
                         )),
                         isExpanded: true,
-                        value: selectedPasien,
-                        items: pasienList.map(
+                        value: status,
+                        items: statusList.map(
                           (e) {
                             return DropdownMenuItem(
                               value: e,
-                              child: Text(e.namaLengkap),
+                              child: Text(e),
                             );
                           },
                         ).toList(),
                         onChanged: (value) {
                           setState(() {
-                            // widget.selectedPasien = value;
-                            // Pasien selected = value as Pasien;
-                            selectedPasien = value!;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Pilih Dokter",
-                        style: regular14,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      DropdownButton2(
-                        buttonStyleData: ButtonStyleData(
-                            decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              width: 2,
-                              color: const Color(0xffC9C9C9).withOpacity(0.7)),
-                        )),
-                        isExpanded: true,
-                        value: selectedDokter,
-                        items: dokterList.map(
-                          (e) {
-                            return DropdownMenuItem(
-                              value: e,
-                              child: Text(e.namaDokter),
-                            );
-                          },
-                        ).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            // Dokter selected = value as Dokter;
-                            selectedDokter = value!;
-                            print(selectedDokter);
+                            print(value);
+                            status = value!;
                           });
                         },
                       ),
@@ -196,9 +262,11 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                               Pendaftaran pendaftaran = Pendaftaran(
                                 dokter: selectedDokter.id!,
                                 pasien: selectedPasien.id!,
-                                admin: controller.adminData.value.idAdmin!,
+                                admin: (controller.role == 'Admin')
+                                    ? controller.adminData.value.idAdmin!
+                                    : admin,
                                 keluhan: widget.keluhanController.text,
-                                status: widget.status,
+                                status: status,
                                 tanggal: DateFormat('yyyy-MM-dd')
                                     .format(currentDate),
                               );
