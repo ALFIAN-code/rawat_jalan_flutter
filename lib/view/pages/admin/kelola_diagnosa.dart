@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rawat_jalan/model/obat_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/model/resep_model.dart';
 import 'package:rawat_jalan/view/component/create_diagnosa_form.dart';

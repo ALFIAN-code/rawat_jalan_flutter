@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:rawat_jalan/view/component/create_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/pages/admin/admin_home.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
-import 'package:rawat_jalan/view/pages/dokter/dokter_home.dart';
 import 'package:rawat_jalan/view/pages/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('tessss');
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Rawat Jalan',
       theme: ThemeData(
         primarySwatch: Colors.blue,
