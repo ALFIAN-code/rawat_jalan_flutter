@@ -43,7 +43,7 @@ class _EditDokterFormState extends State<EditDokterForm> {
     );
 
     if (pickedDate != null) {
-      return "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+      return "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
     } else {
       return controller.text;
     }
@@ -93,7 +93,6 @@ class _EditDokterFormState extends State<EditDokterForm> {
     return FutureBuilder(
       future: Future.delayed(
         const Duration(milliseconds: 500),
-        () => loadDokterData(),
       ),
       builder: (context, snapshot) {
         return Dialog(
