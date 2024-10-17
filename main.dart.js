@@ -89720,7 +89720,7 @@ s.u$=r
 s.q$=0},
 H(a){var s,r,q,p=this,o=null,n=A.b_(20),m=A.b_(30),l=A.o("Tambah Obat",o,o,o,$.js(),o,o,o),k=$.dS(),j=A.o("Nama Obat",o,o,o,k,o,o,o),i=A.aN(p.d,"Paracetamol",!1,o,o,!1,o),h=A.o("Jenis Obat",o,o,o,k,o,o,o),g=A.aN(p.e,"Analgesik",!1,o,o,!1,o),f=A.o("Dosis",o,o,o,k,o,o,o),e=A.aN(p.f,"2x1",!1,o,o,!1,o)
 k=A.o("Rute Pemberian",o,o,o,k,o,o,o)
-s=A.aN(p.r,"ruang a301",!1,o,o,!1,o)
+s=A.aN(p.r,"lewat Mulut",!1,o,o,!1,o)
 r=A.a([new A.aU(1,B.y,A.L(B.c.M(25.5),0,0,0),B.bv,10)],t.V)
 q=t.p
 return A.hZ(o,A.bi(o,A.bA(A.a([l,B.ao,new A.e4(1,B.aL,A.hu(A.a([j,B.l,i,B.j,h,B.l,g,B.j,f,B.l,e,B.j,k,B.l,s,B.j,A.bi(o,new A.fe(B.bf,A.o("Tambah",o,o,o,$.iE(),o,o,o),new A.ap7(p),o),B.n,o,o,new A.aG(o,o,o,o,r,o,o,B.p),o,o,o,o,o,o,o,o),B.j],q),o,o,!0),o)],q),B.u,B.o,B.a8),B.n,o,o,new A.aG(B.k,o,o,m,o,o,o,B.p),o,o,o,o,B.bp,o,o,800),o,o,o,o,new A.ci(n,B.q),o)}}
@@ -89820,10 +89820,10 @@ r.q$=0
 s=s.x
 s.u$=q
 s.q$=0},
-H(c9){var s,r,q=this,p=null,o="Indonesia",n=A.b_(20),m=A.b_(30),l=A.o("Tambah Pasiwn",p,p,p,$.js(),p,p,p),k=$.dS(),j=A.o("ID External",p,p,p,k,p,p,p),i=q.a,h=A.aN(i.c,"012********",!1,p,p,!1,p),g=A.o("Nama Lengkap",p,p,p,k,p,p,p),f=A.aN(i.d,"john doe",!1,p,p,!1,p),e=A.o("Nama Panggilan",p,p,p,k,p,p,p),d=A.aN(i.e,"john",!1,p,p,!1,p),c=A.o("Jenis Kelamin",p,p,p,k,p,p,p),b=A.o("Nomor Telfon",p,p,p,k,p,p,p),a=A.aN(i.at,"0815********",!1,p,p,!1,p),a0=A.o("Alamat",p,p,p,k,p,p,p),a1=A.aN(i.Q,"Jl. panjasila, Sukolilo, Surabaya",!1,p,p,!1,p),a2=A.o("Tanggal lahir",p,p,p,k,p,p,p),a3=A.aN(i.w,"hint",!1,p,new A.api(q,c9),!0,p),a4=A.o("Tempat Lahir",p,p,p,k,p,p,p),a5=A.aN(i.x,"Surabaya",!1,p,p,!1,p),a6=A.o("Agama",p,p,p,k,p,p,p),a7=A.aN(i.y,"Islam",!1,p,p,!1,p),a8=A.o("Ras",p,p,p,k,p,p,p),a9=A.aN(i.z,"Asia",!1,p,p,!1,p),b0=A.o("Nama Ibu",p,p,p,k,p,p,p),b1=A.aN(i.f,"Sri Utami",!1,p,p,!1,p),b2=A.o("kode negara",p,p,p,k,p,p,p),b3=A.aN(i.as,"62",!1,p,p,!1,p),b4=A.o("bahasa Utama",p,p,p,k,p,p,p),b5=A.aN(i.ax,o,!1,p,p,!1,p),b6=A.o("Status Pernikahan",p,p,p,k,p,p,p),b7=A.o("No Rekening",p,p,p,k,p,p,p),b8=A.aN(i.ch,"5678************",!1,p,p,!1,p),b9=A.o("No Sim",p,p,p,k,p,p,p),c0=A.aN(i.CW,"9788*********",!1,p,p,!1,p),c1=A.o("Kelompok Etnis",p,p,p,k,p,p,p),c2=A.aN(i.cx,"Madura",!1,p,p,!1,p),c3=A.o("Kelahiran Kembar",p,p,p,k,p,p,p),c4=A.o("Indikator Meninggal",p,p,p,k,p,p,p),c5=A.aN(i.db,"Kulit pucat, Denyut nadi",!1,p,p,!1,p),c6=A.o("kewarganegaraan",p,p,p,k,p,p,p),c7=A.aN(i.dx,o,!1,p,p,!1,p),c8=A.o("Status Militer",p,p,p,k,p,p,p)
+H(c9){var s,r,q=this,p=null,o="Indonesia",n=A.b_(20),m=A.b_(30),l=A.o("Tambah Pasien",p,p,p,$.js(),p,p,p),k=$.dS(),j=A.o("ID External",p,p,p,k,p,p,p),i=q.a,h=A.aN(i.c,"012********",!1,p,p,!1,p),g=A.o("Nama Lengkap",p,p,p,k,p,p,p),f=A.aN(i.d,"john doe",!1,p,p,!1,p),e=A.o("Nama Panggilan",p,p,p,k,p,p,p),d=A.aN(i.e,"john",!1,p,p,!1,p),c=A.o("Jenis Kelamin",p,p,p,k,p,p,p),b=A.o("Nomor Telfon",p,p,p,k,p,p,p),a=A.aN(i.at,"0815********",!1,p,p,!1,p),a0=A.o("Alamat",p,p,p,k,p,p,p),a1=A.aN(i.Q,"Jl. panjasila, Sukolilo, Surabaya",!1,p,p,!1,p),a2=A.o("Tanggal lahir",p,p,p,k,p,p,p),a3=A.aN(i.w,"hint",!1,p,new A.api(q,c9),!0,p),a4=A.o("Tempat Lahir",p,p,p,k,p,p,p),a5=A.aN(i.x,"Surabaya",!1,p,p,!1,p),a6=A.o("Agama",p,p,p,k,p,p,p),a7=A.aN(i.y,"Islam",!1,p,p,!1,p),a8=A.o("Ras",p,p,p,k,p,p,p),a9=A.aN(i.z,"Asia",!1,p,p,!1,p),b0=A.o("Nama Ibu",p,p,p,k,p,p,p),b1=A.aN(i.f,"Sri Utami",!1,p,p,!1,p),b2=A.o("kode negara",p,p,p,k,p,p,p),b3=A.aN(i.as,"62",!1,p,p,!1,p),b4=A.o("bahasa Utama",p,p,p,k,p,p,p),b5=A.aN(i.ax,o,!1,p,p,!1,p),b6=A.o("Status Pernikahan",p,p,p,k,p,p,p),b7=A.o("No Rekening",p,p,p,k,p,p,p),b8=A.aN(i.ch,"5678************",!1,p,p,!1,p),b9=A.o("No Sim",p,p,p,k,p,p,p),c0=A.aN(i.CW,"9788*********",!1,p,p,!1,p),c1=A.o("Kelompok Etnis",p,p,p,k,p,p,p),c2=A.aN(i.cx,"Madura",!1,p,p,!1,p),c3=A.o("Kelahiran Kembar",p,p,p,k,p,p,p),c4=A.o("Indikator Meninggal",p,p,p,k,p,p,p),c5=A.aN(i.db,"Kulit pucat, Denyut nadi",!1,p,p,!1,p),c6=A.o("kewarganegaraan",p,p,p,k,p,p,p),c7=A.aN(i.dx,o,!1,p,p,!1,p),c8=A.o("Status Militer",p,p,p,k,p,p,p)
 k=A.o("Tanggal Passien Meninggal",p,p,p,k,p,p,p)
 s=t.p
-i=A.cs(A.a([A.dr(A.aN(i.fr,"hint",!1,p,new A.apj(q,c9),!0,p),1),A.nH(p,B.nF,new A.apk(q),p,p)],s),B.u,B.o,B.v,p)
+i=A.cs(A.a([A.dr(A.aN(i.fr,"tinggalkan kosong jika tidak",!1,p,new A.apj(q,c9),!0,p),1),A.nH(p,B.nF,new A.apk(q),p,p)],s),B.u,B.o,B.v,p)
 r=A.a([new A.aU(1,B.y,A.L(B.c.M(25.5),0,0,0),B.bv,10)],t.V)
 return A.hZ(p,A.bi(p,A.bA(A.a([l,B.ao,new A.e4(1,B.aL,A.hu(A.a([j,B.l,h,B.j,g,B.l,f,B.j,e,B.l,d,B.j,c,B.l,new A.dJ(new A.apl(q),p),B.j,b,B.l,a,B.j,a0,B.l,a1,B.j,a2,B.l,a3,B.j,a4,B.l,a5,B.j,a6,B.l,a7,B.j,a8,B.l,a9,B.j,b0,B.l,b1,B.j,b2,B.l,b3,B.j,b4,B.l,b5,B.j,b6,B.l,new A.dJ(new A.apm(q),p),B.j,b7,B.l,b8,B.j,b9,B.l,c0,B.j,c1,B.l,c2,B.j,c3,B.l,new A.dJ(new A.apn(q),p),B.j,c4,B.l,c5,B.j,c6,B.l,c7,B.j,c8,B.l,new A.dJ(new A.apo(q),p),B.j,k,B.l,i,B.j,A.bi(p,new A.fe(B.bf,A.o("Tambah",p,p,p,$.iE(),p,p,p),new A.app(q),p),B.n,p,p,new A.aG(p,p,p,p,r,p,p,B.p),p,p,p,p,p,p,p,p)],s),p,p,!0),p)],s),B.u,B.o,B.a8),B.n,p,p,new A.aG(B.k,p,p,m,p,p,p,B.p),p,p,p,p,B.bp,p,p,800),p,p,p,p,new A.ci(n,B.q),p)}}
 A.apl.prototype={
@@ -89890,7 +89890,7 @@ $1(a){var s=null
 return A.dG(A.o(a,s,s,s,s,s,s,s),a,t.N)},
 $S:24}
 A.apb.prototype={
-$1(a){this.a.a.ay.sl(0,a)},
+$1(a){this.a.a.cy.sl(0,a)},
 $S:15}
 A.apo.prototype={
 $0(){var s,r,q,p,o=null,n=A.b_(10)
@@ -90267,7 +90267,7 @@ m=A.o("Password",q,q,q,m,q,q,q)
 j=A.aN(j.at,"********",!1,q,q,!1,q)
 s=A.a([new A.aU(1,B.y,A.L(B.c.M(25.5),0,0,0),B.bv,10)],t.V)
 r=t.p
-return A.hZ(q,A.bi(q,A.bA(A.a([n,B.ao,new A.e4(1,B.aL,A.hu(A.a([l,B.l,i,B.j,h,B.l,g,B.j,f,B.l,new A.dJ(new A.arj(k),q),B.j,e,B.l,d,B.j,c,B.l,b,B.j,a,B.l,a0,B.j,a1,B.l,a2,B.j,a3,B.l,a4,B.j,a5,B.l,new A.dJ(new A.ark(k),q),B.j,a6,B.l,a7,B.j,a8,B.l,a9,B.j,m,B.l,j,B.j,A.bi(q,new A.fe(B.bf,A.o("Ubah",q,q,q,$.iE(),q,q,q),new A.arl(k),q),B.n,q,q,new A.aG(q,q,q,q,s,q,q,B.p),q,q,q,q,q,q,q,q)],r),q,q,!0),q)],r),B.u,B.o,B.a8),B.n,q,q,new A.aG(B.k,q,q,o,q,q,q,B.p),q,q,q,q,B.bp,q,q,800),q,q,q,q,new A.ci(p,B.q),q)},
+return A.hZ(q,A.bi(q,A.bA(A.a([n,B.ao,new A.e4(1,B.aL,A.hu(A.a([l,B.l,i,B.j,h,B.l,g,B.j,f,B.l,new A.dJ(new A.arj(k),q),B.j,e,B.l,d,B.j,c,B.l,b,B.j,a,B.l,a0,B.j,a1,B.l,a2,B.j,a3,B.l,a4,B.j,a5,B.l,new A.dJ(new A.ark(k),q),B.j,a6,B.l,a7,B.j,a8,B.l,a9,B.j,m,B.l,j,B.j,A.bi(q,new A.fe(B.bf,A.o("Update",q,q,q,$.iE(),q,q,q),new A.arl(k),q),B.n,q,q,new A.aG(q,q,q,q,s,q,q,B.p),q,q,q,q,q,q,q,q)],r),q,q,!0),q)],r),B.u,B.o,B.a8),B.n,q,q,new A.aG(B.k,q,q,o,q,q,q,B.p),q,q,q,q,B.bp,q,q,800),q,q,q,q,new A.ci(p,B.q),q)},
 $S:221}
 A.arj.prototype={
 $0(){var s,r,q,p,o=null,n=A.b_(10)
@@ -90642,7 +90642,7 @@ A.as0.prototype={
 $0(){return this.a.ar4()},
 $S:0}
 A.as_.prototype={
-$2(c9,d0){var s,r,q=null,p="Indonesia",o=A.b_(20),n=A.b_(30),m=A.o("Edit Pasied",q,q,q,$.js(),q,q,q),l=$.dS(),k=A.o("ID External",q,q,q,l,q,q,q),j=this.a,i=j.a,h=A.aN(i.c,"012********",!1,q,q,!1,q),g=A.o("Nama Lengkap",q,q,q,l,q,q,q),f=A.aN(i.d,"john doe",!1,q,q,!1,q),e=A.o("Nama Panggilan",q,q,q,l,q,q,q),d=A.aN(i.e,"john",!1,q,q,!1,q),c=A.o("Jenis Kelamin",q,q,q,l,q,q,q),b=A.o("Nomor Telfon",q,q,q,l,q,q,q),a=A.aN(i.at,"0815********",!1,q,q,!1,q),a0=A.o("Alamat",q,q,q,l,q,q,q),a1=A.aN(i.Q,"Jl. panjasila, Sukolilo, Surabaya",!1,q,q,!1,q),a2=A.o("Tanggal lahir",q,q,q,l,q,q,q),a3=A.aN(i.w,"hint",!1,q,new A.arS(j,c9),!0,q),a4=A.o("Tempat Lahir",q,q,q,l,q,q,q),a5=A.aN(i.x,"Surabaya",!1,q,q,!1,q),a6=A.o("Agama",q,q,q,l,q,q,q),a7=A.aN(i.y,"Islam",!1,q,q,!1,q),a8=A.o("Ras",q,q,q,l,q,q,q),a9=A.aN(i.z,"Asia",!1,q,q,!1,q),b0=A.o("Nama Ibu",q,q,q,l,q,q,q),b1=A.aN(i.f,"Sri Utami",!1,q,q,!1,q),b2=A.o("kode negara",q,q,q,l,q,q,q),b3=A.aN(i.as,"62",!1,q,q,!1,q),b4=A.o("bahasa Utama",q,q,q,l,q,q,q),b5=A.aN(i.ax,p,!1,q,q,!1,q),b6=A.o("Status Pernikahan",q,q,q,l,q,q,q),b7=A.o("No Rekening",q,q,q,l,q,q,q),b8=A.aN(i.ch,"5678************",!1,q,q,!1,q),b9=A.o("No Sim",q,q,q,l,q,q,q),c0=A.aN(i.CW,"9788*********",!1,q,q,!1,q),c1=A.o("Kelompok Etnis",q,q,q,l,q,q,q),c2=A.aN(i.cx,"Madura",!1,q,q,!1,q),c3=A.o("Kelahiran Kembar",q,q,q,l,q,q,q),c4=A.o("Indikator Meninggal",q,q,q,l,q,q,q),c5=A.aN(i.db,"Kulit pucat, Denyut nadi",!1,q,q,!1,q),c6=A.o("kewarganegaraan",q,q,q,l,q,q,q),c7=A.aN(i.dx,p,!1,q,q,!1,q),c8=A.o("Status Militer",q,q,q,l,q,q,q)
+$2(c9,d0){var s,r,q=null,p="Indonesia",o=A.b_(20),n=A.b_(30),m=A.o("Edit Pasien",q,q,q,$.js(),q,q,q),l=$.dS(),k=A.o("ID External",q,q,q,l,q,q,q),j=this.a,i=j.a,h=A.aN(i.c,"012********",!1,q,q,!1,q),g=A.o("Nama Lengkap",q,q,q,l,q,q,q),f=A.aN(i.d,"john doe",!1,q,q,!1,q),e=A.o("Nama Panggilan",q,q,q,l,q,q,q),d=A.aN(i.e,"john",!1,q,q,!1,q),c=A.o("Jenis Kelamin",q,q,q,l,q,q,q),b=A.o("Nomor Telfon",q,q,q,l,q,q,q),a=A.aN(i.at,"0815********",!1,q,q,!1,q),a0=A.o("Alamat",q,q,q,l,q,q,q),a1=A.aN(i.Q,"Jl. panjasila, Sukolilo, Surabaya",!1,q,q,!1,q),a2=A.o("Tanggal lahir",q,q,q,l,q,q,q),a3=A.aN(i.w,"hint",!1,q,new A.arS(j,c9),!0,q),a4=A.o("Tempat Lahir",q,q,q,l,q,q,q),a5=A.aN(i.x,"Surabaya",!1,q,q,!1,q),a6=A.o("Agama",q,q,q,l,q,q,q),a7=A.aN(i.y,"Islam",!1,q,q,!1,q),a8=A.o("Ras",q,q,q,l,q,q,q),a9=A.aN(i.z,"Asia",!1,q,q,!1,q),b0=A.o("Nama Ibu",q,q,q,l,q,q,q),b1=A.aN(i.f,"Sri Utami",!1,q,q,!1,q),b2=A.o("kode negara",q,q,q,l,q,q,q),b3=A.aN(i.as,"62",!1,q,q,!1,q),b4=A.o("bahasa Utama",q,q,q,l,q,q,q),b5=A.aN(i.ax,p,!1,q,q,!1,q),b6=A.o("Status Pernikahan",q,q,q,l,q,q,q),b7=A.o("No Rekening",q,q,q,l,q,q,q),b8=A.aN(i.ch,"5678************",!1,q,q,!1,q),b9=A.o("No Sim",q,q,q,l,q,q,q),c0=A.aN(i.CW,"9788*********",!1,q,q,!1,q),c1=A.o("Kelompok Etnis",q,q,q,l,q,q,q),c2=A.aN(i.cx,"Madura",!1,q,q,!1,q),c3=A.o("Kelahiran Kembar",q,q,q,l,q,q,q),c4=A.o("Indikator Meninggal",q,q,q,l,q,q,q),c5=A.aN(i.db,"Kulit pucat, Denyut nadi",!1,q,q,!1,q),c6=A.o("kewarganegaraan",q,q,q,l,q,q,q),c7=A.aN(i.dx,p,!1,q,q,!1,q),c8=A.o("Status Militer",q,q,q,l,q,q,q)
 l=A.o("Tanggal Passien Meninggal",q,q,q,l,q,q,q)
 s=t.p
 i=A.cs(A.a([A.dr(A.aN(i.fr,"hint",!1,q,new A.arT(j,c9),!0,q),1),A.nH(q,B.nF,new A.arU(j),q,q)],s),B.u,B.o,B.v,q)
@@ -90845,7 +90845,7 @@ m=A.X(n).h("a4<1,cB<j>>")
 o=A.dF(q,!0,A.S(new A.a4(n,new A.as9(),m),!0,m.h("a9.E")),new A.asa(p),o,t.N)
 m=A.a([new A.aU(1,B.y,A.L(B.c.M(25.5),0,0,0),B.bv,10)],t.V)
 n=t.p
-return A.hZ(j,A.bi(j,A.bA(A.a([g,B.ao,new A.e4(1,B.aL,A.hu(A.a([s,r,B.l,o,B.l5,A.bi(j,new A.fe(B.bf,A.o("Tambah",j,j,j,$.iE(),j,j,j),new A.asb(p),j),B.n,j,j,new A.aG(j,j,j,j,m,j,j,B.p),j,j,j,j,j,j,j,j),B.j],n),j,j,!0),j)],n),B.u,B.o,B.a8),B.n,j,j,new A.aG(B.k,j,j,h,j,j,j,B.p),j,j,j,j,B.bp,j,j,800),j,j,j,j,new A.ci(i,B.q),j)},
+return A.hZ(j,A.bi(j,A.bA(A.a([g,B.ao,new A.e4(1,B.aL,A.hu(A.a([s,r,B.l,o,B.l5,A.bi(j,new A.fe(B.bf,A.o("Update",j,j,j,$.iE(),j,j,j),new A.asb(p),j),B.n,j,j,new A.aG(j,j,j,j,m,j,j,B.p),j,j,j,j,j,j,j,j),B.j],n),j,j,!0),j)],n),B.u,B.o,B.a8),B.n,j,j,new A.aG(B.k,j,j,h,j,j,j,B.p),j,j,j,j,B.bp,j,j,800),j,j,j,j,new A.ci(i,B.q),j)},
 $S:105}
 A.as5.prototype={
 $1(a){var s=null
