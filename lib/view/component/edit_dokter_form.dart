@@ -360,7 +360,7 @@ class _EditDokterFormState extends State<EditDokterForm> {
                             },
                             color: mainColor,
                             child: Text(
-                              'Ubah',
+                              'Update',
                               style: bold16,
                             ),
                           ))

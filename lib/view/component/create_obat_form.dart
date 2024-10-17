@@ -102,7 +102,7 @@ class _CreateObatFormState extends State<CreateObatForm> {
                     height: 10,
                   ),
                   CustomTextField(
-                      hint: 'ruang a301', controller: rutePemberian),
+                      hint: 'lewat Mulut', controller: rutePemberian),
                   const SizedBox(
                     height: 20,
                   ),

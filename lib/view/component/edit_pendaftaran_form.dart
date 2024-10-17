@@ -276,7 +276,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                             },
                             color: mainColor,
                             child: Text(
-                              'Tambah',
+                              'Update',
                               style: bold16,
                             ),
                           )),

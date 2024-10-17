@@ -141,7 +141,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
               children: [
-                Text("Edit Pasied", style: bold24),
+                Text("Edit Pasien", style: bold24),
                 const SizedBox(height: 30),
                 Flexible(
                   child: ListView(

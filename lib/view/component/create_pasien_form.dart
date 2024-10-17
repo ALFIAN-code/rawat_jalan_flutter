@@ -106,7 +106,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
         child: Column(
           mainAxisSize: MainAxisSize.min, // Membatasi ukuran column
           children: [
-            Text("Tambah Pasiwn", style: bold24),
+            Text("Tambah Pasien", style: bold24),
             const SizedBox(height: 30),
             Flexible(
               child: ListView(
@@ -347,7 +347,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
                         },
                       ).toList(),
                       onChanged: (value) {
-                        widget.statusPernikahan.value = value.toString();
+                        widget.statusPernikahan.value = value!;
                       },
                     ),
                   ),
@@ -424,7 +424,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
                         },
                       ).toList(),
                       onChanged: (value) {
-                        widget.statusPernikahan.value = value.toString();
+                        widget.kelahiranKembar.value = value!;
                       },
                     ),
                   ),
@@ -506,7 +506,7 @@ class _CreatePasienFormState extends State<CreatePasienForm> {
                     children: [
                       Expanded(
                         child: CustomTextField(
-                            hint: 'hint',
+                            hint: 'tinggalkan kosong jika tidak',
                             controller: widget.tanggalPasienMeninggalController,
                             readOnly: true,
                             onTap: () async {
