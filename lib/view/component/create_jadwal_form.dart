@@ -29,7 +29,7 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
     );
 
     if (pickedDate != null) {
-      return "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+      return "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
     } else {
       return controller.text;
     }
