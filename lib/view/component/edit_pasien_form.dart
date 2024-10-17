@@ -60,10 +60,17 @@ class _EditPasienFormState extends State<EditPasienForm> {
     );
 
     if (pickedDate != null) {
-      return "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+      return "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
     } else {
       return controller.text;
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadPasienData();
   }
 
   void loadPasienData() {
@@ -123,9 +130,7 @@ class _EditPasienFormState extends State<EditPasienForm> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.delayed(const Duration(milliseconds: 300), () {
-        return loadPasienData();
-      }),
+      future: Future.delayed(const Duration(milliseconds: 300)),
       builder: (context, snapshot) {
         return Dialog(
           shape: RoundedRectangleBorder(
