@@ -71,7 +71,7 @@ class KelolaDiagnosa extends StatelessWidget {
                 height: 20,
               ),
               Obx(() {
-                if (controller.listJadwal.isNotEmpty) {
+                if (controller.diagnosaList.isNotEmpty) {
                   return DataTable(
                     columns: [
                       DataColumn(

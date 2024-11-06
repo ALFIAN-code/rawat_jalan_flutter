@@ -60,6 +60,7 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
   var ruanganList = controller.listRuangan.value;
 
   var selectedPasien = controller.pasienData.value.first;
+  var selectedDokter = controller.dokterData.value.first;
   var selectedRuangan = controller.listRuangan.value.first;
 
   @override
@@ -280,6 +281,10 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
                                       .firstWhere((element) =>
                                           element.pasien == selectedPasien.id)
                                       .id!,
+                                  // idDokter: controller.pendaftaranData
+                                  //     .firstWhere((element) =>
+                                  //         element.pasien == selectedPasien.id)
+                                  //     .dokter,
                                   tanggal: tanggalController.text,
                                   waktuMulai: waktuMulaiController.text,
                                   waktuSelesai: waktuSelesaiController.text);

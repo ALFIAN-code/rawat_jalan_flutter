@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
+import 'package:rawat_jalan/view/component/create_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';

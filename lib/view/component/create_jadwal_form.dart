@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
+import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -52,12 +53,21 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
   TextEditingController waktuSelesaiController = TextEditingController();
 
   var pasienList = controller.pasienData.value;
+  // var dokterList = controller.dokterData.value;
 
-  var pendaftaranList = controller.pendaftaranData.value;
+  //var pendaftaranList = controller.pendaftaranData.value;
   var ruanganList = controller.listRuangan.value;
+
+  var pendaftaranList = controller.pendaftaranData
+      .where((element) => element.dokter == controller.dokterUser.value.id);
+
+  var selectedPendaftaran = controller.pendaftaranData
+      .where((element) => element.dokter == controller.dokterUser.value.id)
+      .first;
 
   var selectedPasien = controller.pasienData.value.first;
   var selectedRuangan = controller.listRuangan.value.first;
+  // var selectedDokter = controller.listDokter.value.first;
 
   @override
   void dispose() {
@@ -207,12 +217,14 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
                           color: const Color(0xffC9C9C9).withOpacity(0.7)),
                     )),
                     isExpanded: true,
-                    value: selectedPasien,
-                    items: pasienList.map(
+                    value: selectedPendaftaran,
+                    items: pendaftaranList.map(
                       (e) {
+                        var pasien = controller.pasienData
+                            .firstWhere((element) => element.id == e.pasien);
                         return DropdownMenuItem(
                           value: e,
-                          child: Text(e.namaLengkap),
+                          child: Text(pasien.namaLengkap),
                         );
                       },
                     ).toList(),
@@ -220,7 +232,7 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
                       setState(() {
                         // widget.selectedPasien = value;
                         // Pasien selected = value as Pasien;
-                        selectedPasien = value!;
+                        selectedPasien = value as Pasien;
                       });
                     },
                   ),
@@ -243,10 +255,7 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
                         onTap: () {
                           Jadwal jadwal = Jadwal(
                               idRuangan: selectedRuangan.idRuangan,
-                              idPendaftaran: controller.pendaftaranData
-                                  .firstWhere((element) =>
-                                      element.pasien == selectedPasien.id)
-                                  .id!,
+                              idPendaftaran: selectedPendaftaran.id!,
                               tanggal: tanggalController.text,
                               waktuMulai: waktuMulaiController.text,
                               waktuSelesai: waktuSelesaiController.text);

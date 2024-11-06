@@ -69,71 +69,133 @@ class KelolaJadwalPage extends StatelessWidget {
               ),
               Obx(() {
                 if (controller.listJadwal.isNotEmpty) {
-                  return DataTable(
-                    columns: [
-                      DataColumn(
-                          label: Text('Ruangan',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Nama',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('tanggal',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('waktu mulai',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('waktu selesai',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Action',
-                              style: bold10.copyWith(fontSize: 12))),
-                    ],
-                    rows: controller.listJadwal.value.map((jadwal) {
-                      Pendaftaran pendaftarandata = controller.pendaftaranData
-                          .firstWhere(
-                              (element) => element.id == jadwal.idPendaftaran);
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(controller.listRuangan
-                              .firstWhere((element) =>
-                                  element.idRuangan == jadwal.idRuangan)
-                              .namaRuangan)),
-                          DataCell(Text(controller.pasienData
-                              .firstWhere((element) =>
-                                  element.id == pendaftarandata.pasien)
-                              .namaLengkap)),
-                          DataCell(Text(jadwal.tanggal)),
-                          DataCell(Text(jadwal.waktuMulai)),
-                          DataCell(Text(jadwal.waktuSelesai)),
+                  return Expanded(
+                    child: ListView(
+                      children: [
+                        Expanded(
+                            child: DataTable(
+                          columns: [
+                            DataColumn(
+                                label: Text('Ruangan',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Nama',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('tanggal',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('waktu mulai',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('waktu selesai',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Action',
+                                    style: bold10.copyWith(fontSize: 12))),
+                          ],
+                          rows: (controller.role == 'Dokter')
+                              ? controller.listJadwal.value.map((jadwal) {
+                                  Pendaftaran pendaftarandata = controller
+                                      .pendaftaranData
+                                      .firstWhere((element) =>
+                                          element.id == jadwal.idPendaftaran);
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(Text(controller.listRuangan
+                                          .firstWhere((element) =>
+                                              element.idRuangan ==
+                                              jadwal.idRuangan)
+                                          .namaRuangan)),
+                                      DataCell(Text(controller.pasienData
+                                          .firstWhere((element) =>
+                                              element.id ==
+                                              pendaftarandata.pasien)
+                                          .namaLengkap)),
+                                      DataCell(Text(jadwal.tanggal)),
+                                      DataCell(Text(jadwal.waktuMulai)),
+                                      DataCell(Text(jadwal.waktuSelesai)),
 
-                          DataCell(Row(
-                            children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => EditJadwalForm(
-                                        id: jadwal.idJadwal!,
-                                      ),
-                                    );
-                                  },
-                                  child: const Icon(Icons.edit)),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    controller.deleteJadwal(jadwal.idJadwal!);
-                                  },
-                                  child: const Icon(Icons.delete))
-                            ],
-                          ))
-                          // Add more cells as needed
-                        ],
-                      );
-                    }).toList(),
+                                      DataCell(Row(
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      EditJadwalForm(
+                                                    id: jadwal.idJadwal!,
+                                                  ),
+                                                );
+                                              },
+                                              child: const Icon(Icons.edit)),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                controller.deleteJadwal(
+                                                    jadwal.idJadwal!);
+                                              },
+                                              child: const Icon(Icons.delete))
+                                        ],
+                                      ))
+                                      // Add more cells as needed
+                                    ],
+                                  );
+                                }).toList()
+                              : controller.listJadwal.value.map((jadwal) {
+                                  Pendaftaran pendaftarandata = controller
+                                      .pendaftaranData
+                                      .firstWhere((element) =>
+                                          element.id == jadwal.idPendaftaran);
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(Text(controller.listRuangan
+                                          .firstWhere((element) =>
+                                              element.idRuangan ==
+                                              jadwal.idRuangan)
+                                          .namaRuangan)),
+                                      DataCell(Text(controller.pasienData
+                                          .firstWhere((element) =>
+                                              element.id ==
+                                              pendaftarandata.pasien)
+                                          .namaLengkap)),
+                                      DataCell(Text(jadwal.tanggal)),
+                                      DataCell(Text(jadwal.waktuMulai)),
+                                      DataCell(Text(jadwal.waktuSelesai)),
+
+                                      DataCell(Row(
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      EditJadwalForm(
+                                                    id: jadwal.idJadwal!,
+                                                  ),
+                                                );
+                                              },
+                                              child: const Icon(Icons.edit)),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                controller.deleteJadwal(
+                                                    jadwal.idJadwal!);
+                                              },
+                                              child: const Icon(Icons.delete))
+                                        ],
+                                      ))
+                                      // Add more cells as needed
+                                    ],
+                                  );
+                                }).toList(),
+                        ))
+                      ],
+                    ),
                   );
                 } else {
                   return const Center(

@@ -117,23 +117,6 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Text(
-                'Kelola Dokter',
-                style: bold31,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 30,
-        ),
         Container(
           height: 500,
           width: double.infinity,
@@ -160,19 +143,19 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                       'Data Dokter',
                       style: bold20,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          openFormDialog(context);
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.add_rounded),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text('Tambah')
-                          ],
-                        )),
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       openFormDialog(context);
+                    //     },
+                    //     child: const Row(
+                    //       children: [
+                    //         Icon(Icons.add_rounded),
+                    //         SizedBox(
+                    //           width: 5,
+                    //         ),
+                    //         Text('Tambah')
+                    //       ],
+                    //     )),
                   ],
                 ),
               ),
@@ -196,6 +179,9 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                           label: Text('Alamat',
                               style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
+                          label: Text('Email',
+                              style: bold10.copyWith(fontSize: 12))),
+                      DataColumn(
                           label: Text('Tgl lahir',
                               style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
@@ -210,9 +196,9 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                       DataColumn(
                           label: Text('Lisensi',
                               style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('action',
-                              style: bold10.copyWith(fontSize: 12))),
+                      // DataColumn(
+                      //     label: Text('action',
+                      //         style: bold10.copyWith(fontSize: 12))),
                       // Add more columns as needed
                     ],
                     rows: controller.dokterData.value.map((dokter) {
@@ -222,33 +208,34 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                           DataCell(Text(dokter.namaDokter)),
                           DataCell(Text(dokter.jenisKelamin)),
                           DataCell(Text(dokter.alamat)),
+                          DataCell(Text(dokter.email)),
                           DataCell(Text(dokter.tanggalLahir)),
                           DataCell(Text(dokter.spesialisasi)),
                           DataCell(Text(
                               '${calculateAge('${dokter.tanggalLahir}')}')),
                           DataCell(Text(dokter.noTelp)),
                           DataCell(Text(dokter.statusLisensi)),
-                          DataCell(Row(
-                            children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          EditDokterForm(idDokter: dokter.id!),
-                                    );
-                                  },
-                                  child: const Icon(Icons.edit)),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    controller.deleteDokter(dokter.id!);
-                                  },
-                                  child: const Icon(Icons.delete))
-                            ],
-                          ))
+                          // DataCell(Row(
+                          //   children: [
+                          //     ElevatedButton(
+                          //         onPressed: () {
+                          //           showDialog(
+                          //             context: context,
+                          //             builder: (context) =>
+                          //                 EditDokterForm(idDokter: dokter.id!),
+                          //           );
+                          //         },
+                          //         child: const Icon(Icons.edit)),
+                          //     const SizedBox(
+                          //       width: 5,
+                          //     ),
+                          //     ElevatedButton(
+                          //         onPressed: () {
+                          //           controller.deleteDokter(dokter.id!);
+                          //         },
+                          //         child: const Icon(Icons.delete))
+                          //   ],
+                          // ))
 
                           // Add more cells as needed
                         ],

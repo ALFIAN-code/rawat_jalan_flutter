@@ -27,6 +27,7 @@ class AdminController extends GetxController {
   var listAdmin = <Admin>[].obs;
   var listJadwal = <Jadwal>[].obs;
   var listRuangan = <Ruangan>[].obs;
+  var listDokter = <Dokter>[].obs;
   var diagnosaList = <Diagnosa>[].obs;
   var resepList = <Resep>[].obs;
   var obatList = <Obat>[].obs;
