@@ -95,7 +95,19 @@ class KelolaJadwalPage extends StatelessWidget {
                                     style: bold10.copyWith(fontSize: 12))),
                           ],
                           rows: (controller.role == 'Dokter')
-                              ? controller.listJadwal.value.map((jadwal) {
+                              ? controller.listJadwal.value
+                                  .where(
+                                  (element) =>
+                                      element.idPendaftaran ==
+                                      (controller.pendaftaranData.value
+                                          .firstWhere(
+                                        (element) =>
+                                            element.dokter ==
+                                            controller
+                                                .dokterUser.value.iDDokter,
+                                      )).id,
+                                )
+                                  .map((jadwal) {
                                   Pendaftaran pendaftarandata = controller
                                       .pendaftaranData
                                       .firstWhere((element) =>

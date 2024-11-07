@@ -68,7 +68,6 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
 
   var selectedPasien = controller.pasienData.value.first;
   var selectedRuangan = controller.listRuangan.value.first;
-  // var selectedDokter = controller.listDokter.value.first;
 
   @override
   void dispose() {

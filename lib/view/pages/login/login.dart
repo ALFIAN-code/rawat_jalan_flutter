@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
 
   var obscure = true.obs;
 
-  // String password = '';
   String selectedRole = 'Admin';
 
   final roles = ['Admin', 'Dokter'];

@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: checkLogin(),
         builder: (context, snapshot) {
+          var adminController = Get.put(AdminController());
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
               body: Center(
@@ -44,7 +45,6 @@ class MyApp extends StatelessWidget {
             );
           } else {
             if (snapshot.hasData) {
-              var adminController = Get.put(AdminController());
               if (snapshot.data![0] == 'Admin') {
                 adminController.getAdminDataById(snapshot.data![1]!);
                 controller.role = 'Admin';
