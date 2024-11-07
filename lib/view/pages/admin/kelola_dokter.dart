@@ -164,83 +164,89 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
               ),
               Obx(() {
                 if (controller.dokterData.isNotEmpty) {
-                  return DataTable(
-                    columns: [
-                      DataColumn(
-                          label: Text('NPI',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Nama',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Kelamin',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Alamat',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Email',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Tgl lahir',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Spesialisasi',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Umur',
-                              style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('No telp',
-                              style: bold10.copyWith(fontSize: 12))),
-                      // DataColumn(
-                      //     label: Text('Lisensi',
-                      //         style: bold10.copyWith(fontSize: 12))),
-                      // DataColumn(
-                      //     label: Text('action',
-                      //         style: bold10.copyWith(fontSize: 12))),
-                      // Add more columns as needed
-                    ],
-                    rows: controller.dokterData.value.map((dokter) {
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(dokter.nPI ?? 'null')),
-                          DataCell(Text(dokter.nama ?? 'null')),
-                          DataCell(Text(dokter.jenisKelamin ?? 'null')),
-                          DataCell(Text(dokter.alamat ?? 'null')),
-                          DataCell(Text(dokter.email ?? 'null')),
-                          DataCell(Text(dokter.tanggalLahir ?? 'null')),
-                          DataCell(Text(dokter.spesialisasi ?? 'null')),
-                          DataCell(Text(
-                              '${calculateAge('${dokter.tanggalLahir}')}')),
-                          DataCell(Text(dokter.noHp ?? 'null')),
-                          // DataCell(Text(dokter.statusLisensi)),
-                          // DataCell(Row(
-                          //   children: [
-                          //     ElevatedButton(
-                          //         onPressed: () {
-                          //           showDialog(
-                          //             context: context,
-                          //             builder: (context) =>
-                          //                 EditDokterForm(idDokter: dokter.id!),
-                          //           );
-                          //         },
-                          //         child: const Icon(Icons.edit)),
-                          //     const SizedBox(
-                          //       width: 5,
-                          //     ),
-                          //     ElevatedButton(
-                          //         onPressed: () {
-                          //           controller.deleteDokter(dokter.id!);
-                          //         },
-                          //         child: const Icon(Icons.delete))
-                          //   ],
-                          // ))
+                  return Expanded(
+                    child: ListView(
+                      children: [
+                        DataTable(
+                          columns: [
+                            DataColumn(
+                                label: Text('NPI',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Nama',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Kelamin',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Alamat',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Email',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Tgl lahir',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Spesialisasi',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('Umur',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            DataColumn(
+                                label: Text('No telp',
+                                    style: bold10.copyWith(fontSize: 12))),
+                            // DataColumn(
+                            //     label: Text('Lisensi',
+                            //         style: bold10.copyWith(fontSize: 12))),
+                            // DataColumn(
+                            //     label: Text('action',
+                            //         style: bold10.copyWith(fontSize: 12))),
+                            // Add more columns as needed
+                          ],
+                          rows: controller.dokterData.value.map((dokter) {
+                            return DataRow(
+                              cells: [
+                                DataCell(Text(dokter.nPI ?? 'null')),
+                                DataCell(Text(dokter.nama ?? 'null')),
+                                DataCell(Text(dokter.jenisKelamin ?? 'null')),
+                                DataCell(Text(dokter.alamat ?? 'null')),
+                                DataCell(Text(dokter.email ?? 'null')),
+                                DataCell(Text(dokter.tanggalLahir ?? 'null')),
+                                DataCell(Text(dokter.spesialisasi ?? 'null')),
+                                DataCell(Text(
+                                    '${calculateAge('${dokter.tanggalLahir}')}')),
+                                DataCell(Text(dokter.noHp ?? 'null')),
+                                // DataCell(Text(dokter.statusLisensi)),
+                                // DataCell(Row(
+                                //   children: [
+                                //     ElevatedButton(
+                                //         onPressed: () {
+                                //           showDialog(
+                                //             context: context,
+                                //             builder: (context) =>
+                                //                 EditDokterForm(idDokter: dokter.id!),
+                                //           );
+                                //         },
+                                //         child: const Icon(Icons.edit)),
+                                //     const SizedBox(
+                                //       width: 5,
+                                //     ),
+                                //     ElevatedButton(
+                                //         onPressed: () {
+                                //           controller.deleteDokter(dokter.id!);
+                                //         },
+                                //         child: const Icon(Icons.delete))
+                                //   ],
+                                // ))
 
-                          // Add more cells as needed
-                        ],
-                      );
-                    }).toList(),
+                                // Add more cells as needed
+                              ],
+                            );
+                          }).toList(),
+                        )
+                      ],
+                    ),
                   );
                 } else {
                   return const Center(
