@@ -51,19 +51,19 @@ class _EditDokterFormState extends State<EditDokterForm> {
 
   void loadDokterData() {
     var dokter = controller.dokterData
-        .firstWhere((element) => element.id == widget.idDokter);
-    widget.NPI.text = dokter.npi;
-    widget.namaDokter.text = dokter.namaDokter;
-    widget.jenisKelamin.value = dokter.jenisKelamin;
-    widget.spesialisasi.text = dokter.spesialisasi;
-    widget.alamat.text = dokter.alamat;
-    widget.tanggalLahir.text = dokter.tanggalLahir;
-    widget.email.text = dokter.email;
-    widget.statusLisensi.value = dokter.statusLisensi;
-    widget.tanggalLisensi.text = dokter.tanggalLisensi;
-    widget.namaInstitusi.text = dokter.namaInstitusi;
-    widget.password.text = dokter.password;
-    widget.noTelp.text = dokter.noTelp;
+        .firstWhere((element) => element.iDDokter == widget.idDokter);
+    widget.NPI.text = dokter.nPI ?? 'null';
+    widget.namaDokter.text = dokter.nama ?? 'null';
+    widget.jenisKelamin.value = dokter.jenisKelamin ?? 'null';
+    widget.spesialisasi.text = dokter.spesialisasi ?? 'null';
+    widget.alamat.text = dokter.alamat ?? 'null';
+    widget.tanggalLahir.text = dokter.tanggalLahir ?? 'null';
+    widget.email.text = dokter.email ?? 'null';
+    // widget.statusLisensi.value = dokter.statusLisensi ?? 'null';
+    widget.tanggalLisensi.text = dokter.tanggalLisensi ?? 'null';
+    // widget.namaInstitusi.text = dokter.namaInstitusi ?? 'null';
+    // widget.password.text = dokter.password;
+    widget.noTelp.text = dokter.noHp ?? 'null';
   }
 
   @override

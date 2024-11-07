@@ -5,13 +5,14 @@ import 'package:rawat_jalan/model/dokter_model_api.dart';
 class DokterServicesApi {
   static Future<List<DokterModelApi>> getDokters() async {
     final response = await http.get(
-        Uri.https(
-          'https://cors-anywhere.herokuapp.com/https://0sr024r8-3000.asse.devtunnels.ms/api/dokter/',
-        ),
+        Uri.https('cors-anywhere.herokuapp.com',
+            '/0sr024r8-3000.asse.devtunnels.ms/api/dokter/'),
         headers: {'X-Requested-With': 'XMLHttpRequest'});
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+    final data = json.decode(response.body);
+
+    if (data['status'] == 200) {
+      print('data dokter didapatkan ${data['payload']}');
       final List<dynamic> dokterJsonList = data['payload'];
 
       print("list dokter ${dokterJsonList[1]['Nama']}");

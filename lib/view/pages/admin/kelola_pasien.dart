@@ -1,14 +1,8 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:rawat_jalan/model/dokter_model.dart';
-import 'package:rawat_jalan/view/component/create_dokter_form.dart';
 import 'package:rawat_jalan/view/component/create_pasien_form.dart';
 import 'package:rawat_jalan/view/component/create_pendaftaran_form.dart';
-import 'package:rawat_jalan/view/component/custom_button.dart';
-import 'package:rawat_jalan/view/component/custom_textfield.dart';
-import 'package:rawat_jalan/view/component/edit_dokter_form.dart';
 import 'package:rawat_jalan/view/component/edit_pasien_form.dart';
 import 'package:rawat_jalan/view/component/edit_pendaftaran_form.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -38,27 +32,6 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
   }
 
   TextEditingController NPI = TextEditingController();
-
-  // TextEditingController namaDokter = TextEditingController();
-
-  // // TextEditingController jenisKelamin = TextEditingController();
-  // var jenisKelamin = 'Laki-laki'.obs;
-
-  // TextEditingController spesialisasi = TextEditingController();
-
-  // TextEditingController alamat = TextEditingController();
-
-  // TextEditingController tanggalLahir = TextEditingController();
-
-  // TextEditingController email = TextEditingController();
-  // var statusLisensi = 'Aktif'.obs;
-
-  // TextEditingController tanggalLisensi = TextEditingController();
-
-  // TextEditingController namaInstitusi = TextEditingController();
-
-  // TextEditingController password = TextEditingController();
-  // TextEditingController noTelp = TextEditingController();
 
   List<String> gender = ['Laki-laki', 'Perempuan'];
   List<String> status = ['Aktif', 'Tidak Aktif'];
@@ -358,10 +331,12 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                               )
                               .namaLengkap)),
                           DataCell(Text(controller.dokterData.value
-                              .firstWhere(
-                                (element) => element.id == data.dokter,
-                              )
-                              .namaDokter)),
+                                  .firstWhere(
+                                    (element) =>
+                                        element.iDDokter == data.dokter,
+                                  )
+                                  .nama ??
+                              'null')),
                           DataCell(Text(data.tanggal)),
                           DataCell(Text(data.keluhan)),
 

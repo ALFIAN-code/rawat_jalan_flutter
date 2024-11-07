@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rawat_jalan/controller/admin_service.dart';
 import 'package:rawat_jalan/controller/diagnosa_service.dart';
+import 'package:rawat_jalan/controller/dokter_api_services.dart';
 import 'package:rawat_jalan/controller/dokter_service.dart';
 import 'package:rawat_jalan/controller/jadwal_services.dart';
 import 'package:rawat_jalan/controller/obat_service.dart';
@@ -11,6 +12,7 @@ import 'package:rawat_jalan/controller/ruangan_service.dart';
 import 'package:rawat_jalan/model/admin_model.dart';
 import 'package:rawat_jalan/model/diagnosa_model.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
+import 'package:rawat_jalan/model/dokter_model_api.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
 import 'package:rawat_jalan/model/obat_model.dart';
 import 'package:rawat_jalan/model/pasien_model.dart';
@@ -21,7 +23,7 @@ import 'package:rawat_jalan/pocketbase.dart';
 
 class AdminController extends GetxController {
   var adminData = Admin(idAdmin: '', nama: '', password: '', no_telp: '').obs;
-  var dokterData = <Dokter>[].obs;
+  var dokterData = <DokterModelApi>[].obs;
   var pasienData = <Pasien>[].obs;
   var pendaftaranData = <Pendaftaran>[].obs;
   var listAdmin = <Admin>[].obs;
@@ -278,7 +280,7 @@ class AdminController extends GetxController {
 
   void getDokterData() async {
     try {
-      await DokterService.getAllDokter(pb).then(
+      await DokterServicesApi.getDokters().then(
         (value) => dokterData.value = value,
       );
     } catch (e) {

@@ -146,7 +146,7 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
                       (e) {
                         return DropdownMenuItem(
                           value: e,
-                          child: Text(e.namaDokter),
+                          child: Text(e.nama ?? 'null'),
                         );
                       },
                     ).toList(),
@@ -176,7 +176,7 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
                         onTap: () {
                           var currentDate = DateTime.now();
                           Pendaftaran pendaftaran = Pendaftaran(
-                            dokter: selectedDokter.id!,
+                            dokter: selectedDokter.iDDokter!,
                             pasien: selectedPasien.id!,
                             admin: controller.adminData.value.idAdmin!,
                             keluhan: widget.keluhanController.text,

@@ -193,9 +193,9 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                       DataColumn(
                           label: Text('No telp',
                               style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Lisensi',
-                              style: bold10.copyWith(fontSize: 12))),
+                      // DataColumn(
+                      //     label: Text('Lisensi',
+                      //         style: bold10.copyWith(fontSize: 12))),
                       // DataColumn(
                       //     label: Text('action',
                       //         style: bold10.copyWith(fontSize: 12))),
@@ -204,17 +204,17 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                     rows: controller.dokterData.value.map((dokter) {
                       return DataRow(
                         cells: [
-                          DataCell(Text(dokter.npi)),
-                          DataCell(Text(dokter.namaDokter)),
-                          DataCell(Text(dokter.jenisKelamin)),
-                          DataCell(Text(dokter.alamat)),
-                          DataCell(Text(dokter.email)),
-                          DataCell(Text(dokter.tanggalLahir)),
-                          DataCell(Text(dokter.spesialisasi)),
+                          DataCell(Text(dokter.nPI ?? 'null')),
+                          DataCell(Text(dokter.nama ?? 'null')),
+                          DataCell(Text(dokter.jenisKelamin ?? 'null')),
+                          DataCell(Text(dokter.alamat ?? 'null')),
+                          DataCell(Text(dokter.email ?? 'null')),
+                          DataCell(Text(dokter.tanggalLahir ?? 'null')),
+                          DataCell(Text(dokter.spesialisasi ?? 'null')),
                           DataCell(Text(
                               '${calculateAge('${dokter.tanggalLahir}')}')),
-                          DataCell(Text(dokter.noTelp)),
-                          DataCell(Text(dokter.statusLisensi)),
+                          DataCell(Text(dokter.noHp ?? 'null')),
+                          // DataCell(Text(dokter.statusLisensi)),
                           // DataCell(Row(
                           //   children: [
                           //     ElevatedButton(

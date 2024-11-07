@@ -69,7 +69,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
         .firstWhere((element) => element.id == pendaftaran.pasien);
 
     selectedDokter = controller.dokterData
-        .firstWhere((element) => element.id == pendaftaran.dokter);
+        .firstWhere((element) => element.iDDokter == pendaftaran.dokter);
   }
 
   @override
@@ -191,7 +191,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                                     (e) {
                                       return DropdownMenuItem(
                                         value: e,
-                                        child: Text(e.namaDokter),
+                                        child: Text(e.nama ?? 'null'),
                                       );
                                     },
                                   ).toList(),
@@ -260,7 +260,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                             onTap: () {
                               var currentDate = DateTime.now();
                               Pendaftaran pendaftaran = Pendaftaran(
-                                dokter: selectedDokter.id!,
+                                dokter: selectedDokter.iDDokter!,
                                 pasien: selectedPasien.id!,
                                 admin: (controller.role == 'Admin')
                                     ? controller.adminData.value.idAdmin!
