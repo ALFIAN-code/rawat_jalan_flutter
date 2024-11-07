@@ -1,5 +1,6 @@
 import 'package:pocketbase/pocketbase.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
+import 'package:rawat_jalan/model/dokter_model_api.dart';
 import 'package:rawat_jalan/pocketbase.dart';
 
 class DokterService {
@@ -27,11 +28,11 @@ class DokterService {
     }
   }
 
-  static Future<Dokter> getDokterByNoTelp(String noTelp) async {
+  static Future<DokterModelApi> getDokterByNoTelp(String noTelp) async {
     try {
       final record =
           await pb.collection('dokter').getFirstListItem('no_telp="$noTelp"');
-      return Dokter.fromJson(record.data, id: record.id);
+      return DokterModelApi.fromJson(record.data);
     } catch (e) {
       print('Gagal mendapatkan data dokter: $e');
       rethrow;

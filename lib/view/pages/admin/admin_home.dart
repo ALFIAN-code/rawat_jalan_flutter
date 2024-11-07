@@ -162,7 +162,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 (controller.role == 'Admin')
                                     ? controller.adminData.value.nama
                                     : getFirstTwoWords(
-                                        controller.dokterUser.value.namaDokter),
+                                        controller.dokterUser.value.nama ??
+                                            'null'),
                                 style: bold14,
                               ),
                             ],

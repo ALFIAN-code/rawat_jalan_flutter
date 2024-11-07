@@ -100,7 +100,7 @@ class KelolaDiagnosa extends StatelessWidget {
                           (controller.pendaftaranData.value.firstWhere(
                             (element) =>
                                 element.dokter ==
-                                controller.dokterUser.value.id,
+                                controller.dokterUser.value.iDDokter,
                           )).id,
                     )
                         .map((diagnosa) {

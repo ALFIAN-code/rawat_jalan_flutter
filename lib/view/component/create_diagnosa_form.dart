@@ -52,11 +52,12 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
   TextEditingController kodeDiagnosaController = TextEditingController();
   TextEditingController detailController = TextEditingController();
 
-  var pendaftaranList = controller.pendaftaranData
-      .where((element) => element.dokter == controller.dokterUser.value.id);
+  var pendaftaranList = controller.pendaftaranData.where(
+      (element) => element.dokter == controller.dokterUser.value.iDDokter);
 
   var selectedPendaftaran = controller.pendaftaranData
-      .where((element) => element.dokter == controller.dokterUser.value.id)
+      .where(
+          (element) => element.dokter == controller.dokterUser.value.iDDokter)
       .first;
 
   @override

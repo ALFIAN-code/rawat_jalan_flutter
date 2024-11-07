@@ -34,19 +34,16 @@ class AdminController extends GetxController {
   var resepList = <Resep>[].obs;
   var obatList = <Obat>[].obs;
 
-  var dokterUser = Dokter(
-    npi: '',
-    namaDokter: '',
+  var dokterUser = DokterModelApi(
+    nPI: '',
+    nama: '',
     jenisKelamin: '',
     spesialisasi: '',
     alamat: '',
     tanggalLahir: '',
     email: '',
-    statusLisensi: '',
     tanggalLisensi: '',
-    namaInstitusi: '',
-    password: '',
-    noTelp: '',
+    noHp: '',
   ).obs;
 
   var role = 'Admin';
@@ -230,8 +227,7 @@ class AdminController extends GetxController {
   }
 
   bool dokterAuth(String noTelp, String password) {
-    if (dokterUser.value.noTelp == noTelp &&
-        dokterUser.value.password == password) {
+    if (dokterUser.value.noHp == noTelp && dokterUser.value.noHp == password) {
       return true;
     } else {
       return false;
@@ -289,14 +285,19 @@ class AdminController extends GetxController {
     update();
   }
 
-  Future<void> getDokterById(String noTelp) async {
+  Future<void> getDokterById(String noHp) async {
     try {
-      var result = await DokterService.getDokterByNoTelp(noTelp);
-      dokterUser.value = result;
-      print(dokterUser.value.namaDokter);
-      update();
+      // Mencari dokter berdasarkan noHp
+      DokterModelApi? dokter = dokterData.firstWhere(
+        (dokter) =>
+            dokter.noHp == noHp, // Mengembalikan null jika tidak ditemukan
+      );
+      print(dokter.noHp);
+      dokterUser.value = dokter;
+      // return dokter; // Mengembalikan data dokter yang ditemukan
     } catch (e) {
-      print(e);
+      print('Error: $e');
+      return null; // Mengembalikan null jika terjadi error
     }
   }
 

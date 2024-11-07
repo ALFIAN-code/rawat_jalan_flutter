@@ -293,7 +293,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                 height: 20,
               ),
               Obx(() {
-                if (controller.dokterData.isNotEmpty) {
+                if (controller.pendaftaranData.isNotEmpty) {
                   return DataTable(
                     columns: [
                       DataColumn(
