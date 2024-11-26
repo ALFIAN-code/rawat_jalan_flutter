@@ -1,0 +1,27 @@
+import 'dart:convert';
+
+import 'package:rawat_jalan/model/jenis_layanan_model.dart';
+import 'package:http/http.dart' as http;
+
+class RadiologiService {
+  //to do
+  // make function to fetch data : jenis layanan, jenis pemeriksaan
+
+  static Future<List<LayananModel>> getDokters() async {
+    final response = await http.get(
+      Uri.https('https://4dbh2ssn-3000.asse.devtunnels.ms', '/api/layanan'),
+    );
+
+    final data = json.decode(response.body);
+
+    if (data['status'] == 200) {
+      print('data dokter didapatkan ${data['payload']}');
+      final List<dynamic> dokterJsonList = data['payload'];
+
+      print("list dokter ${dokterJsonList[1]['Nama']}");
+      return dokterJsonList.map((json) => LayananModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load dokters');
+    }
+  }
+}
