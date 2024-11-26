@@ -38,10 +38,7 @@ class _OverviewPageState extends State<OverviewPage> {
             child: GetBuilder<AdminController>(
               init: controller,
               builder: (_) {
-                if (controller.pasienData.isEmpty ||
-                    controller.dokterData.isEmpty ||
-                    // controller.pendaftaranData != null ||
-                    controller.listAdmin.isEmpty) {
+                if (false) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );

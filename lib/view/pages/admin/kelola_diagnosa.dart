@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rawat_jalan/model/obat_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/model/resep_model.dart';
 import 'package:rawat_jalan/view/component/create_diagnosa_form.dart';
@@ -118,7 +119,7 @@ class KelolaDiagnosa extends StatelessWidget {
                               ));
                       print('tanggal resep = ${resep.tanggalDiberikan}');
 
-                      var obat = controller.obatList.value.where(
+                      List<Obat> obat = controller.obatList.value.where(
                         (element) {
                           return element.idResep == resep.idResep;
                         },
