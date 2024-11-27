@@ -38,6 +38,7 @@ class DokterModelApi {
   String? nPI;
   String? spesialisasi;
   String? tanggalLisensi;
+  String? Password;
 
   DokterModelApi(
       {this.iDDokter,
@@ -49,7 +50,8 @@ class DokterModelApi {
       this.alamat,
       this.nPI,
       this.spesialisasi,
-      this.tanggalLisensi});
+      this.tanggalLisensi,
+      this.Password});
 
   DokterModelApi.fromJson(Map<String, dynamic> json) {
     iDDokter = json['ID_Dokter'];
@@ -62,6 +64,7 @@ class DokterModelApi {
     nPI = json['NPI'];
     spesialisasi = json['Spesialisasi'];
     tanggalLisensi = json['Tanggal_Lisensi'];
+    Password = json['Password'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,6 +79,7 @@ class DokterModelApi {
     data['NPI'] = nPI;
     data['Spesialisasi'] = spesialisasi;
     data['Tanggal_Lisensi'] = tanggalLisensi;
+    data['Password'] = Password;
     return data;
   }
 }

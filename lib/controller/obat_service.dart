@@ -6,7 +6,7 @@ import 'package:rawat_jalan/pocketbase.dart';
 class ObatService {
   static Future<List<Obat>> getAllObat(PocketBase client) async {
     final records = await client.collection('obat').getFullList();
-    print(records);
+    // print(records);
     return records.map((e) => Obat.fromJson(e.data, id: e.id)).toList();
   }
 

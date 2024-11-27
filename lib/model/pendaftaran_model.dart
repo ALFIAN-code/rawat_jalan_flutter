@@ -4,7 +4,7 @@ class Pendaftaran {
   String pasien;
   String dokter;
   String tanggal;
-  String keluhan;
+  // String keluhan;
   String status;
 
   Pendaftaran({
@@ -13,7 +13,7 @@ class Pendaftaran {
     required this.pasien,
     required this.dokter,
     required this.tanggal,
-    required this.keluhan,
+    // required this.keluhan,
     required this.status,
   });
 
@@ -24,7 +24,7 @@ class Pendaftaran {
       pasien: json['pasien'],
       dokter: json['dokter'],
       tanggal: json['tanggal'],
-      keluhan: json['keluhan'],
+      // keluhan: json['keluhan'],
       status: json['status'],
     );
   }
@@ -35,7 +35,7 @@ class Pendaftaran {
       'pasien': pasien,
       'dokter': dokter,
       'tanggal': tanggal,
-      'keluhan': keluhan,
+      // 'keluhan': keluhan,
       'status': status,
     };
   }

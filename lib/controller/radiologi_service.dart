@@ -7,9 +7,9 @@ class RadiologiService {
   //to do
   // make function to fetch data : jenis layanan, jenis pemeriksaan
 
-  static Future<List<LayananModel>> getDokters() async {
+  static Future<List<LayananModel>> getlayanan() async {
     final response = await http.get(
-      Uri.https('https://4dbh2ssn-3000.asse.devtunnels.ms', '/api/layanan'),
+      Uri.https('https://2hcmlwcq-3000.asse.devtunnels.ms', '/api/layanan'),
     );
 
     final data = json.decode(response.body);

@@ -52,6 +52,12 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
   TextEditingController kodeDiagnosaController = TextEditingController();
   TextEditingController detailController = TextEditingController();
 
+  // TextEditingController jenisLayanan = TextEditingController();
+  TextEditingController jenisPemeriksaan = TextEditingController();
+  TextEditingController prioritas = TextEditingController();
+  TextEditingController catatan = TextEditingController();
+  TextEditingController keluhanController = TextEditingController();
+
   var pendaftaranList = controller.pendaftaranData.where(
       (element) => element.dokter == controller.dokterUser.value.iDDokter);
 
@@ -59,6 +65,8 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
       .where(
           (element) => element.dokter == controller.dokterUser.value.iDDokter)
       .first;
+
+  var selectedLayanan = controller.layananList.first;
 
   @override
   void dispose() {
@@ -137,7 +145,7 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                             .firstWhere((element) => element.id == e.pasien);
                         return DropdownMenuItem(
                           value: e,
-                          child: Text('${pasien.namaLengkap} - ${e.keluhan}'),
+                          child: Text('${pasien.namaLengkap}'),
                         );
                       },
                     ).toList(),
@@ -148,6 +156,19 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                     },
                   ),
 
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                  Text(
+                    "Keluhan",
+                    style: regular14,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(
+                      hint: '012********', controller: keluhanController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -178,6 +199,58 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                     height: 20,
                   ),
 
+                  Text(
+                    "Jenis layanan",
+                    style: regular14,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  DropdownButton2(
+                    buttonStyleData: ButtonStyleData(
+                        decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          width: 2,
+                          color: const Color(0xffC9C9C9).withOpacity(0.7)),
+                    )),
+                    isExpanded: true,
+                    value: selectedLayanan,
+                    items: controller.layananList.map((element) {
+                      return DropdownMenuItem(
+                        value: element,
+                        child: Text(element.namaLayanan ?? 'null'),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+
+                  Text(
+                    "Prioritas",
+                    style: regular14,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(hint: 'lorem ipsum', controller: prioritas),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                  Text(
+                    "Catatan",
+                    style: regular14,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(hint: 'lorem ipsum', controller: catatan),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
                   //tombol kirim
                   Container(
                       decoration: BoxDecoration(boxShadow: [
@@ -190,11 +263,49 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                       ]),
                       child: CustomButton(
                         onTap: () {
+                          /* 
+                            Pemeriksaan Darah, Lab
+                            Pemeriksaan Rontgen, Radiologi
+                            Pemeriksaan MRI, Lab
+                            Scan MCR, Lab 
+                            Scan USG, Lab
+                            X-ray, Lab
+                          */
+                          var lab = [
+                            'Pemeriksaan Darah',
+                            'Pemeriksaan MRI',
+                            'Scan MCR',
+                            'Scan USG',
+                            'X-ray'
+                          ];
+                          var radiologi = ['Pemeriksaan Rontgen'];
+
+                          String jenisPemeriksaan = 'Lab';
+
+                          if (lab.contains(selectedLayanan.namaLayanan)) {
+                            jenisPemeriksaan = 'Lab';
+                          } else if (radiologi
+                              .contains(selectedLayanan.namaLayanan)) {
+                            jenisPemeriksaan = 'Radiologi';
+                          } else {
+                            jenisPemeriksaan = 'null';
+                          }
+
                           Diagnosa diagnosa = Diagnosa(
+                              jenisLayanan:
+                                  selectedLayanan.namaLayanan ?? 'null',
+                              prioritas: prioritas.text,
+                              catatan: catatan.text,
+                              jenisPemeriksaan: jenisPemeriksaan,
                               idPendaftaran: selectedPendaftaran.id!,
                               tanggal: tanggalController.text,
                               kodeDiagnosa: kodeDiagnosaController.text,
-                              detail: detailController.text);
+                              detail: detailController.text,
+                              keluhan: keluhanController.text
+
+                              // menambahkan 4 data baru
+                              // catatan ,id jenis layanan, id jenis pemeriksaan, prioritas dan catatan
+                              );
 
                           controller.createDiagnosa(diagnosa);
                           Get.back();

@@ -16,7 +16,7 @@ class CreatePendaftarannForm extends StatefulWidget {
   });
 
   final tanggalController = TextEditingController();
-  final keluhanController = TextEditingController();
+  // final keluhanController = TextEditingController();
   final status = 'Berjalan';
 
   @override
@@ -52,7 +52,7 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
   void dispose() {
     super.dispose();
     widget.tanggalController.dispose();
-    widget.keluhanController.dispose();
+    // widget.keluhanController.dispose();
   }
 
   @override
@@ -79,19 +79,19 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  Text(
-                    "Keluhan",
-                    style: regular14,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                      hint: '012********',
-                      controller: widget.keluhanController),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // Text(
+                  //   "Keluhan",
+                  //   style: regular14,
+                  // ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  // CustomTextField(
+                  //     hint: '012********',
+                  //     controller: widget.keluhanController),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   Text(
                     "Pilih Pasien",
                     style: regular14,
@@ -179,7 +179,7 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
                             dokter: selectedDokter.iDDokter!,
                             pasien: selectedPasien.id!,
                             admin: controller.adminData.value.idAdmin!,
-                            keluhan: widget.keluhanController.text,
+                            // keluhan: widget.keluhanController.text,
                             status: widget.status,
                             tanggal:
                                 DateFormat('yyyy-MM-dd').format(currentDate),

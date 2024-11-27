@@ -1,8 +1,11 @@
-# Gunakan image Nginx sebagai base
-FROM nginx:stable
+# Step 1: Base image
+FROM nginx:stable-alpine
 
-# Salin build Flutter ke direktori default Nginx
+# Step 2: Copy Flutter Web build output to Nginx directory
 COPY build/web /usr/share/nginx/html
 
-# Expose port default Nginx
+# Step 3: Expose port 80
 EXPOSE 80
+
+# Step 4: Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

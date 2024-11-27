@@ -15,8 +15,11 @@ class MyApp extends StatelessWidget {
 
   Future<List<String?>?> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    await controller.getDokterData();
+    print(controller.dokterData);
     String? role = prefs.getString('role');
     String? noTelp = prefs.getString('noTelp');
+    print('$role $noTelp');
     if (role != null) {
       return [role, noTelp];
     } else {
@@ -49,6 +52,7 @@ class MyApp extends StatelessWidget {
                 adminController.getAdminDataById(snapshot.data![1]!);
                 controller.role = 'Admin';
               } else {
+                print('getting dokter data ${controller.dokterData}');
                 adminController.getDokterById(snapshot.data![1]!);
                 controller.role = 'Dokter';
               }

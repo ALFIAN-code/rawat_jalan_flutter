@@ -131,10 +131,12 @@ class KelolaDiagnosa extends StatelessWidget {
 
                       return DataRow(
                         cells: [
-                          DataCell(Text(controller.pasienData
-                              .firstWhere((element) =>
-                                  element.id == pendaftarandata.pasien)
-                              .namaLengkap)),
+                          DataCell(Text('test')
+                              // Text(controller.pasienData
+                              //   .firstWhere((element) =>
+                              //       element.id == pendaftarandata.pasien)
+                              //   .namaLengkap)
+                              ),
                           DataCell(Text(diagnosa.tanggal)),
                           DataCell(Text(diagnosa.kodeDiagnosa)),
                           DataCell(Text(diagnosa.detail)),

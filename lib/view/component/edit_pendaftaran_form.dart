@@ -55,7 +55,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
         .firstWhere((element) => element.id == widget.idPendaftaran);
 
     widget.tanggalController.text = pendaftaran.tanggal;
-    widget.keluhanController.text = pendaftaran.keluhan;
+    // widget.keluhanController.text = pendaftaran.keluhan;
     status = pendaftaran.status;
 
     if (controller.role == 'Dokter') {
@@ -265,7 +265,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                                 admin: (controller.role == 'Admin')
                                     ? controller.adminData.value.idAdmin!
                                     : admin,
-                                keluhan: widget.keluhanController.text,
+                                // keluhan: widget.keluhanController.text,
                                 status: status,
                                 tanggal: DateFormat('yyyy-MM-dd')
                                     .format(currentDate),

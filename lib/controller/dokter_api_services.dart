@@ -12,10 +12,10 @@ class DokterServicesApi {
     final data = json.decode(response.body);
 
     if (data['status'] == 200) {
-      print('data dokter didapatkan ${data['payload']}');
+      // print('data dokter didapatkan ${data['payload']}');
       final List<dynamic> dokterJsonList = data['payload'];
 
-      print("list dokter ${dokterJsonList[1]['Nama']}");
+      // print("list dokter ${dokterJsonList[1]['Nama']}");
       return dokterJsonList
           .map((json) => DokterModelApi.fromJson(json))
           .toList();

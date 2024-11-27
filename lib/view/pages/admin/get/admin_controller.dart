@@ -7,6 +7,7 @@ import 'package:rawat_jalan/controller/jadwal_services.dart';
 import 'package:rawat_jalan/controller/obat_service.dart';
 import 'package:rawat_jalan/controller/pasien_service.dart';
 import 'package:rawat_jalan/controller/pendaftaran_service.dart';
+import 'package:rawat_jalan/controller/radiologi_service.dart';
 import 'package:rawat_jalan/controller/resep_service.dart';
 import 'package:rawat_jalan/controller/ruangan_service.dart';
 import 'package:rawat_jalan/model/admin_model.dart';
@@ -14,6 +15,7 @@ import 'package:rawat_jalan/model/diagnosa_model.dart';
 import 'package:rawat_jalan/model/dokter_model.dart';
 import 'package:rawat_jalan/model/dokter_model_api.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
+import 'package:rawat_jalan/model/jenis_layanan_model.dart';
 import 'package:rawat_jalan/model/obat_model.dart';
 import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
@@ -33,6 +35,9 @@ class AdminController extends GetxController {
   var diagnosaList = <Diagnosa>[].obs;
   var resepList = <Resep>[].obs;
   var obatList = <Obat>[].obs;
+  var layananList = <LayananModel>[].obs;
+
+  // var jenisLayanan = <>
 
   var dokterUser = DokterModelApi(
     nPI: '',
@@ -68,6 +73,16 @@ class AdminController extends GetxController {
     try {
       await ResepService.createResep(resep.toJson());
       getResepData();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getLayanan() async {
+    try {
+      var result = await RadiologiService.getlayanan();
+      layananList.value = result;
       update();
     } catch (e) {
       print(e);
@@ -227,7 +242,8 @@ class AdminController extends GetxController {
   }
 
   bool dokterAuth(String noTelp, String password) {
-    if (dokterUser.value.noHp == noTelp && dokterUser.value.noHp == password) {
+    if (dokterUser.value.noHp == noTelp &&
+        dokterUser.value.Password == password) {
       return true;
     } else {
       return false;
@@ -274,7 +290,7 @@ class AdminController extends GetxController {
     }
   }
 
-  void getDokterData() async {
+  Future<void> getDokterData() async {
     try {
       await DokterServicesApi.getDokters().then(
         (value) => dokterData.value = value,
@@ -288,11 +304,12 @@ class AdminController extends GetxController {
   Future<void> getDokterById(String noHp) async {
     try {
       // Mencari dokter berdasarkan noHp
+      getDokterData();
       DokterModelApi? dokter = dokterData.firstWhere(
         (dokter) =>
             dokter.noHp == noHp, // Mengembalikan null jika tidak ditemukan
       );
-      print(dokter.noHp);
+      print('data dokter berhasil di dapatkan ${dokter.noHp}');
       dokterUser.value = dokter;
       // return dokter; // Mengembalikan data dokter yang ditemukan
     } catch (e) {

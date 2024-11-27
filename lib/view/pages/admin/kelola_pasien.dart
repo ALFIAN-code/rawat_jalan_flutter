@@ -307,9 +307,9 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                       DataColumn(
                           label: Text('Tanggal Pendaftaran',
                               style: bold10.copyWith(fontSize: 12))),
-                      DataColumn(
-                          label: Text('Keluhan',
-                              style: bold10.copyWith(fontSize: 12))),
+                      // DataColumn(
+                      //     label: Text('Keluhan',
+                      //         style: bold10.copyWith(fontSize: 12))),
                       DataColumn(
                           label: Text('Status',
                               style: bold10.copyWith(fontSize: 12))),
@@ -338,7 +338,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
                                   .nama ??
                               'null')),
                           DataCell(Text(data.tanggal)),
-                          DataCell(Text(data.keluhan)),
+                          // DataCell(Text(data.keluhan)),
 
                           DataCell(Text(data.status)),
                           DataCell(Text(controller.listAdmin.value
