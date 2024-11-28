@@ -60,6 +60,7 @@ class AdminController extends GetxController {
 
     getAllRuangan();
     getResepData();
+    getLayanan();
     getObatData();
     getDiagnosaData();
     getJadwalData();

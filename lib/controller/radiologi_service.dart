@@ -9,19 +9,17 @@ class RadiologiService {
 
   static Future<List<LayananModel>> getlayanan() async {
     final response = await http.get(
-      Uri.https('https://2hcmlwcq-3000.asse.devtunnels.ms', '/api/layanan'),
+      Uri.parse('https://2hcmlwcq-3000.asse.devtunnels.ms/api/layanan'),
     );
 
     final data = json.decode(response.body);
 
     if (data['status'] == 200) {
-      print('data dokter didapatkan ${data['payload']}');
+      print('data layanan ${data['payload']}');
       final List<dynamic> dokterJsonList = data['payload'];
-
-      print("list dokter ${dokterJsonList[1]['Nama']}");
       return dokterJsonList.map((json) => LayananModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load dokters');
+      throw Exception('Failed to load layanan');
     }
   }
 }

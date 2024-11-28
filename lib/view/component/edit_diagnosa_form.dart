@@ -51,7 +51,9 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
     tanggalController.text = diagnosa.tanggal;
     kodeDiagnosaController.text = diagnosa.kodeDiagnosa;
     detailController.text = diagnosa.detail;
-    selectedLayanan = diagnosa.jenisLayanan;
+    selectedLayanan = controller.layananList.firstWhere(
+      (value) => value.namaLayanan == diagnosa.jenisLayanan,
+    );
     jenisPemeriksaan.text = diagnosa.jenisPemeriksaan;
     prioritas.text = diagnosa.prioritas;
     catatan.text = diagnosa.catatan;
@@ -90,7 +92,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
           (element) => element.dokter == controller.dokterUser.value.iDDokter)
       .first;
 
-  var selectedLayanan = '';
+  var selectedLayanan = controller.layananList.first;
 
   @override
   void dispose() {
@@ -251,7 +253,9 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                           );
                         }).toList(),
                         onChanged: (value) {
-                          setState(() {});
+                          setState(() {
+                            selectedLayanan = value!;
+                          });
                         },
                       ),
 
@@ -320,7 +324,8 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                               }
 
                               Diagnosa diagnosa = Diagnosa(
-                                  jenisLayanan: selectedLayanan,
+                                  jenisLayanan:
+                                      selectedLayanan.namaLayanan ?? 'null',
                                   prioritas: prioritas.text,
                                   catatan: catatan.text,
                                   jenisPemeriksaan: jenisPemeriksaan,

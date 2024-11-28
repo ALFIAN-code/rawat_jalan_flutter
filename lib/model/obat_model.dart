@@ -28,7 +28,7 @@ class Obat {
 
   Map<String, dynamic> toJson() {
     return {
-      // 'resep': idResep,
+      'resep': idResep,
       'nama_obat': namaObat,
       'jenis_obat': jenisObat,
       'dosis': dosis,

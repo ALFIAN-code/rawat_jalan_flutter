@@ -117,13 +117,17 @@ class KelolaDiagnosa extends StatelessWidget {
                                 idDiagnosa: '',
                                 tanggalDiberikan: '',
                               ));
-                      print('tanggal resep = ${resep.tanggalDiberikan}');
 
-                      List<Obat> obat = controller.obatList.value.where(
-                        (element) {
-                          return element.idResep == resep.idResep;
-                        },
-                      ).toList();
+                      print('tanggal resep = ${resep.idResep}');
+
+                      var obat = controller.obatList.value
+                          .where(
+                            (element) {
+                              return element.idResep == resep.idResep;
+                            },
+                          )
+                          .toList()
+                          .obs;
 
                       print(controller.obatList.value.length);
 
@@ -131,17 +135,12 @@ class KelolaDiagnosa extends StatelessWidget {
 
                       return DataRow(
                         cells: [
-                          DataCell(Text('test')
-                              // Text(controller.pasienData
-                              //   .firstWhere((element) =>
-                              //       element.id == pendaftarandata.pasien)
-                              //   .namaLengkap)
-                              ),
+                          DataCell(Text('test')),
                           DataCell(Text(diagnosa.tanggal)),
                           DataCell(Text(diagnosa.kodeDiagnosa)),
                           DataCell(Text(diagnosa.detail)),
 
-                          DataCell((resep.idResep!.isEmpty)
+                          DataCell(Obx(() => (resep.idResep!.isEmpty)
                               ? ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor:
@@ -197,7 +196,7 @@ class KelolaDiagnosa extends StatelessWidget {
                                       }).toList(),
                                     ),
                                   )
-                                ])),
+                                ]))),
 
                           DataCell(Row(
                             children: [

@@ -223,8 +223,14 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                       );
                     }).toList(),
                     onChanged: (value) {
-                      setState(() {});
+                      setState(() {
+                        selectedLayanan = value!;
+                      });
                     },
+                  ),
+
+                  const SizedBox(
+                    height: 20,
                   ),
 
                   Text(

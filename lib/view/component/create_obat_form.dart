@@ -38,6 +38,7 @@ class _CreateObatFormState extends State<CreateObatForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('id resep : ${widget.resepId}');
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -133,6 +134,7 @@ class _CreateObatFormState extends State<CreateObatForm> {
                           );
                           controller.createObat(obat);
                           Get.back();
+                          setState(() {});
                         },
                         color: mainColor,
                         child: Text(
