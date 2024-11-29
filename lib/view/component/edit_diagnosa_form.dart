@@ -58,7 +58,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
     prioritas.text = diagnosa.prioritas;
     catatan.text = diagnosa.catatan;
     keluhanController.text = diagnosa.keluhan;
-    var selectedJadwal = controller.jadwalData
+    selectedJadwal = controller.listJadwal
         .where((jadwal) => controller.pendaftaranData
             .where(
               (pendaftaran) =>
@@ -99,7 +99,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
           (element) => element.dokter == controller.dokterUser.value.iDDokter)
       .first;
 
-  var jadwalList = controller.jadwalData
+  var jadwalList = controller.listJadwal
       .where(
         (jadwal) => controller.pendaftaranData
             .where(
@@ -111,7 +111,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
       )
       .toList();
 
-  var selectedJadwal = controller.jadwalData
+  var selectedJadwal = controller.listJadwal
       .where((jadwal) => controller.pendaftaranData
           .where(
             (pendaftaran) =>

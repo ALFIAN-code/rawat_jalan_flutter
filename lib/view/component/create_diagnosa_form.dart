@@ -68,7 +68,7 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
   //         pendaftaran.dokter == controller.dokterUser.value.iDDokter)
   //     .first;
 
-  var jadwalList = controller.jadwalData.where(
+  var jadwalList = controller.listJadwal.where(
     (jadwal) => controller.pendaftaranData
         .where(
           (pendaftaran) =>
@@ -78,7 +78,7 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
         .isNotEmpty,
   );
 
-  var selectedJadwal = controller.jadwalData
+  var selectedJadwal = controller.listJadwal
       .where((jadwal) => controller.pendaftaranData
           .where(
             (pendaftaran) =>

@@ -84,7 +84,7 @@ class AdminController extends GetxController {
 
   Future<void> getLayanan() async {
     try {
-      var result = await RadiologiService.getlayanan();
+      var result = await RadiologiService.getLayanan();
       layananList.value = result;
       update();
     } catch (e) {
