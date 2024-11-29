@@ -1,6 +1,7 @@
 class Diagnosa {
   final String? idDiagnosa;
-  final String idPendaftaran;
+  // final String idPendaftaran;
+  final String idJadwal;
   final String tanggal;
   final String detail;
   final String kodeDiagnosa;
@@ -12,7 +13,8 @@ class Diagnosa {
 
   Diagnosa(
       {this.idDiagnosa,
-      required this.idPendaftaran,
+      // required this.idPendaftaran,
+      required this.idJadwal,
       required this.keluhan,
       required this.tanggal,
       required this.detail,
@@ -25,7 +27,8 @@ class Diagnosa {
   factory Diagnosa.fromJson(Map<String, dynamic> json, {String? id}) {
     return Diagnosa(
         idDiagnosa: id,
-        idPendaftaran: json['pendaftaran'],
+        // idPendaftaran: json['pendaftaran'],
+        idJadwal: json['jadwal'],
         tanggal: json['tanggal'],
         detail: json['detail'],
         kodeDiagnosa: json['kode_diagnosis'],
@@ -38,7 +41,8 @@ class Diagnosa {
 
   Map<String, dynamic> toJson() {
     return {
-      'pendaftaran': idPendaftaran,
+      // 'pendaftaran': idPendaftaran,
+
       'tanggal': tanggal,
       'detail': detail,
       'kode_diagnosis': kodeDiagnosa,

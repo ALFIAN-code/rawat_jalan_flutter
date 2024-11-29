@@ -58,13 +58,25 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
   //var pendaftaranList = controller.pendaftaranData.value;
   var ruanganList = controller.listRuangan.value;
 
-  var pendaftaranList = controller.pendaftaranData.where(
-      (element) => element.dokter == controller.dokterUser.value.iDDokter);
+  // var pendaftaranList = controller.pendaftaranData.where(
+  //     (element) => element.dokter == controller.dokterUser.value.iDDokter);
 
-  var selectedPendaftaran = controller.pendaftaranData
-      .where(
+  // var selectedPendaftaran = controller.pendaftaranData
+  //     .where(
+  //         (element) => element.dokter == controller.dokterUser.value.iDDokter)
+  //     .first;
+
+  var pendaftaranList = (controller.role == 'Dokter')
+      ? controller.pendaftaranData.where(
           (element) => element.dokter == controller.dokterUser.value.iDDokter)
-      .first;
+      : controller.pendaftaranData;
+
+  var selectedPendaftaran = (controller.role == 'Dokter')
+      ? controller.pendaftaranData
+          .where((element) =>
+              element.dokter == controller.dokterUser.value.iDDokter)
+          .first
+      : controller.pendaftaranData.first;
 
   var selectedPasien = controller.pasienData.value.first;
   var selectedRuangan = controller.listRuangan.value.first;

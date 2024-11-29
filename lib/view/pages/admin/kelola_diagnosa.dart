@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/obat_model.dart';
+import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/model/resep_model.dart';
 import 'package:rawat_jalan/view/component/create_diagnosa_form.dart';
@@ -94,20 +95,44 @@ class KelolaDiagnosa extends StatelessWidget {
                           label: Text('action',
                               style: bold10.copyWith(fontSize: 12))),
                     ],
-                    rows: controller.diagnosaList.value
-                        .where(
-                      (element) =>
-                          element.idPendaftaran ==
-                          (controller.pendaftaranData.value.firstWhere(
-                            (element) =>
-                                element.dokter ==
-                                controller.dokterUser.value.iDDokter,
-                          )).id,
-                    )
-                        .map((diagnosa) {
-                      Pendaftaran pendaftarandata = controller.pendaftaranData
-                          .firstWhere((element) =>
-                              element.id == diagnosa.idPendaftaran);
+                    rows: controller.diagnosaList.value.where(
+                      (diagnosa) {
+                        // Temukan jadwal yang sesuai dengan diagnosa
+                        var jadwal = controller.listJadwal.value.firstWhere(
+                          (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
+                        );
+
+                        // Jika jadwal tidak ditemukan, skip
+                        if (jadwal == null) return false;
+
+                        // Temukan pendaftaran yang sesuai dengan jadwal
+                        var pendaftaran =
+                            controller.pendaftaranData.value.firstWhere(
+                          (pendaftaran) =>
+                              pendaftaran.id == jadwal.idPendaftaran,
+                        );
+
+                        // Jika pendaftaran tidak ditemukan, skip
+                        if (pendaftaran == null) return false;
+
+                        // Filter diagnosa berdasarkan dokter yang sedang login
+                        return pendaftaran.dokter ==
+                            controller.dokterUser.value.iDDokter;
+                      },
+                    ).map((diagnosa) {
+                      // Mendapatkan data jadwal yang terkait
+                      var jadwal = controller.listJadwal.value.firstWhere(
+                        (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
+                      );
+
+                      // Mendapatkan data pendaftaran yang terkait
+                      var pendaftaran =
+                          controller.pendaftaranData.value.firstWhere(
+                        (pendaftaran) => pendaftaran.id == jadwal.idPendaftaran,
+                      );
+
+                      var pasien = controller.pasienData.value.firstWhere(
+                          (pasien) => pasien.id == pendaftaran.pasien);
 
                       Resep resep = controller.resepList.value.firstWhere(
                           (element) =>
@@ -135,12 +160,12 @@ class KelolaDiagnosa extends StatelessWidget {
 
                       return DataRow(
                         cells: [
-                          DataCell(Text('test')),
+                          DataCell(Text(pendaftaran.pasien)),
                           DataCell(Text(diagnosa.tanggal)),
                           DataCell(Text(diagnosa.kodeDiagnosa)),
                           DataCell(Text(diagnosa.detail)),
 
-                          DataCell(Obx(() => (resep.idResep!.isEmpty)
+                          DataCell((resep.idResep!.isEmpty)
                               ? ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor:
@@ -196,7 +221,7 @@ class KelolaDiagnosa extends StatelessWidget {
                                       }).toList(),
                                     ),
                                   )
-                                ]))),
+                                ])),
 
                           DataCell(Row(
                             children: [

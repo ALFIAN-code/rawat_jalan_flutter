@@ -58,8 +58,15 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
     prioritas.text = diagnosa.prioritas;
     catatan.text = diagnosa.catatan;
     keluhanController.text = diagnosa.keluhan;
-    selectedPendaftaran = controller.pendaftaranData
-        .firstWhere((element) => element.id == diagnosa.idPendaftaran);
+    var selectedJadwal = controller.jadwalData
+        .where((jadwal) => controller.pendaftaranData
+            .where(
+              (pendaftaran) =>
+                  pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
+                  pendaftaran.id == jadwal.idPendaftaran,
+            )
+            .isNotEmpty)
+        .first;
   }
 
   Future<String> _selectTime(BuildContext context) async {
@@ -90,6 +97,28 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
   var selectedPendaftaran = controller.pendaftaranData
       .where(
           (element) => element.dokter == controller.dokterUser.value.iDDokter)
+      .first;
+
+  var jadwalList = controller.jadwalData
+      .where(
+        (jadwal) => controller.pendaftaranData
+            .where(
+              (pendaftaran) =>
+                  pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
+                  pendaftaran.id == jadwal.idPendaftaran,
+            )
+            .isNotEmpty,
+      )
+      .toList();
+
+  var selectedJadwal = controller.jadwalData
+      .where((jadwal) => controller.pendaftaranData
+          .where(
+            (pendaftaran) =>
+                pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
+                pendaftaran.id == jadwal.idPendaftaran,
+          )
+          .isNotEmpty)
       .first;
 
   var selectedLayanan = controller.layananList.first;
@@ -167,11 +196,15 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                               color: const Color(0xffC9C9C9).withOpacity(0.7)),
                         )),
                         isExpanded: true,
-                        value: selectedPendaftaran,
-                        items: pendaftaranList.map(
+                        value: selectedJadwal,
+                        items: jadwalList.map(
                           (e) {
+                            var pendaftaran = controller.pendaftaranData
+                                .firstWhere((pendaftaran) =>
+                                    pendaftaran.id == e.idPendaftaran);
+
                             var pasien = controller.pasienData.firstWhere(
-                                (element) => element.id == e.pasien);
+                                (element) => element.id == pendaftaran.pasien);
                             return DropdownMenuItem(
                               value: e,
                               child: Text('${pasien.namaLengkap}'),
@@ -180,7 +213,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                         ).toList(),
                         onChanged: (value) {
                           setState(() {
-                            selectedPendaftaran = value!;
+                            selectedJadwal = value!;
                           });
                         },
                       ),
@@ -329,7 +362,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                                   prioritas: prioritas.text,
                                   catatan: catatan.text,
                                   jenisPemeriksaan: jenisPemeriksaan,
-                                  idPendaftaran: selectedPendaftaran.id!,
+                                  idJadwal: selectedJadwal.idJadwal!,
                                   tanggal: tanggalController.text,
                                   kodeDiagnosa: kodeDiagnosaController.text,
                                   detail: detailController.text,

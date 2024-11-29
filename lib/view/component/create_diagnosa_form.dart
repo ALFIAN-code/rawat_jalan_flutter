@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/diagnosa_model.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
+import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -58,12 +59,33 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
   TextEditingController catatan = TextEditingController();
   TextEditingController keluhanController = TextEditingController();
 
-  var pendaftaranList = controller.pendaftaranData.where(
-      (element) => element.dokter == controller.dokterUser.value.iDDokter);
+  // var pendaftaranList = controller.pendaftaranData.where(
+  //   (pendaftaran) => pendaftaran.dokter == controller.dokterUser.value.iDDokter,
+  // );
 
-  var selectedPendaftaran = controller.pendaftaranData
-      .where(
-          (element) => element.dokter == controller.dokterUser.value.iDDokter)
+  // var selectedPendaftaran = controller.pendaftaranData
+  //     .where((pendaftaran) =>
+  //         pendaftaran.dokter == controller.dokterUser.value.iDDokter)
+  //     .first;
+
+  var jadwalList = controller.jadwalData.where(
+    (jadwal) => controller.pendaftaranData
+        .where(
+          (pendaftaran) =>
+              pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
+              pendaftaran.id == jadwal.idPendaftaran,
+        )
+        .isNotEmpty,
+  );
+
+  var selectedJadwal = controller.jadwalData
+      .where((jadwal) => controller.pendaftaranData
+          .where(
+            (pendaftaran) =>
+                pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
+                pendaftaran.id == jadwal.idPendaftaran,
+          )
+          .isNotEmpty)
       .first;
 
   var selectedLayanan = controller.layananList.first;
@@ -138,20 +160,36 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                           color: const Color(0xffC9C9C9).withOpacity(0.7)),
                     )),
                     isExpanded: true,
-                    value: selectedPendaftaran,
-                    items: pendaftaranList.map(
-                      (e) {
-                        var pasien = controller.pasienData
-                            .firstWhere((element) => element.id == e.pasien);
-                        return DropdownMenuItem(
-                          value: e,
-                          child: Text('${pasien.namaLengkap}'),
-                        );
-                      },
-                    ).toList(),
+                    value: selectedJadwal,
+                    items: selectedJadwal != null
+                        ? jadwalList.map(
+                            (e) {
+                              var pasien = controller.pasienData.firstWhere(
+                                (element) =>
+                                    element.id ==
+                                    controller.pendaftaranData
+                                        .firstWhere(
+                                          (pendaftaran) =>
+                                              pendaftaran.id == e.idPendaftaran,
+                                        )
+                                        ?.pasien,
+                              );
+
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text('${pasien.namaLengkap}'),
+                              );
+                            },
+                          ).toList()
+                        : [
+                            DropdownMenuItem(
+                              value: null,
+                              child: Text("Tidak ada jadwal tersedia"),
+                            ),
+                          ],
                     onChanged: (value) {
                       setState(() {
-                        selectedPendaftaran = value!;
+                        selectedJadwal = value!;
                       });
                     },
                   ),
@@ -303,7 +341,7 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                               prioritas: prioritas.text,
                               catatan: catatan.text,
                               jenisPemeriksaan: jenisPemeriksaan,
-                              idPendaftaran: selectedPendaftaran.id!,
+                              idJadwal: selectedJadwal.idJadwal!,
                               tanggal: tanggalController.text,
                               kodeDiagnosa: kodeDiagnosaController.text,
                               detail: detailController.text,

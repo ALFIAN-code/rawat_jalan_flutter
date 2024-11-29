@@ -1,3 +1,5 @@
+import 'package:rawat_jalan/model/dokter_model_api.dart';
+
 class Jadwal {
   final String? idJadwal;
   final String idRuangan;

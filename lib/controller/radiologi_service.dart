@@ -9,7 +9,7 @@ class RadiologiService {
 
   static Future<List<LayananModel>> getlayanan() async {
     final response = await http.get(
-      Uri.parse('https://2hcmlwcq-3000.asse.devtunnels.ms/api/layanan'),
+      Uri.parse('https://wabw.chasterise.fun/api/layanan'),
     );
 
     final data = json.decode(response.body);
