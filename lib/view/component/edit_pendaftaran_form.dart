@@ -2,8 +2,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:rawat_jalan/model/dokter_model.dart';
-import 'package:rawat_jalan/model/pasien_model.dart';
 import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
@@ -39,11 +37,11 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
     }
   }
 
-  var pasienList = controller.pasienData.value;
-  var dokterList = controller.dokterData.value;
+  var pasienList = controller.pasienData;
+  var dokterList = controller.dokterData;
 
-  var selectedPasien = controller.pasienData.value.first;
-  var selectedDokter = controller.dokterData.value.first;
+  var selectedPasien = controller.pasienData.first;
+  var selectedDokter = controller.dokterData.first;
 
   var admin = '';
 
@@ -59,7 +57,7 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
     status = pendaftaran.status;
 
     if (controller.role == 'Dokter') {
-      admin = controller.pendaftaranData.value
+      admin = controller.pendaftaranData
           .firstWhere(
             (element) => element.id == widget.idPendaftaran,
           )

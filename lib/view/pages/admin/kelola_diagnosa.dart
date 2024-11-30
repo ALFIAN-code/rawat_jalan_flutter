@@ -18,10 +18,12 @@ class KelolaDiagnosa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deviceHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
         Container(
-          height: 500,
+          height: deviceHeight * 0.7,
           width: double.infinity,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -97,35 +99,27 @@ class KelolaDiagnosa extends StatelessWidget {
                     ],
                     rows: controller.diagnosaList.value.where(
                       (diagnosa) {
-                        // Temukan jadwal yang sesuai dengan diagnosa
                         var jadwal = controller.listJadwal.value.firstWhere(
                           (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
                         );
-
-                        // Jika jadwal tidak ditemukan, skip
                         if (jadwal == null) return false;
 
-                        // Temukan pendaftaran yang sesuai dengan jadwal
                         var pendaftaran =
                             controller.pendaftaranData.value.firstWhere(
                           (pendaftaran) =>
                               pendaftaran.id == jadwal.idPendaftaran,
                         );
 
-                        // Jika pendaftaran tidak ditemukan, skip
                         if (pendaftaran == null) return false;
 
-                        // Filter diagnosa berdasarkan dokter yang sedang login
                         return pendaftaran.dokter ==
                             controller.dokterUser.value.iDDokter;
                       },
                     ).map((diagnosa) {
-                      // Mendapatkan data jadwal yang terkait
                       var jadwal = controller.listJadwal.value.firstWhere(
                         (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
                       );
 
-                      // Mendapatkan data pendaftaran yang terkait
                       var pendaftaran =
                           controller.pendaftaranData.value.firstWhere(
                         (pendaftaran) => pendaftaran.id == jadwal.idPendaftaran,
@@ -202,8 +196,7 @@ class KelolaDiagnosa extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    width:
-                                        300, // Batasi ukuran lebar sesuai kebutuhan
+                                    width: 300,
                                     child: Wrap(
                                       spacing: 10.0,
                                       children: obat.map((o) {

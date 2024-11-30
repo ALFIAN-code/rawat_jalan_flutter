@@ -1,12 +1,7 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:rawat_jalan/model/dokter_model.dart';
 import 'package:rawat_jalan/view/component/create_dokter_form.dart';
-import 'package:rawat_jalan/view/component/custom_button.dart';
-import 'package:rawat_jalan/view/component/custom_textfield.dart';
-import 'package:rawat_jalan/view/component/edit_dokter_form.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
 import 'package:rawat_jalan/view/style.dart';
 
@@ -115,10 +110,12 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
 
   @override
   Widget build(BuildContext context) {
+    var deviceHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
         Container(
-          height: 500,
+          height: deviceHeight * 0.8,
           width: double.infinity,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -217,28 +214,6 @@ class _KelolaDokterPageState extends State<KelolaDokterPage> {
                                 DataCell(Text(
                                     '${calculateAge('${dokter.tanggalLahir}')}')),
                                 DataCell(Text(dokter.noHp ?? 'null')),
-                                // DataCell(Text(dokter.statusLisensi)),
-                                // DataCell(Row(
-                                //   children: [
-                                //     ElevatedButton(
-                                //         onPressed: () {
-                                //           showDialog(
-                                //             context: context,
-                                //             builder: (context) =>
-                                //                 EditDokterForm(idDokter: dokter.id!),
-                                //           );
-                                //         },
-                                //         child: const Icon(Icons.edit)),
-                                //     const SizedBox(
-                                //       width: 5,
-                                //     ),
-                                //     ElevatedButton(
-                                //         onPressed: () {
-                                //           controller.deleteDokter(dokter.id!);
-                                //         },
-                                //         child: const Icon(Icons.delete))
-                                //   ],
-                                // ))
 
                                 // Add more cells as needed
                               ],

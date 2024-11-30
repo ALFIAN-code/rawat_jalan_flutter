@@ -28,7 +28,6 @@ class AdminController extends GetxController {
   var dokterData = <DokterModelApi>[].obs;
   var pasienData = <Pasien>[].obs;
   var pendaftaranData = <Pendaftaran>[].obs;
-  var jadwalData = <Jadwal>[], obs;
   var listAdmin = <Admin>[].obs;
   var listJadwal = <Jadwal>[].obs;
   var listRuangan = <Ruangan>[].obs;

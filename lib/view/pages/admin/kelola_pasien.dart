@@ -78,6 +78,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
 
   @override
   Widget build(BuildContext context) {
+    var deviceHeight = MediaQuery.of(context).size.height;
     return ListView(
       children: [
         const SizedBox(
@@ -98,7 +99,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
           height: 30,
         ),
         Container(
-          height: 500,
+          height: deviceHeight * 0.7,
           width: double.infinity,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -239,7 +240,7 @@ class _KelolaPasienPageState extends State<KelolaPasienPage> {
           height: 40,
         ),
         Container(
-          height: 500,
+          height: deviceHeight * 0.7,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
