@@ -79,19 +79,6 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  // Text(
-                  //   "Keluhan",
-                  //   style: regular14,
-                  // ),
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  // CustomTextField(
-                  //     hint: '012********',
-                  //     controller: widget.keluhanController),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
                   Text(
                     "Pilih Pasien",
                     style: regular14,
@@ -146,7 +133,8 @@ class _CreatePendaftarannFormState extends State<CreatePendaftarannForm> {
                       (e) {
                         return DropdownMenuItem(
                           value: e,
-                          child: Text(e.nama ?? 'null'),
+                          child:
+                              Text('${e.nama} - ${e.spesialisasi}' ?? 'null'),
                         );
                       },
                     ).toList(),

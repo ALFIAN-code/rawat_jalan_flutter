@@ -227,7 +227,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rawat_jalan/model/jadwal_model.dart';
 import 'package:rawat_jalan/view/component/create_jadwal_form.dart';
 import 'package:rawat_jalan/view/component/edit_jadwal_form.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -280,7 +279,7 @@ class _KelolaJadwalPageState extends State<KelolaJadwalPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Data Dokter',
+                      'Data Jadwal',
                       style: bold20,
                     ),
                     ElevatedButton(
@@ -339,41 +338,47 @@ class _KelolaJadwalPageState extends State<KelolaJadwalPage> {
                                           jadwal.idPendaftaran == element.id,
                                     );
 
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(Text(jadwal.idRuangan)),
-                                        DataCell(Text(jadwal.idPendaftaran)),
-                                        DataCell(Text(jadwal.tanggal)),
-                                        DataCell(Text(jadwal.waktuMulai)),
-                                        DataCell(Text(jadwal.waktuSelesai)),
-                                        DataCell(Row(
-                                          children: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        EditJadwalForm(
-                                                      id: jadwal.idJadwal!,
-                                                    ),
-                                                  );
-                                                },
-                                                child: const Icon(Icons.edit)),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  controller.deleteJadwal(
-                                                      jadwal.idJadwal!);
-                                                },
-                                                child: const Icon(Icons.delete))
-                                          ],
-                                        ))
+                                    var pasien = controller.pasienData
+                                        .firstWhere((element) =>
+                                            element.id == pendaftaran.pasien);
 
-                                        // Add more cells as needed
-                                      ],
+                                    var ruangan =
+                                        controller.listRuangan.firstWhere(
+                                      (element) =>
+                                          element.idRuangan == jadwal.idRuangan,
                                     );
+
+                                    return DataRow(cells: [
+                                      DataCell(Text(ruangan.namaRuangan)),
+                                      DataCell(Text(pasien.namaLengkap)),
+                                      DataCell(Text(jadwal.tanggal)),
+                                      DataCell(Text(jadwal.waktuMulai)),
+                                      DataCell(Text(jadwal.waktuSelesai)),
+                                      DataCell(Row(
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      EditJadwalForm(
+                                                    id: jadwal.idJadwal!,
+                                                  ),
+                                                );
+                                              },
+                                              child: const Icon(Icons.edit)),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                controller.deleteJadwal(
+                                                    jadwal.idJadwal!);
+                                              },
+                                              child: const Icon(Icons.delete))
+                                        ],
+                                      ))
+                                    ]);
                                   }).toList()
                                 : jadwalByDokter.map((jadwal) {
                                     var pendaftaran =

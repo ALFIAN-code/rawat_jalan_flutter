@@ -59,15 +59,6 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
   TextEditingController catatan = TextEditingController();
   TextEditingController keluhanController = TextEditingController();
 
-  // var pendaftaranList = controller.pendaftaranData.where(
-  //   (pendaftaran) => pendaftaran.dokter == controller.dokterUser.value.iDDokter,
-  // );
-
-  // var selectedPendaftaran = controller.pendaftaranData
-  //     .where((pendaftaran) =>
-  //         pendaftaran.dokter == controller.dokterUser.value.iDDokter)
-  //     .first;
-
   var jadwalList = controller.listJadwal.where(
     (jadwal) => controller.pendaftaranData
         .where(
@@ -164,20 +155,20 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                     items: selectedJadwal != null
                         ? jadwalList.map(
                             (e) {
+                              var pendaftaran =
+                                  controller.pendaftaranData.firstWhere(
+                                (pendaftaran) =>
+                                    pendaftaran.id == e.idPendaftaran,
+                              );
+
                               var pasien = controller.pasienData.firstWhere(
-                                (element) =>
-                                    element.id ==
-                                    controller.pendaftaranData
-                                        .firstWhere(
-                                          (pendaftaran) =>
-                                              pendaftaran.id == e.idPendaftaran,
-                                        )
-                                        ?.pasien,
+                                (element) => element.id == pendaftaran.pasien,
                               );
 
                               return DropdownMenuItem(
                                 value: e,
-                                child: Text('${pasien.namaLengkap}'),
+                                child: Text(
+                                    '${pasien.namaLengkap} - ${pendaftaran.tanggal}'),
                               );
                             },
                           ).toList()
@@ -206,7 +197,7 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                     height: 10,
                   ),
                   CustomTextField(
-                      hint: '012********', controller: keluhanController),
+                      hint: 'kepala Pusing', controller: keluhanController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -225,14 +216,15 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                   ),
 
                   Text(
-                    "Detail",
+                    "Diagnosa",
                     style: regular14,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomTextField(
-                      hint: 'Sesak nafas hebat', controller: detailController),
+                      hint: 'Minum obat dan vitamin 3X1',
+                      controller: detailController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -278,7 +270,9 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomTextField(hint: 'lorem ipsum', controller: prioritas),
+                  CustomTextField(
+                      hint: 'Emergency, Urgent atau normal',
+                      controller: prioritas),
                   const SizedBox(
                     height: 20,
                   ),
@@ -290,7 +284,9 @@ class _CreateDiagnosaFormState extends State<CreateDiagnosaForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomTextField(hint: 'lorem ipsum', controller: catatan),
+                  CustomTextField(
+                      hint: 'Pemeriksaan segera diperlukan',
+                      controller: catatan),
                   const SizedBox(
                     height: 20,
                   ),

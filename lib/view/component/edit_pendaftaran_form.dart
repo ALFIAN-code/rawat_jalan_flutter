@@ -189,7 +189,8 @@ class _EditPendaftarannFormState extends State<EditPendaftarannForm> {
                                     (e) {
                                       return DropdownMenuItem(
                                         value: e,
-                                        child: Text(e.nama ?? 'null'),
+                                        child: Text(
+                                            '${e.nama} - ${e.spesialisasi}'),
                                       );
                                     },
                                   ).toList(),
