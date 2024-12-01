@@ -4,12 +4,9 @@ import 'package:rawat_jalan/model/jenis_layanan_model.dart';
 import 'package:http/http.dart' as http;
 
 class RadiologiService {
-  //to do
-  // make function to fetch data : jenis layanan, jenis pemeriksaan
-
   static Future<List<LayananModel>> getLayanan() async {
     final response = await http
-        .get(Uri.parse('https://2hcmlwcq-3000.asse.devtunnels.ms/api/layanan'));
+        .get(Uri.parse('https://wabw.chasterise.fun/api/pemeriksaan'));
 
     final data = json.decode(response.body);
 
