@@ -103,15 +103,12 @@ class KelolaDiagnosa extends StatelessWidget {
                           (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
                         );
                         if (jadwal == null) return false;
-
                         var pendaftaran =
                             controller.pendaftaranData.value.firstWhere(
                           (pendaftaran) =>
                               pendaftaran.id == jadwal.idPendaftaran,
                         );
-
                         if (pendaftaran == null) return false;
-
                         return pendaftaran.dokter ==
                             controller.dokterUser.value.iDDokter;
                       },
@@ -119,15 +116,12 @@ class KelolaDiagnosa extends StatelessWidget {
                       var jadwal = controller.listJadwal.value.firstWhere(
                         (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
                       );
-
                       var pendaftaran =
                           controller.pendaftaranData.value.firstWhere(
                         (pendaftaran) => pendaftaran.id == jadwal.idPendaftaran,
                       );
-
                       var pasien = controller.pasienData.value.firstWhere(
                           (pasien) => pasien.id == pendaftaran.pasien);
-
                       Resep resep = controller.resepList.value.firstWhere(
                           (element) =>
                               element.idDiagnosa == diagnosa.idDiagnosa,
@@ -136,9 +130,7 @@ class KelolaDiagnosa extends StatelessWidget {
                                 idDiagnosa: '',
                                 tanggalDiberikan: '',
                               ));
-
                       print('tanggal resep = ${resep.idResep}');
-
                       var obat = controller.obatList.value
                           .where(
                             (element) {
@@ -147,14 +139,11 @@ class KelolaDiagnosa extends StatelessWidget {
                           )
                           .toList()
                           .obs;
-
                       print(controller.obatList.value.length);
-
                       print('obat = ${obat.length}');
-
                       return DataRow(
                         cells: [
-                          DataCell(Text(pendaftaran.pasien)),
+                          DataCell(Text(pasien.namaPanggilan)),
                           DataCell(Text(diagnosa.tanggal)),
                           DataCell(Text(diagnosa.kodeDiagnosa)),
                           DataCell(Text(diagnosa.detail)),

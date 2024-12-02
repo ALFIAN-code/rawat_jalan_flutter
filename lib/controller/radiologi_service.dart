@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 
 class RadiologiService {
   static Future<List<LayananModel>> getLayanan() async {
-    final response = await http
-        .get(Uri.parse('https://wabw.chasterise.fun/api/pemeriksaan'));
+    final response =
+        await http.get(Uri.parse('https://wabw.chasterise.fun/api/Layanan'));
 
     final data = json.decode(response.body);
 
