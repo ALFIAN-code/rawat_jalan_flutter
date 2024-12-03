@@ -33,7 +33,7 @@ class Jadwal {
 
   Map<String, dynamic> toJson() {
     return {
-      // 'id_jadwal': idJadwal,
+      'id_jadwal': idJadwal,
       'ruangan': idRuangan,
       'pendaftaran': idPendaftaran,
       // 'dokter': idDokter,

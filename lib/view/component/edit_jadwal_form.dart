@@ -56,9 +56,20 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
 
   var pasienList = controller.pasienData.value;
 
-  var pendaftaranList = controller.pendaftaranData.value;
-  var ruanganList = controller.listRuangan.value;
+  var pendaftaranList = (controller.role == 'Dokter')
+      ? controller.pendaftaranData.where(
+          (element) => element.dokter == controller.dokterUser.value.iDDokter)
+      : controller.pendaftaranData;
 
+  var selectedPendaftaran = (controller.role == 'Dokter')
+      ? controller.pendaftaranData
+          .where((element) =>
+              element.dokter == controller.dokterUser.value.iDDokter)
+          .first
+      : controller.pendaftaranData.first;
+
+  // var pendaftaranList = controller.pendaftaranData.value;
+  var ruanganList = controller.listRuangan.value;
   var selectedPasien = controller.pasienData.value.first;
   var selectedDokter = controller.dokterData.value.first;
   var selectedRuangan = controller.listRuangan.value.first;
@@ -87,6 +98,8 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
     waktuSelesaiController.text = jadwal.waktuSelesai;
     var pendaftaran = controller.pendaftaranData.value
         .firstWhere((element) => element.id == jadwal.idPendaftaran);
+
+    selectedPendaftaran = pendaftaran;
     selectedPasien = controller.pasienData.value.firstWhere(
       (element) => element.id == pendaftaran.pasien,
     );
@@ -243,18 +256,22 @@ class _EditJadwalFormState extends State<EditJadwalForm> {
                               color: const Color(0xffC9C9C9).withOpacity(0.7)),
                         )),
                         isExpanded: true,
-                        value: selectedPasien,
-                        items: pasienList.map(
+                        value: selectedPendaftaran,
+                        items: pendaftaranList.map(
                           (e) {
+                            var pasien = controller.pasienData.firstWhere(
+                                (element) => element.id == e.pasien);
                             return DropdownMenuItem(
                               value: e,
-                              child: Text(e.namaLengkap),
+                              child: Text(pasien.namaLengkap),
                             );
                           },
                         ).toList(),
                         onChanged: (value) {
                           setState(() {
-                            selectedPasien = value!;
+                            // widget.selectedPasien = value;
+                            // Pasien selected = value as Pasien;
+                            selectedPendaftaran = value!;
                           });
                         },
                       ),

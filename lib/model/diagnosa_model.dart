@@ -42,7 +42,7 @@ class Diagnosa {
   Map<String, dynamic> toJson() {
     return {
       // 'pendaftaran': idPendaftaran,
-
+      'jadwal': idJadwal,
       'tanggal': tanggal,
       'detail': detail,
       'kode_diagnosis': kodeDiagnosa,

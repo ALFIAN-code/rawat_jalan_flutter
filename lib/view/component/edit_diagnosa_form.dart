@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/diagnosa_model.dart';
+import 'package:rawat_jalan/model/jenis_layanan_model.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -51,22 +52,20 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
     tanggalController.text = diagnosa.tanggal;
     kodeDiagnosaController.text = diagnosa.kodeDiagnosa;
     detailController.text = diagnosa.detail;
-    selectedLayanan = controller.layananList.firstWhere(
-      (value) => value.namaLayanan == diagnosa.jenisLayanan,
-    );
+    selectedLayanan = controller.layananList.firstWhere((value) {
+      if (value == null) {
+        return value.namaLayanan == diagnosa.jenisLayanan;
+      } else {
+        return value.namaLayanan == controller.layananList.first.namaLayanan;
+      }
+    });
     jenisPemeriksaan.text = diagnosa.jenisPemeriksaan;
     prioritas.text = diagnosa.prioritas;
     catatan.text = diagnosa.catatan;
     keluhanController.text = diagnosa.keluhan;
-    selectedJadwal = controller.listJadwal
-        .where((jadwal) => controller.pendaftaranData
-            .where(
-              (pendaftaran) =>
-                  pendaftaran.dokter == controller.dokterUser.value.iDDokter &&
-                  pendaftaran.id == jadwal.idPendaftaran,
-            )
-            .isNotEmpty)
-        .first;
+    selectedJadwal = controller.listJadwal.firstWhere(
+      (jadwal) => jadwal.idJadwal == diagnosa.idJadwal,
+    );
   }
 
   Future<String> _selectTime(BuildContext context) async {
@@ -90,6 +89,8 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
   TextEditingController prioritas = TextEditingController();
   TextEditingController catatan = TextEditingController();
   TextEditingController keluhanController = TextEditingController();
+
+  bool selectedPilihan = false;
 
   var pendaftaranList = controller.pendaftaranData.where(
       (element) => element.dokter == controller.dokterUser.value.iDDokter);
@@ -263,7 +264,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                       ),
 
                       Text(
-                        "Jenis layanan",
+                        "Layanan lab radiologi",
                         style: regular14,
                       ),
                       const SizedBox(
@@ -278,44 +279,105 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                               color: const Color(0xffC9C9C9).withOpacity(0.7)),
                         )),
                         isExpanded: true,
-                        value: selectedLayanan,
-                        items: controller.layananList.map((element) {
-                          return DropdownMenuItem(
-                            value: element,
-                            child: Text(element.namaLayanan ?? 'null'),
-                          );
-                        }).toList(),
+                        value: selectedPilihan,
+                        items: [
+                          DropdownMenuItem(
+                            value: true,
+                            child: Text('Ya'),
+                          ),
+                          DropdownMenuItem(
+                            value: false,
+                            child: Text('Tidak'),
+                          ),
+                        ],
                         onChanged: (value) {
                           setState(() {
-                            selectedLayanan = value!;
+                            selectedPilihan = value!;
+                            if (!selectedPilihan) {
+                              selectedLayanan = LayananModel(
+                                  biayaLayanan: '0',
+                                  createdAt: '',
+                                  idLayanan: 0,
+                                  namaLayanan: '',
+                                  updatedAt: '');
+                              // catatan.text = '-';
+                            } else {
+                              selectedLayanan = controller.layananList.first;
+                            }
                           });
                         },
                       ),
-
-                      Text(
-                        "Prioritas",
-                        style: regular14,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                          hint: 'lorem ipsum', controller: prioritas),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
 
-                      Text(
-                        "Catatan",
-                        style: regular14,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(hint: 'lorem ipsum', controller: catatan),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      (selectedPilihan)
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Jenis layanan",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                DropdownButton2(
+                                  buttonStyleData: ButtonStyleData(
+                                      decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 2,
+                                        color: const Color(0xffC9C9C9)
+                                            .withOpacity(0.7)),
+                                  )),
+                                  isExpanded: true,
+                                  value: selectedLayanan,
+                                  items: controller.layananList.map((element) {
+                                    return DropdownMenuItem(
+                                      value: element,
+                                      child:
+                                          Text(element.namaLayanan ?? 'null'),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedLayanan = value!;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Prioritas",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CustomTextField(
+                                    hint: 'Emergency, Urgent atau normal',
+                                    controller: prioritas),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Catatan",
+                                  style: regular14,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CustomTextField(
+                                    hint: 'Pemeriksaan segera diperlukan',
+                                    controller: catatan),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            )
+                          : SizedBox(),
 
                       //tombol kirim
                       Container(
@@ -353,7 +415,7 @@ class _EditDiagnosaFormState extends State<EditDiagnosaForm> {
                               } else if (radiologi.contains(selectedLayanan)) {
                                 jenisPemeriksaan = 'Radiologi';
                               } else {
-                                jenisPemeriksaan = 'null';
+                                jenisPemeriksaan = '-';
                               }
 
                               Diagnosa diagnosa = Diagnosa(

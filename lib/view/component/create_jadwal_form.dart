@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rawat_jalan/model/jadwal_model.dart';
 import 'package:rawat_jalan/model/pasien_model.dart';
+import 'package:rawat_jalan/model/pendaftaran_model.dart';
 import 'package:rawat_jalan/view/component/custom_button.dart';
 import 'package:rawat_jalan/view/component/custom_textfield.dart';
 import 'package:rawat_jalan/view/pages/admin/get/admin_controller.dart';
@@ -244,7 +245,7 @@ class _CreateJadwalFormState extends State<CreateJadwalForm> {
                       setState(() {
                         // widget.selectedPasien = value;
                         // Pasien selected = value as Pasien;
-                        selectedPasien = value as Pasien;
+                        selectedPendaftaran = value as Pendaftaran;
                       });
                     },
                   ),
